@@ -1,0 +1,140 @@
+# Blogger Automation Platform
+
+Production-grade platform for automated Blogger content creation, publishing, and SEO optimization.
+
+## Architecture
+
+Built in phases following clean architecture principles:
+- **Phase 1**: Foundation (config, auth, models, exceptions) ✅
+- **Phase 2**: Publishing Engine (retry, queue, publisher) ✅
+- **Phase 3**: SEO Engine (meta, headings, keywords, readability) ✅
+- **Phase 4**: AI Engine (article generation, SEO titles, meta optimization, FAQ, summary, keywords) ✅ Enhanced
+- **Phase 5**: Media Engine (image upload, Unsplash, thumbnails) 🔄 Planned
+
+## Key Patterns
+
+| Module | Pattern | Purpose |
+|--------|---------|---------|
+| `config/settings.py` | Singleton + Pydantic | Validated, cached configuration |
+| `core/auth.py` | Service | OAuth 2.0 with google-auth library |
+| `core/blogger_client.py` | Facade | Simplified Blogger API wrapper |
+| `core/publishing/retry.py` | Strategy | Configurable retry with exponential backoff |
+| `core/publishing/queue.py` | Active Record | JSON-based publish queue |
+| `core/publishing/publisher.py` | Facade | Publishing orchestration |
+| `seo/analyzer.py` | Composite | Combined SEO checks |
+| `ai/generator.py` | Facade | AI content generation orchestrator |
+| `ai/providers/base.py` | Strategy | Abstract provider interface |
+| `ai/providers/anthropic_provider.py` | Adapter | Anthropic Claude SDK wrapper |
+| `ai/providers/openrouter_provider.py` | Adapter | OpenRouter unified API wrapper |
+
+## CLI Usage
+
+```bash
+# Authentication
+python app.py auth
+
+# Publish single post
+python app.py publish --title "My Title" --content "<h1>Content</h1>" --labels "python,automation"
+
+# Schedule post for future publishing
+python app.py schedule --title "Future Post" --when "2026-07-10T10:00:00"
+
+# Update an existing post
+python app.py update --post-id "123456789" --title "New Title" --labels "python,ai"
+
+# Delete a post
+python app.py delete --post-id "123456789"
+
+# Bulk publish from JSON
+python app.py bulk-publish --file data/sample_posts.json
+
+# SEO check
+python app.py seo-check --title "Test" --content "<h1>...</h1><p>...</p>"
+
+# AI Content Generation (Phase 4)
+python app.py ai-generate --topic "Python Tips" --tone professional --keywords "python,coding" --words 800
+
+# AI SEO Title Generation
+python app.py ai-title --topic "Python Tips" --keywords "python,programming"
+
+# AI Meta Description Optimization
+python app.py ai-meta --title "My Post" --content "<p>Post content</p>" --keyword "python"
+
+# AI FAQ Generation
+python app.py ai-faq --title "Python Guide" --content "<p>Python content...</p>" --count 5
+
+# AI Summary Generation
+python app.py ai-summary --content "<p>Long content...</p>" --style brief
+
+# AI Keyword Optimization
+python app.py ai-keywords --topic "Python" --content "<p>Content...</p>"
+```
+
+**Note:** For AI commands, set `OPENROUTER_API_KEY` in `.env` (recommended) or `ANTHROPIC_API_KEY`.
+
+## AI Provider Options
+
+| Provider | Models Available | Use Case |
+|----------|-----------------|----------|
+| openrouter | Llama-3.3-70b (free), Claude 5, GPT-4, etc. | Recommended - unified access |
+| anthropic | Claude models | Direct Anthropic access |
+| openai | GPT models | Direct OpenAI access |
+
+### OpenRouter Free Model
+
+For no-cost usage, the platform supports OpenRouter's free models:
+- `poolside/laguna-m.1:free` - Poolside Laguna (recommended)
+- `google/gemma-4-26b-a4b-it:free` - Gemma 4 26B
+- Set in `.env`: `AI_DEFAULT_MODEL=poolside/laguna-m.1:free`
+
+## Engineering Standards
+
+Never generate quick fixes.
+
+Always prefer maintainability.
+
+Always separate business logic.
+
+Never hardcode credentials.
+
+Always use type hints.
+
+Always use logging.
+
+Every module must have docstrings.
+
+Every public function must contain examples.
+
+## JSON Format for Bulk Publishing
+
+`data/sample_posts.json`:
+```json
+{
+  "posts": [
+    {
+      "title": "Post Title",
+      "content": "<h1>HTML Content</h1>",
+      "labels": ["tag1", "tag2"]
+    }
+  ]
+}
+```
+
+## Testing
+
+```bash
+pytest tests/ -v
+```
+
+All 32 tests pass.
+
+## Recent Improvements (2026-07-04)
+
+### Phase 2: Publishing Engine
+- **Scheduled Post Publishing**: Queue now preserves `published` datetime for proper scheduling
+- **Update/Delete Operations**: Added `update_post()` and `delete_post()` methods with CLI commands
+
+### Phase 4: AI Engine Enhancements
+- **Free Model Output Handling**: Added cleaning, HTML structure fixes, and optimization methods
+- **Improved Prompt Engineering**: Better instructions for free models to produce cleaner output
+- **Defensive Parsing**: Multiple fallback strategies for parsing free model responses
