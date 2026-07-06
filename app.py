@@ -311,6 +311,7 @@ if app:
         tone: Annotated[str, typer.Option(help="Writing tone: professional, casual, technical, friendly")] = "professional",
         keywords: Annotated[str, typer.Option(help="Comma-separated target keywords")] = "",
         words: Annotated[int, typer.Option(help="Target word count")] = 1000,
+        language: Annotated[str, typer.Option(help="Target language: en, kn, hi, es, fr, de, zh, ja, ta, te")] = "en",
         publish: Annotated[bool, typer.Option(help="Publish to Blogger after generation")] = False,
     ) -> None:
         """Generate an AI-powered blog post."""
@@ -335,6 +336,7 @@ if app:
                 target_keywords=keywords_list,
                 tone=tone,
                 word_count=words,
+                language=language,
             )
             response = generator.generate(request)
 
@@ -342,6 +344,8 @@ if app:
             print(f"  Title: {response.title}")
             print(f"  Words: {response.word_count}")
             print(f"  SEO Score: {response.seo_score}/100")
+            if language != "en":
+                print(f"  Language: {language}")
 
             if response.meta_description:
                 print(f"  Meta: {response.meta_description[:80]}...")
@@ -379,6 +383,7 @@ if app:
     def ai_title(
         topic: Annotated[str, typer.Option(help="Article topic")] = None,
         keywords: Annotated[str, typer.Option(help="Comma-separated keywords")] = "",
+        language: Annotated[str, typer.Option(help="Target language: en, kn, hi, es, fr, de, zh, ja, ta, te")] = "en",
     ) -> None:
         """Generate SEO-optimized title variants."""
         if not topic:
@@ -400,6 +405,7 @@ if app:
             request = SEOTitleRequest(
                 topic=topic,
                 target_keywords=keywords_list,
+                language=language,
             )
             response = generator.generate(request)
 

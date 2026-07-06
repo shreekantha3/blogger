@@ -100,6 +100,7 @@ class BaseProvider(ABC):
         tone: str,
         target_keywords: Optional[list[str]] = None,
         word_count: int = 1000,
+        language: str = "en",
     ) -> tuple[str, str]:
         """
         Generate a complete article.
@@ -109,6 +110,7 @@ class BaseProvider(ABC):
             tone: Writing tone
             target_keywords: Keywords to include
             word_count: Target word count
+            language: Target language code
 
         Returns:
             Tuple of (title, content)
@@ -121,6 +123,7 @@ class BaseProvider(ABC):
         topic: str,
         target_keywords: Optional[list[str]] = None,
         max_length: int = 60,
+        language: str = "en",
     ) -> str:
         """
         Generate an SEO-optimized title.
@@ -129,6 +132,7 @@ class BaseProvider(ABC):
             topic: Topic for the title
             target_keywords: Keywords to include
             max_length: Maximum title length
+            language: Target language code
 
         Returns:
             Generated SEO title
@@ -142,6 +146,7 @@ class BaseProvider(ABC):
         title: str,
         target_keyword: Optional[str] = None,
         length: int = 155,
+        language: str = "en",
     ) -> str:
         """
         Optimize or generate a meta description.
@@ -151,6 +156,7 @@ class BaseProvider(ABC):
             title: Post title
             target_keyword: Primary keyword
             length: Target length
+            language: Target language code
 
         Returns:
             Optimized meta description
@@ -163,6 +169,7 @@ class BaseProvider(ABC):
         content: str,
         title: Optional[str] = None,
         num_questions: int = 5,
+        language: str = "en",
     ) -> list[tuple[str, str]]:
         """
         Generate FAQ from content.
@@ -171,6 +178,7 @@ class BaseProvider(ABC):
             content: Content to base FAQs on
             title: Post title for context
             num_questions: Number of questions to generate
+            language: Target language code
 
         Returns:
             List of (question, answer) tuples

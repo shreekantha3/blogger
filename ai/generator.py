@@ -78,6 +78,7 @@ class AIArticleGenerator:
             topic=request.topic[:50],
             tone=request.tone,
             word_count=request.word_count,
+            language=request.language,
         )
 
         # Generate title and content with SEO optimization
@@ -86,6 +87,7 @@ class AIArticleGenerator:
             tone=request.tone,
             target_keywords=request.target_keywords,
             word_count=request.word_count,
+            language=request.language,
         )
 
         # Generate and optimize meta description
@@ -95,6 +97,7 @@ class AIArticleGenerator:
                 content=content,
                 title=title,
                 target_keyword=request.target_keywords[0] if request.target_keywords else None,
+                language=request.language,
             )
 
         # Generate FAQ if requested
@@ -104,6 +107,7 @@ class AIArticleGenerator:
                     content=content,
                     title=title,
                     num_questions=5,
+                    language=request.language,
                 )
                 # Append FAQ to content as HTML
                 faq_html = self._format_faq_html(faqs)
@@ -118,7 +122,7 @@ class AIArticleGenerator:
         # If SEO score below 95, optimize the content
         if seo_score < 95:
             logger.info(f"SEO score {seo_score} below 95%, optimizing...")
-            optimized = self._optimize_for_seo(title, content, request.target_keywords, meta_description)
+            optimized = self._optimize_for_seo(title, content, request.target_keywords, meta_description, request.language)
             title = optimized["title"]
             content = optimized["content"]
             meta_description = optimized["meta_description"]
@@ -131,9 +135,10 @@ class AIArticleGenerator:
             target_keywords=request.target_keywords,
             word_count=len(content.split()),
             seo_score=seo_score,
+            language=request.language,
         )
 
-    def _optimize_for_seo(self, title: str, content: str, keywords: list[str], meta: str) -> dict:
+    def _optimize_for_seo(self, title: str, content: str, keywords: list[str], meta: str, language: str = "en") -> dict:
         """
         Optimize title, content, and meta for 95%+ SEO score.
         """

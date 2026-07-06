@@ -68,12 +68,13 @@ class SEOTitleGenerator:
         Returns:
             SEOTitleResponse with title and quality metrics
         """
-        logger.info("Generating SEO title", topic=request.topic[:50])
+        logger.info("Generating SEO title", topic=request.topic[:50], language=request.language)
 
         title = self._provider.generate_seo_title(
             topic=request.topic,
             target_keywords=request.target_keywords,
             max_length=request.max_length,
+            language=request.language,
         )
 
         # Calculate metrics
@@ -86,6 +87,7 @@ class SEOTitleGenerator:
             title=title,
             seo_score=seo_score,
             keyword_coverage=keyword_coverage,
+            language=request.language,
         )
 
     def generate_variants(

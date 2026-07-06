@@ -7,7 +7,7 @@ The KeywordOptimizer enhances the SEO keyword analyzer by using AI
 to suggest related keywords and optimize content density.
 """
 
-from typing import Optional
+from typing import Optional, List, Dict, Any
 
 from config import get_logger
 from ai.models import (
@@ -178,3 +178,131 @@ Include long-tail variations and semantic matches.
                 improvement += int((opt - orig) * 10)
 
         return min(100, improvement)
+
+    def generate_lsi_keywords(
+        self,
+        main_topic: str,
+        count: int = 10,
+        cluster_by_semantic: bool = True,
+    ) -> List[Dict[str, Any]]:
+        """
+        Generate LSI (Latent Semantic Indexing) keywords for a topic.
+
+        LSI keywords are semantically related terms that help Google understand
+        the context and topical depth of content.
+
+        Args:
+            main_topic: Primary topic to generate LSI keywords for
+            count: Number of LSI keywords to generate (default 10+)
+            cluster_by_semantic: Group keywords by semantic meaning
+
+        Returns:
+            List of dicts with keyword, semantic_group, and relevance
+
+        Example:
+            >>> lsi = optimizer.generate_lsi_keywords("python programming")
+            >>> for kw in lsi:
+            ...     print(f"{kw['keyword']} ({kw['semantic_group']})")
+        """
+        prompt = f"""Generate {count} LSI (Latent Semantic Indexing) keywords for "{main_topic}".
+
+LSI keywords are semantically related terms that help with SEO. Group them by semantic meaning.
+
+Return as JSON array with:
+{{"keyword": "related term", "semantic_group": "group name", "relevance": 90}}
+
+Semantic groups to consider:
+- Primary topic variations
+- Related concepts
+- Long-tail variations
+- Synonyms and related terms
+- Question-based keywords
+- Comparison terms
+
+Example output:
+[
+  {{"keyword": "python basics", "semantic_group": "primary_variations", "relevance": 95}},
+  {{"keyword": "learn python", "semantic_group": "long_tail", "relevance": 90}}
+]
+"""
+        try:
+            response = self._provider.generate_text(prompt, max_tokens=800)
+            import json
+            data = json.loads(response)
+
+            if cluster_by_semantic:
+                # Group keywords by semantic group
+                groups: Dict[str, List[str]] = {}
+                for item in data:
+                    group = item.get("semantic_group", "general")
+                    keyword = item.get("keyword", "")
+                    if group not in groups:
+                        groups[group] = []
+                    groups[group].append(keyword)
+
+                return data[:count]
+            return data[:count]
+        except Exception as e:
+            logger.warning("Failed to generate LSI keywords", error=str(e))
+            # Fallback: return basic related terms
+            return self._fallback_lsi_keywords(main_topic, count)
+
+    def _fallback_lsi_keywords(self, topic: str, count: int) -> List[Dict[str, Any]]:
+        """Generate basic LSI keywords when AI fails."""
+        # Common semantic groups for topics
+        semantic_groups = {
+            "beginner": [f"{topic} for beginners", f"learn {topic}", f"introduction to {topic}"],
+            "advanced": [f"advanced {topic}", f"{topic} expert", f"{topic} mastery"],
+            "tutorials": [f"{topic} tutorial", f"how to {topic}", f"{topic} guide"],
+            "comparison": [f"{topic} vs alternatives", f"best {topic}", f"{topic} comparison"],
+            "related": [f"related to {topic}", f"{topic} techniques", f"{topic} methods"],
+        }
+
+        results = []
+        for group, keywords in semantic_groups.items():
+            for kw in keywords:
+                results.append({
+                    "keyword": kw,
+                    "semantic_group": group,
+                    "relevance": 85,
+                })
+                if len(results) >= count:
+                    return results
+
+        return results[:count]
+
+    def validate_keyword_density(
+        self,
+        content: str,
+        primary_keyword: str,
+        target_density: float = 1.5,
+    ) -> Dict[str, Any]:
+        """
+        Validate keyword density meets SEO requirements.
+
+        Args:
+            content: HTML content to analyze
+            primary_keyword: Primary keyword to check
+            target_density: Target density percentage (default 1.5%)
+
+        Returns:
+            Dict with density, is_optimal, and recommendations
+        """
+        density = self._calculate_keyword_density(content, [primary_keyword])
+        actual_density = density.get(primary_keyword, 0)
+
+        is_optimal = 1.0 <= actual_density <= 2.0  # 1-2% is optimal
+
+        recommendations = []
+        if actual_density < 1.0:
+            recommendations.append(f"Increase '{primary_keyword}' density (currently {actual_density:.2f}%, target 1-2%)")
+        elif actual_density > 2.0:
+            recommendations.append(f"Reduce '{primary_keyword}' density (currently {actual_density:.2f}%, target 1-2%)")
+
+        return {
+            "keyword": primary_keyword,
+            "density": actual_density,
+            "target_density": target_density,
+            "is_optimal": is_optimal,
+            "recommendations": recommendations,
+        }

@@ -234,13 +234,108 @@ class TestKeywordDensity:
         pass
 
 
+
+
 class TestOpenGraphTags:
-    """Tests for Open Graph meta tag generation."""
+    """Tests for Open Graph and Twitter Card meta tag generation."""
 
     def test_open_graph_generation(self) -> None:
         """Should generate proper OG tags."""
-        # Will be implemented in Phase 5
-        pass
+        from ai.meta_optimizer import MetaDescriptionOptimizer
+
+        class MockProvider:
+            model = "test"
+            def generate_text(self, prompt, **kwargs):
+                return "A well-crafted meta description for SEO optimization purposes that is within limits"
+
+        optimizer = MetaDescriptionOptimizer(provider=MockProvider())
+        tags = optimizer.generate_open_graph_tags(
+            title="Python Programming Guide",
+            description="Learn Python programming with this comprehensive guide.",
+            url="https://example.com/python-guide",
+            image_url="https://example.com/og-image.jpg",
+        )
+
+        assert tags["og:title"] == "Python Programming Guide"
+        assert tags["og:description"] == "Learn Python programming with this comprehensive guide."
+        assert tags["og:type"] == "article"
+        assert tags["og:url"] == "https://example.com/python-guide"
+        assert tags["og:image"] == "https://example.com/og-image.jpg"
+        assert tags["og:image:width"] == "1200"
+        assert tags["og:image:height"] == "630"
+
+    def test_open_graph_title_length(self) -> None:
+        """OG title should be truncated to 60 chars."""
+        from ai.meta_optimizer import MetaDescriptionOptimizer
+
+        optimizer = MetaDescriptionOptimizer(provider=MockProvider())
+        long_title = "This is a very long title that should be truncated to 60 characters for optimal SEO"
+        tags = optimizer.generate_open_graph_tags(
+            title=long_title,
+            description="Test description",
+        )
+
+        assert len(tags["og:title"]) <= 60
+
+    def test_twitter_card_generation(self) -> None:
+        """Should generate proper Twitter Card tags."""
+        from ai.meta_optimizer import MetaDescriptionOptimizer
+
+        optimizer = MetaDescriptionOptimizer(provider=MockProvider())
+        tags = optimizer.generate_twitter_card_tags(
+            title="Python Tips",
+            description="Learn Python with these tips",
+            image_url="https://example.com/twitter.jpg",
+            creator="johndoe",
+        )
+
+        assert tags["twitter:card"] == "summary_large_image"
+        assert tags["twitter:title"] == "Python Tips"
+        assert tags["twitter:description"] == "Learn Python with these tips"
+        assert tags["twitter:image"] == "https://example.com/twitter.jpg"
+        assert tags["twitter:creator"] == "@johndoe"
+
+    def test_twitter_card_creator_with_at_prefix(self) -> None:
+        """Twitter creator should already have @ prefix."""
+        from ai.meta_optimizer import MetaDescriptionOptimizer
+
+        optimizer = MetaDescriptionOptimizer(provider=MockProvider())
+        tags = optimizer.generate_twitter_card_tags(
+            title="Test",
+            description="Test desc",
+            creator="@johndoe",
+        )
+
+        assert tags["twitter:creator"] == "@johndoe"
+
+    def test_social_meta_tags_combined(self) -> None:
+        """Should combine OG and Twitter tags."""
+        from ai.meta_optimizer import MetaDescriptionOptimizer
+
+        optimizer = MetaDescriptionOptimizer(provider=MockProvider())
+        tags = optimizer.generate_social_meta_tags(
+            title="Test Article",
+            description="Test description",
+            url="https://example.com/test",
+            image_url="https://example.com/image.jpg",
+            creator="testuser",
+        )
+
+        # Should have all OG tags
+        assert "og:title" in tags
+        assert "og:description" in tags
+
+        # Should have all Twitter tags
+        assert "twitter:card" in tags
+        assert "twitter:title" in tags
+
+
+class MockProvider:
+    """Mock provider for testing."""
+    model = "test"
+    def generate_text(self, prompt, **kwargs):
+        return "A well-crafted meta description for SEO optimization purposes that is within limits"
+
 
 
 class TestMetaTags:

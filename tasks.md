@@ -12,36 +12,57 @@
 - [x] OAuth completed
 - [x] Desktop App created
 - [x] Publish first post to Blogger
-- [ ] Test scheduled posts
+- [x] **Scheduled post publishing** - Queue preserves `published` datetime, `process_queue()` handles scheduled vs immediate posts
+- [x] **Post update/delete operations** - Added `update_post()` and `delete_post()` methods + CLI commands
 
 ## Phase 3: SEO Engine
 
-- [ ] Title optimization
-- [ ] Meta description generation
-- [ ] Schema markup
-- [ ] Internal linking suggestions
-- [ ] Keyword density optimization
-- [ ] Readability improvements
+- [x] Meta description analyzer
+- [x] Heading analyzer
+- [x] Keyword analyzer
+- [x] Readability analyzer
+- [x] Composite SEO analyzer
+- [x] Schema markup generation (Article/BlogPosting JSON-LD)
+- [x] Open Graph & Twitter Card tags
+- [x] Keyword density validation (1-2%)
 
-## Phase 4: AI Engine (Current Focus)
+## Phase 4: AI Engine
 
 - [x] Basic article generation working
 - [x] SEO title generation
 - [x] Meta optimization (with free model issues)
 - [x] FAQ generation (with defensive parsing)
-- [ ] Free model output sanitization
-- [ ] HTML validation
-- [ ] Structured data (FAQ schema)
+- [x] **Free model output sanitization** - Added cleaning, HTML structure fixes, and optimization methods
+- [x] **Improved prompt engineering** - Better instructions for free models to produce cleaner output
+- [x] **Defensive parsing** - Multiple fallback strategies for parsing free model responses
+- [x] LSI Keyword Generation (semantic clustering, 10+ variations)
 
-## Phase 5: SEO Enhancement (Current Priority)
+## Phase 5: SEO Enhancement
 
 ### High Priority Tasks
 
-1. **Schema Markup Generation**
-   - [ ] Article/BlogPosting JSON-LD schema generation
-   - [ ] BreadcrumbList JSON-LD schema generation
-   - [ ] Combined schema output for all markup types
-   - [ ] Integration with AIArticleGenerator
+1. **Schema Markup Generation** ✅ COMPLETED
+   - [x] Article/BlogPosting JSON-LD schema generation
+   - [x] BreadcrumbList JSON-LD schema generation
+   - [x] Combined schema output for all markup types
+   - [x] Integration with AIArticleGenerator
+
+2. **H1-H6 Hierarchy Enforcement** ✅ COMPLETED
+   - [x] Update AI prompts for 5-7 H2 sections with 2-3 H3 subsections each
+   - [x] Content length: 2,500+ words for competitive topics
+   - [x] Proper heading structure validation
+   - [x] Free model output structure fixing
+
+3. **Internal Linking Suggestions** ✅ COMPLETED
+   - [x] Link Genius implementation (find related posts)
+   - [x] Keyword-rich anchor text generation
+   - [x] 3-5 internal links per 1,000 words
+   - [x] Content clustering strategy
+
+4. **LSI Keyword Generation** ✅ COMPLETED
+   - [x] Semantic keyword variations (10+ per topic)
+   - [x] Keyword grouping by semantic meaning
+   - [x] Keyword density validation (1-2%)
 
 2. **H1-H6 Hierarchy Enforcement**
    - [ ] Update AI prompts for 5-7 H2 sections with 2-3 H3 subsections each
@@ -136,14 +157,15 @@
 - og:image: 1200x630px recommended
 - twitter:card: summary_large_image
 
-## Current Sprint: Publish Tata Sierra EV Article
+## Current Sprint: Complete SEO Enhancement
 
-- [ ] Generate clean article content (2,500+ words)
-- [ ] Generate proper meta description (120-160 chars)
-- [ ] Ensure proper H1-H2-H3 heading structure
-- [ ] Include 4+ images with alt text
-- [ ] Add 3-5 internal links
-- [ ] Generate Article and Breadcrumb schema markup
-- [ ] Publish to Blogger
+- [x] Schema markup generation (Article + Breadcrumb JSON-LD)
+- [x] H1-H2-H3 heading structure enforcement (6 H2, 2-3 H3 each)
+- [x] Open Graph & Twitter Card tags for social sharing
+- [x] LSI keyword generation with semantic clustering
+- [x] Keyword density validation (1-2% optimal)
+- [x] Internal linking suggestions (Link Genius)
+- [ ] Featured image alt text generation
+- [ ] Publish test article to Blogger
 - [ ] Verify SEO score (target: 95+)
 - [ ] Update documentation

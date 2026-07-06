@@ -27,6 +27,7 @@ class AIArticleRequest(BaseModel):
         word_count: Target word count
         include_faq: Whether to include FAQ section
         include_headings: Whether to include structured headings
+        language: Target language for content (en, kn, hi, etc.)
     """
 
     topic: str = Field(..., min_length=1, description="Main topic for the article")
@@ -49,6 +50,10 @@ class AIArticleRequest(BaseModel):
     include_headings: bool = Field(
         default=True, description="Include structured HTML headings"
     )
+    language: Optional[str] = Field(
+        default="en",
+        description="Target language code (en=English, kn=Kannada, hi=Hindi, etc.)"
+    )
 
     @field_validator("tone")
     @classmethod
@@ -58,6 +63,15 @@ class AIArticleRequest(BaseModel):
         if v.lower() not in allowed:
             raise ValueError(f"tone must be one of {allowed}, got {v}")
         return v.lower()
+
+    @field_validator("language")
+    @classmethod
+    def validate_language(cls, v: str) -> str:
+        """Validate language code is supported."""
+        supported_languages = {"en", "kn", "hi", "es", "fr", "de", "zh", "ja", "ta", "te"}
+        if v is not None and v.lower() not in supported_languages:
+            raise ValueError(f"language must be one of {supported_languages}, got {v}")
+        return v.lower() if v else "en"
 
 
 class AIArticleResponse(BaseModel):
@@ -71,6 +85,7 @@ class AIArticleResponse(BaseModel):
         target_keywords: Keywords used in the article
         word_count: Actual word count
         seo_score: Estimated SEO score (0-100)
+        language: Language code of the generated content
     """
 
     title: str = Field(..., description="Generated article title")
@@ -85,6 +100,9 @@ class AIArticleResponse(BaseModel):
     seo_score: int = Field(
         default=0, ge=0, le=100, description="Estimated SEO score"
     )
+    language: str = Field(
+        default="en", description="Language code of the generated content"
+    )
 
 
 class SEOTitleRequest(BaseModel):
@@ -96,6 +114,7 @@ class SEOTitleRequest(BaseModel):
         target_keywords: Keywords to include
         platform: Target platform (google, blogger, both)
         max_length: Maximum title length
+        language: Target language for the title
     """
 
     topic: str = Field(..., min_length=1, description="Topic for title generation")
@@ -108,6 +127,10 @@ class SEOTitleRequest(BaseModel):
     max_length: int = Field(
         default=60, ge=30, le=100, description="Maximum title length"
     )
+    language: Optional[str] = Field(
+        default="en",
+        description="Target language code (en, kn, hi, etc.)"
+    )
 
     @field_validator("platform")
     @classmethod
@@ -118,6 +141,15 @@ class SEOTitleRequest(BaseModel):
             raise ValueError(f"platform must be one of {allowed}, got {v}")
         return v.lower()
 
+    @field_validator("language")
+    @classmethod
+    def validate_language(cls, v: str) -> str:
+        """Validate language code is supported."""
+        supported_languages = {"en", "kn", "hi", "es", "fr", "de", "zh", "ja", "ta", "te"}
+        if v is not None and v.lower() not in supported_languages:
+            raise ValueError(f"language must be one of {supported_languages}, got {v}")
+        return v.lower() if v else "en"
+
 
 class SEOTitleResponse(BaseModel):
     """
@@ -127,12 +159,16 @@ class SEOTitleResponse(BaseModel):
         title: Generated SEO title
         seo_score: SEO quality score (0-100)
         keyword_coverage: Percentage of keywords included
+        language: Language code of the generated title
     """
 
     title: str = Field(..., description="Generated SEO title")
     seo_score: int = Field(ge=0, le=100, description="SEO quality score")
     keyword_coverage: int = Field(
         ge=0, le=100, description="Percentage of keywords included in title"
+    )
+    language: str = Field(
+        default="en", description="Language code of the generated title"
     )
 
 

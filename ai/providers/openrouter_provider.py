@@ -137,10 +137,28 @@ class OpenRouterProvider(BaseProvider):
         tone: str,
         target_keywords: Optional[list[str]] = None,
         word_count: int = 1000,
+        language: str = "en",
     ) -> tuple[str, str]:
         """Generate a complete article."""
         keywords = target_keywords or []
         keyword_str = ', '.join(keywords) if keywords else "none"
+
+        # Language instruction for multilingual content
+        language_instruction = ""
+        if language and language.lower() != "en":
+            language_map = {
+                "kn": "Kannada",
+                "hi": "Hindi",
+                "es": "Spanish",
+                "fr": "French",
+                "de": "German",
+                "zh": "Chinese",
+                "ja": "Japanese",
+                "ta": "Tamil",
+                "te": "Telugu",
+            }
+            lang_name = language_map.get(language.lower(), language)
+            language_instruction = f"\n- Write the entire content in {lang_name} ({language.upper()}) language."
 
         # Split into two calls for better free model compatibility
         # First, generate the title (optimized for SEO: 50-70 chars)
@@ -148,6 +166,7 @@ class OpenRouterProvider(BaseProvider):
 Tone: {tone}
 Length: 50-70 characters (crucial for SEO - exactly this range)
 Include primary keywords naturally
+{language_instruction}
 Output only the title, no formatting, no html, no quotes.
 
 EXAMPLE: Karnataka Leadership Shift: DKS vs Siddaramaiah and 2028 Impact
@@ -163,6 +182,7 @@ TITLE:'''
         content_prompt = f'''Write a comprehensive blog article about {topic}.
 Tone: {tone}
 Length: {word_count} words minimum (target 2500+ words for competitive topics)
+{language_instruction}
 
 SEO REQUIREMENTS (MUST FOLLOW STRICTLY):
 - Start with EXACT: <h1>{title}</h1>
@@ -195,6 +215,7 @@ CONTENT:'''
             "Article generated via OpenRouter",
             title=title[:50],
             word_count=len(content.split()),
+            language=language,
         )
 
         return title, content
@@ -204,12 +225,29 @@ CONTENT:'''
         topic: str,
         target_keywords: Optional[list[str]] = None,
         max_length: int = 60,
+        language: str = "en",
     ) -> str:
         """Generate an SEO-optimized title."""
+        language_instruction = ""
+        if language and language.lower() != "en":
+            language_map = {
+                "kn": "Kannada",
+                "hi": "Hindi",
+                "es": "Spanish",
+                "fr": "French",
+                "de": "German",
+                "zh": "Chinese",
+                "ja": "Japanese",
+                "ta": "Tamil",
+                "te": "Telugu",
+            }
+            lang_name = language_map.get(language.lower(), language)
+            language_instruction = f"\nWrite in {lang_name} ({language.upper()}) language."
+
         return self.generate_text(
             f"""Generate an SEO-optimized title for a blog post about "{topic}".
 
-Maximum {max_length} characters. Include keywords naturally.
+Maximum {max_length} characters. Include keywords naturally.{language_instruction}
 Return ONLY the title.
 """,
             max_tokens=100,
@@ -221,6 +259,7 @@ Return ONLY the title.
         title: str,
         target_keyword: Optional[str] = None,
         length: int = 155,
+        language: str = "en",
     ) -> str:
         """Optimize or generate a meta description."""
         # Extract first paragraph for context
@@ -228,11 +267,28 @@ Return ONLY the title.
         text_content = re.sub(r'<[^>]+>', '', content)[:500]
 
         keyword_str = target_keyword or ""
+        language_instruction = ""
+        if language and language.lower() != "en":
+            language_map = {
+                "kn": "Kannada",
+                "hi": "Hindi",
+                "es": "Spanish",
+                "fr": "French",
+                "de": "German",
+                "zh": "Chinese",
+                "ja": "Japanese",
+                "ta": "Tamil",
+                "te": "Telugu",
+            }
+            lang_name = language_map.get(language.lower(), language)
+            language_instruction = f"\nWrite in {lang_name} ({language.upper()}) language."
+
         # Very explicit prompt for free models
         prompt = f'''Write an SEO-optimized meta description.
 Blog post title: "{title}"
 Primary keyword: {keyword_str}
 Content preview: {text_content[:200]}...
+{language_instruction}
 
 Requirements:
 - Length: 120-160 characters (EXACTLY in this range for SEO)
@@ -262,11 +318,29 @@ META:'''
         content: str,
         title: Optional[str] = None,
         num_questions: int = 5,
+        language: str = "en",
     ) -> list[tuple[str, str]]:
         """Generate FAQ from content."""
         context = f" titled '{title}'" if title else ""
+
+        language_instruction = ""
+        if language and language.lower() != "en":
+            language_map = {
+                "kn": "Kannada",
+                "hi": "Hindi",
+                "es": "Spanish",
+                "fr": "French",
+                "de": "German",
+                "zh": "Chinese",
+                "ja": "Japanese",
+                "ta": "Tamil",
+                "te": "Telugu",
+            }
+            lang_name = language_map.get(language.lower(), language)
+            language_instruction = f" (in {lang_name} ({language.upper()}) language)"
+
         response = self.generate_text(
-            f"Generate {num_questions} FAQ questions and answers{context} about this content:\n\n{content[:2000]}\n\n"
+            f"Generate {num_questions} FAQ questions and answers{context} about this content:{language_instruction}:\n\n{content[:2000]}\n\n"
             f"Format each as: Q: Question here? A: Answer here.\nOne per line.",
             max_tokens=1500,
         )

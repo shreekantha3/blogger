@@ -46,15 +46,27 @@ class MockProvider:
             return "<h1>Generated Title</h1><p>Generated content for testing purposes.</p>"
 
     def generate_article(self, topic: str, **kwargs) -> tuple[str, str]:
+        language = kwargs.get('language', 'en')
+        if language != 'en':
+            return f"ಲેಖನ ಬರೆಯಿರಿಗೆ {topic}", f"<h1>ಲೆಕ್ಕಾಂಕ {topic}</h1><p>ಸಾಮಗ್ರಿ.</p>"
         return f"Article About {topic}", f"<h1>Article About {topic}</h1><p>Content here.</p>"
 
     def generate_seo_title(self, topic: str, **kwargs) -> str:
+        language = kwargs.get('language', 'en')
+        if language != 'en':
+            return f"SEO ಶೀರ್ಷಕ: {topic}"
         return f"SEO Title: {topic}"
 
     def optimize_meta_description(self, content: str, title: str, **kwargs) -> str:
+        language = kwargs.get('language', 'en')
+        if language != 'en':
+            return f"{title} ಬರೆಯಿರಿಗೆ ನಿರ್ದಿಷ್ಟ ವಿವರಣೆ."
         return f"Meta description for {title}."
 
     def generate_faq(self, content: str, **kwargs) -> list[tuple[str, str]]:
+        language = kwargs.get('language', 'en')
+        if language != 'en':
+            return [("ಇದು ಏನು?", "ಇದು ಒಂದು ಪರೀಕ್ಷಣಾ ಉತ್ತರ.")]
         return [("What is this?", "This is a test answer.")]
 
     def generate_summary(self, content: str, **kwargs) -> str:
@@ -241,3 +253,98 @@ class TestAIModelsValidation:
             max_suggestions=10,
         )
         assert request.max_suggestions == 10
+
+
+class TestLanguageSupport:
+    """Tests for multilingual content generation."""
+
+    def test_generate_article_in_kannada(self) -> None:
+        """Generate article in Kannada language."""
+        generator = AIArticleGenerator(provider=MockProvider())
+
+        request = AIArticleRequest(
+            topic="ಬೆಳೆ ವಿಮೆ",
+            tone="professional",
+            word_count=500,
+            language="kn",
+        )
+        response = generator.generate(request)
+
+        assert response.title
+        assert response.content
+        assert response.language == "kn"
+        assert "<h1>" in response.content
+
+    def test_generate_article_in_hindi(self) -> None:
+        """Generate article in Hindi language."""
+        generator = AIArticleGenerator(provider=MockProvider())
+
+        request = AIArticleRequest(
+            topic="बीज भुगतान",
+            tone="professional",
+            word_count=500,
+            language="hi",
+        )
+        response = generator.generate(request)
+
+        assert response.title
+        assert response.content
+        assert response.language == "hi"
+
+    def test_seo_title_request_language_validation(self) -> None:
+        """Validate language code in SEO title request."""
+        # Valid language codes
+        request = SEOTitleRequest(topic="Test", language="kn")
+        assert request.language == "kn"
+
+        request = SEOTitleRequest(topic="Test", language="hi")
+        assert request.language == "hi"
+
+        # Invalid language code
+        with pytest.raises(ValueError):
+            SEOTitleRequest(topic="Test", language="xx")
+
+    def test_article_request_language_validation(self) -> None:
+        """Validate language code in article request."""
+        # Valid language codes
+        request = AIArticleRequest(topic="Test", language="kn")
+        assert request.language == "kn"
+
+        request = AIArticleRequest(topic="Test", language="hi")
+        assert request.language == "hi"
+
+        # Default language is English
+        request = AIArticleRequest(topic="Test")
+        assert request.language == "en"
+
+        # Invalid language code
+        with pytest.raises(ValueError):
+            AIArticleRequest(topic="Test", language="invalid")
+
+    def test_generate_seo_title_in_kannada(self) -> None:
+        """Generate SEO title in Kannada language."""
+        generator = SEOTitleGenerator(provider=MockProvider())
+
+        request = SEOTitleRequest(
+            topic="ಬೆಳೆ ವಿಮೆ",
+            language="kn",
+        )
+        response = generator.generate(request)
+
+        assert response.title
+        assert response.language == "kn"
+
+    def test_meta_optimization_in_kannada(self) -> None:
+        """Optimize meta description in Kannada language."""
+        optimizer = MetaDescriptionOptimizer(provider=MockProvider())
+
+        request = MetaOptimizationRequest(
+            title="ಬೆಳೆ ವಿಮೆ ಗുരಿತಾಂತ",
+            content="<p>ಬೆಳೆ ವಿಮೆ ಬಗ್ಗೆ ಮಾಹಿತಿ.</p>",
+            target_keyword="ಬೆಳೆ ವಿಮೆ",
+        )
+        response = optimizer.optimize(request)
+
+        assert response.meta_description
+        # Meta should be in Kannada when language is set
+        assert len(response.meta_description) > 0

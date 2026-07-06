@@ -7,7 +7,7 @@ The MetaDescriptionOptimizer enhances existing SEO meta functionality
 by using AI for better, more engaging meta descriptions.
 """
 
-from typing import Optional
+from typing import Optional, List, Dict, Any
 
 from config import get_logger
 from ai.models import MetaOptimizationRequest, MetaOptimizationResponse
@@ -133,3 +133,148 @@ class MetaDescriptionOptimizer:
         elif length <= 160:
             return 90
         return 75
+
+    def generate_open_graph_tags(
+        self,
+        title: str,
+        description: str,
+        url: Optional[str] = None,
+        image_url: Optional[str] = None,
+    ) -> Dict[str, str]:
+        """
+        Generate Open Graph meta tags for social media sharing.
+
+        Args:
+            title: Article title (50-60 chars recommended)
+            description: Meta description (120-160 chars)
+            url: Article URL
+            image_url: Featured image URL (1200x630px recommended)
+
+        Returns:
+            Dict of OG tag names to values
+
+        Example:
+            >>> tags = optimizer.generate_open_graph_tags(
+            ...     title="Python Tips",
+            ...     description="Learn Python with these tips",
+            ...     url="https://example.com/python-tips",
+            ...     image_url="https://example.com/og-image.jpg"
+            ... )
+        """
+        og_tags = {
+            "og:title": title[:60],
+            "og:description": description[:160],
+            "og:type": "article",
+            "og:site_name": "Blogger Automation Platform",
+        }
+
+        if url:
+            og_tags["og:url"] = url
+
+        if image_url:
+            og_tags["og:image"] = image_url
+            og_tags["og:image:width"] = "1200"
+            og_tags["og:image:height"] = "630"
+
+        return og_tags
+
+    def generate_twitter_card_tags(
+        self,
+        title: str,
+        description: str,
+        image_url: Optional[str] = None,
+        creator: Optional[str] = None,
+    ) -> Dict[str, str]:
+        """
+        Generate Twitter Card meta tags.
+
+        Args:
+            title: Article title
+            description: Meta description
+            image_url: Image URL (1200x630px recommended)
+            creator: Twitter handle of creator
+
+        Returns:
+            Dict of Twitter tag names to values
+
+        Example:
+            >>> tags = optimizer.generate_twitter_card_tags(
+            ...     title="Python Tips",
+            ...     description="Learn Python with these tips",
+            ...     image_url="https://example.com/twitter-image.jpg"
+            ... )
+        """
+        twitter_tags = {
+            "twitter:card": "summary_large_image",
+            "twitter:title": title[:60],
+            "twitter:description": description[:160],
+        }
+
+        if image_url:
+            twitter_tags["twitter:image"] = image_url
+
+        if creator:
+            # Ensure @ prefix
+            if not creator.startswith("@"):
+                creator = "@" + creator
+            twitter_tags["twitter:creator"] = creator
+
+        return twitter_tags
+
+    def generate_social_meta_tags(
+        self,
+        title: str,
+        description: str,
+        url: Optional[str] = None,
+        image_url: Optional[str] = None,
+        creator: Optional[str] = None,
+    ) -> Dict[str, str]:
+        """
+        Generate all social media meta tags (OG + Twitter).
+
+        This is a convenience method that combines Open Graph and Twitter Card tags.
+
+        Args:
+            title: Article title
+            description: Meta description
+            url: Article URL
+            image_url: Featured image URL
+            creator: Twitter handle
+
+        Returns:
+            Combined dict of all social meta tags
+        """
+        og_tags = self.generate_open_graph_tags(
+            title=title,
+            description=description,
+            url=url,
+            image_url=image_url,
+        )
+
+        twitter_tags = self.generate_twitter_card_tags(
+            title=title,
+            description=description,
+            image_url=image_url,
+            creator=creator,
+        )
+
+        return {**og_tags, **twitter_tags}
+
+    def format_social_tags_html(self, tags: Dict[str, str]) -> str:
+        """
+        Format social meta tags as HTML meta tags.
+
+        Args:
+            tags: Dict of tag names to values
+
+        Returns:
+            HTML string with meta tags
+        """
+        html_parts = []
+        for name, content in tags.items():
+            if name.startswith("twitter:"):
+                html_parts.append(f'<meta name="{name}" content="{content}">')
+            else:
+                html_parts.append(f'<meta property="{name}" content="{content}">')
+
+        return "\n".join(html_parts)

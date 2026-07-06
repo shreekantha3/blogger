@@ -96,20 +96,38 @@ class AnthropicProvider(BaseProvider):
         tone: str,
         target_keywords: Optional[list[str]] = None,
         word_count: int = 1000,
+        language: str = "en",
     ) -> tuple[str, str]:
         """Generate a complete article."""
         keywords = target_keywords or []
         keyword_instruction = f" Include these keywords naturally: {', '.join(keywords)}." if keywords else ""
 
+        language_instruction = ""
+        if language and language.lower() != "en":
+            language_map = {
+                "kn": "Kannada",
+                "hi": "Hindi",
+                "es": "Spanish",
+                "fr": "French",
+                "de": "German",
+                "zh": "Chinese",
+                "ja": "Japanese",
+                "ta": "Tamil",
+                "te": "Telugu",
+            }
+            lang_name = language_map.get(language.lower(), language)
+            language_instruction = f"\n- Write the entire article in {lang_name} ({language.upper()}) language."
+
         prompt = f"""You are a professional blog writer. Write a comprehensive article about "{topic}".
 
 Requirements:
 - Tone: {tone}
-- Target length: approximately {word_count} words
+- Target length: approximately {word_count} words{language_instruction}
 - Include an H1 title, H2 section headings, and paragraph content
 - Make it engaging and valuable to readers{keyword_instruction}
 - Use proper HTML tags (<h1>, <h2>, <p>)
 - No markdown, only HTML
+- Ensure content is written in the specified language
 
 Return ONLY the HTML content starting with <h1>.
 """
@@ -127,6 +145,7 @@ Return ONLY the HTML content starting with <h1>.
             "Article generated",
             title=title[:50],
             word_count=len(content.split()),
+            language=language,
         )
 
         return title, content
@@ -136,16 +155,33 @@ Return ONLY the HTML content starting with <h1>.
         topic: str,
         target_keywords: Optional[list[str]] = None,
         max_length: int = 60,
+        language: str = "en",
     ) -> str:
         """Generate an SEO-optimized title."""
         keywords = target_keywords or []
         keyword_instruction = f" Include these keywords: {', '.join(keywords)}." if keywords else ""
 
+        language_instruction = ""
+        if language and language.lower() != "en":
+            language_map = {
+                "kn": "Kannada",
+                "hi": "Hindi",
+                "es": "Spanish",
+                "fr": "French",
+                "de": "German",
+                "zh": "Chinese",
+                "ja": "Japanese",
+                "ta": "Tamil",
+                "te": "Telugu",
+            }
+            lang_name = language_map.get(language.lower(), language)
+            language_instruction = f"\n- Write the title in {lang_name} ({language.upper()}) language."
+
         prompt = f"""Generate an SEO-optimized title for a blog post about "{topic}".
 
 Requirements:
 - Maximum {max_length} characters
-- Include primary keywords naturally{keyword_instruction}
+- Include primary keywords naturally{keyword_instruction}{language_instruction}
 - Make it compelling for search users
 - No clickbait, genuinely descriptive
 
@@ -161,16 +197,33 @@ Return ONLY the title, no formatting.
         title: str,
         target_keyword: Optional[str] = None,
         length: int = 155,
+        language: str = "en",
     ) -> str:
         """Optimize or generate a meta description."""
         keyword_instruction = f" Include the keyword '{target_keyword}'." if target_keyword else ""
+
+        language_instruction = ""
+        if language and language.lower() != "en":
+            language_map = {
+                "kn": "Kannada",
+                "hi": "Hindi",
+                "es": "Spanish",
+                "fr": "French",
+                "de": "German",
+                "zh": "Chinese",
+                "ja": "Japanese",
+                "ta": "Tamil",
+                "te": "Telugu",
+            }
+            lang_name = language_map.get(language.lower(), language)
+            language_instruction = f"\n- Write the meta description in {lang_name} ({language.upper()}) language."
 
         prompt = f"""Write a meta description for a blog post titled "{title}".
 
 Requirements:
 - Exactly {length} characters (Google displays ~{length} chars)
 - Compelling call to action (e.g., "Learn about...", "Discover...")
-- Accurate summary of the content{keyword_instruction}
+- Accurate summary of the content{keyword_instruction}{language_instruction}
 - No generic phrases like "Click here" or "Read more"
 
 Return ONLY the meta description.
@@ -184,9 +237,26 @@ Return ONLY the meta description.
         content: str,
         title: Optional[str] = None,
         num_questions: int = 5,
+        language: str = "en",
     ) -> list[tuple[str, str]]:
         """Generate FAQ from content."""
         context = f" for a post titled '{title}'" if title else ""
+
+        language_instruction = ""
+        if language and language.lower() != "en":
+            language_map = {
+                "kn": "Kannada",
+                "hi": "Hindi",
+                "es": "Spanish",
+                "fr": "French",
+                "de": "German",
+                "zh": "Chinese",
+                "ja": "Japanese",
+                "ta": "Tamil",
+                "te": "Telugu",
+            }
+            lang_name = language_map.get(language.lower(), language)
+            language_instruction = f"\n- Write the questions and answers in {lang_name} ({language.upper()}) language."
 
         prompt = f"""Generate {num_questions} frequently asked questions{context} based on this content:
 
@@ -194,7 +264,7 @@ Return ONLY the meta description.
 
 Format your response as JSON array with objects containing "question" and "answer" keys.
 Each answer should be 1-2 sentences.
-Be specific and relevant to the content.
+Be specific and relevant to the content.{language_instruction}
 Return ONLY the JSON array.
 """
 

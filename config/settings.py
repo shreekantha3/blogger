@@ -69,8 +69,8 @@ class Settings(BaseSettings):
         description="Default AI provider: openrouter, anthropic, or openai"
     )
     ai_default_model: str = Field(
-        default="claude-sonnet-5",
-        description="Default model for AI operations"
+        default="poolside-xs-free",
+        description="Default model for AI operations (using free OpenRouter model)"
     )
     ai_max_tokens: int = Field(
         default=4000,
