@@ -1,12 +1,12 @@
-# Cotton Corporation of India Limited Recruitment 2026: Apply Online for 148 Assistant Manager & Junior Assistant Posts
+<h1>CCI Recruitment 2026: 148 Assistant Manager Posts</h1>
 
 **Last Updated:** July 2026 | **Total Posts:** 148 | **Application Mode:** Online
 
-Cotton Corporation of India Limited (CCI) has announced recruitment for **148 posts** across various departments including Assistant Manager, Management Trainee, Junior Commercial Executive, and Junior Assistant positions. This is a significant opportunity for professionals seeking roles in India's premier cotton trading organization.
+CCI announced recruitment for **148 posts** across departments. Positions include Assistant Manager, Management Trainee, Junior Commercial Executive, and Junior Assistant. This is a major opportunity for professionals in India's premier cotton trading organization.
 
-## Cotton Corporation of India Limited Recruitment 2026 - Overview
+<h2>Cotton Corporation of India Limited Recruitment 2026 - Overview</h2>
 
-### Post-wise Vacancy Details
+<h3>Post-wise Vacancy Details</h3>
 
 | Post Name | Number of Posts |
 |-----------|-----------------|
@@ -23,9 +23,9 @@ Cotton Corporation of India Limited (CCI) has announced recruitment for **148 po
 
 ---
 
-## Application Timeline
+<h2>Application Timeline</h2>
 
-### Important Dates
+<h3>Important Dates</h3>
 
 | Event | Date |
 |-------|------|
@@ -34,9 +34,9 @@ Cotton Corporation of India Limited (CCI) has announced recruitment for **148 po
 
 ---
 
-## How to Apply Online
+<h2>How to Apply Online</h2>
 
-### Step-by-Step Application Process:
+<h3>Step-by-Step Application Process:</h3>
 
 1. **Visit Official Website:** [cotcorp.org.in](https://cotcorp.org.in)
 
@@ -60,9 +60,9 @@ Cotton Corporation of India Limited (CCI) has announced recruitment for **148 po
 
 ---
 
-## Detailed Eligibility Criteria
+<h2>Detailed Eligibility Criteria</h2>
 
-### Age Limits
+<h3>Age Limits</h3>
 
 | Post Category | Minimum Age | Maximum Age |
 |---------------|-------------|-------------|
@@ -71,7 +71,7 @@ Cotton Corporation of India Limited (CCI) has announced recruitment for **148 po
 
 **Note:** Age relaxation available for SC/ST, OBC, PwBD, and Ex-Servicemen as per government rules.
 
-### Educational Qualification by Post
+<h3>Educational Qualification by Post</h3>
 
 | Post | Qualification |
 |------|---------------|
@@ -85,14 +85,14 @@ Cotton Corporation of India Limited (CCI) has announced recruitment for **148 po
 
 ---
 
-## Application Fee
+<h2>Application Fee</h2>
 
 | Category | Fee |
 |----------|-----|
 | **General/OBC/EWS** | ₹500/- |
 | **SC/ST/PwBD** | ₹250/- |
 
-### Payment Method
+<h3>Payment Method</h3>
 Fee can be paid online through:
 - Credit/Debit Card
 - Net Banking
@@ -101,9 +101,9 @@ Fee can be paid online through:
 
 ---
 
-## Salary Structure
+<h2>Salary Structure</h2>
 
-### Pay Scale Details
+<h3>Pay Scale Details</h3>
 
 | Post | Pay Scale | Estimated Monthly |
 |------|-----------|-------------------|
@@ -114,10 +114,10 @@ Fee can be paid online through:
 
 ---
 
-## Selection Process
+<h2>Selection Process</h2>
 
-### Process Overview
-The selection process follows a structured approach:
+<h3>Process Overview</h3>
+The selection process follows a structured approach. It includes:
 
 1. **Computer Based Test (CBT)**
    - Online examination conducted by CCI
@@ -129,30 +129,30 @@ The selection process follows a structured approach:
    - Experience certificate validation (if applicable)
    - Age and category certificate verification
 
-### Exam Pattern
+<h3>Exam Pattern</h3>
 
-#### For Management Trainee Posts:
+<h4>For Management Trainee Posts:</h4>
 - **Reasoning & Numerical Ability:** 25 marks
 - **General English:** 25 marks
 - **Professional Knowledge:** 50 marks
 - **Total:** 100 marks
 
-#### For Junior Assistant Posts:
+<h4>For Junior Assistant Posts:</h4>
 - **Reasoning:** 30 marks
 - **Numerical Ability:** 30 marks
 - **General English:** 40 marks
 - **Total:** 100 marks
 
-#### For Assistant Manager Posts:
+<h4>For Assistant Manager Posts:</h4>
 - **Professional Knowledge:** 100 marks
 - **General English:** 50 marks
 - **Total:** 150 marks
 
 ---
 
-## Required Documents
+<h2>Required Documents</h2>
 
-### For Application:
+<h3>For Application:</h3>
 - Educational Certificates (Mark Sheets & Degree)
 - Age Proof (10th Certificate or Birth Certificate)
 - Identity Proof (Aadhaar, PAN, Passport)
@@ -162,7 +162,7 @@ The selection process follows a structured approach:
 - Passport Size Photograph
 - Signature
 
-### For Selected Candidates:
+<h3>For Selected Candidates:</h3>
 - All documents mentioned above
 - Experience Certificate (if applicable)
 - Bank Passbook & Cancelled Cheque
@@ -170,16 +170,16 @@ The selection process follows a structured approach:
 
 ---
 
-## About Cotton Corporation of India Limited
+<h2>About Cotton Corporation of India Limited</h2>
 
-### Company Overview
-Cotton Corporation of India Limited is India's premier organization engaged in:
+<h3>Company Overview</h3>
+CCI is India's premier cotton organization. It engages in:
 - **Cotton trading and procurement**
 - **Quality testing and grading**
 - **Market intervention and stabilization**
 - **Support to cotton growers and textile industry**
 
-### Key Functions
+<h3>Key Functions</h3>
 - Procurement of cotton from farmers
 - Quality assessment and testing
 - Market price stabilization
@@ -188,15 +188,15 @@ Cotton Corporation of India Limited is India's premier organization engaged in:
 
 ---
 
-## Why Join CCI?
+<h2>Why Join CCI?</h2>
 
-### Career Opportunities
+<h3>Career Opportunities</h3>
 - **Government Company:** Stable and secure employment
 - **Growing Sector:** Cotton and textile industry growth
 - **Skill Development:** Training programs for career growth
 - **National Importance:** Contribution to India's agricultural sector
 
-### Benefits
+<h3>Benefits</h3>
 - **Competitive Salary:** As per pay matrix with allowances
 - **Medical Insurance:** Comprehensive health coverage
 - **Retirement Benefits:** Provident fund, pension schemes
@@ -205,35 +205,35 @@ Cotton Corporation of India Limited is India's premier organization engaged in:
 
 ---
 
-## Frequently Asked Questions
+<h2>Frequently Asked Questions</h2>
 
-### What is the total number of posts available?
+<h3>What is the total number of posts available?</h3>
 
-CCI has announced **148 posts** across various departments including Assistant Managers, Management Trainees, Junior Commercial Executives, and Junior Assistants.
+CCI announced **148 posts** across departments. These include Assistant Managers, Management Trainees, and Junior Commercial Executives.
 
-### Is there any application fee for all categories?
+<h3>Is there any application fee for all categories?</h3>
 
 No, there is a **fee exemption** for SC/ST and PwBD candidates:
 - **General/OBC/EWS:** ₹500/-
 - **SC/ST/PwBD:** ₹250/-
 
-### What is the application deadline?
+<h3>What is the application deadline?</h3>
 
-The last date for online application is **July 27, 2026**. Applications received after this date will not be considered.
+The last date for online application is **July 27, 2026**. Applications after this date will not be considered.
 
-### How many posts are available for Junior Assistant?
+<h3>How many posts are available for Junior Assistant?</h3>
 
 There are **80 Junior Assistant posts** in total:
 - **Junior Assistant (Accounts):** 50 posts
 - **Junior Assistant (General):** 30 posts
 
-### Is there any reservation for women candidates?
+<h3>Is there any reservation for women candidates?</h3>
 
-Women candidates are eligible for all posts as per the general category rules, with applicable age relaxation for reserved categories.
+Women candidates can apply for all posts. Age relaxation applies for reserved categories.
 
 ---
 
-## Important Links
+<h2>Important Links</h2>
 
 | Link | Purpose |
 |------|---------|
@@ -243,10 +243,10 @@ Women candidates are eligible for all posts as per the general category rules, w
 
 ---
 
-> **Important:** Applications are only accepted **online** through the official website. Ensure you have all documents scanned in the correct format before uploading.
+> **Important:** Applications are **online only**. Submit through the official website. Scan documents in correct format before uploading.
 
 ---
 
 **Keywords:** Cotton Corporation of India Recruitment 2026, CCI Assistant Manager Jobs, Junior Assistant Cotton Corporation, Management Trainee CCI, Apply Online CCI, Cotton Corporation Jobs India, Textile Industry Jobs, Government Jobs 2026
 
-**Meta Description:** Apply for Cotton Corporation of India Limited Recruitment 2026 for 148 posts (Assistant Manager, Management Trainee, Junior Assistant). Check eligibility, salary & application process at cotcorp.org.in
+**Meta Description:** Apply for cci recruitment 2026: 148 assistant manager posts. Check eligibility, salary, and application process. cotton corporation recruitment jobs ava...

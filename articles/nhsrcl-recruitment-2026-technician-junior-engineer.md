@@ -1,12 +1,12 @@
-# NHSRCL Recruitment 2026: Apply Online for 454 Technician & Junior Engineer Posts - National High Speed Rail Company
+<h1>NHSRCL Recruitment 2026: 454 Technician & JE Posts</h1>
 
 **Last Updated:** July 2026 | **Total Posts:** 454 | **Application Mode:** Online
 
-The National High Speed Rail Company Limited (NHSRCL) has announced recruitment for **454 Technician and Junior Engineer posts** in 2026. These positions are crucial for the development and maintenance of India's high-speed rail infrastructure.
+NHSRCL has announced recruitment for **454 Technician and Junior Engineer posts** in 2026. These positions support India's high-speed rail development. They handle infrastructure maintenance.
 
-## NHSRCL Recruitment 2026 - Overview
+<h2>NHSRCL Recruitment 2026 - Overview</h2>
 
-### Total Posts Breakdown
+<h3>Total Posts Breakdown</h3>
 - **Technician Posts:** 237
 - **Junior Engineer Posts:** 206
 - **Combined Total:** 454 Posts
@@ -15,9 +15,9 @@ The National High Speed Rail Company Limited (NHSRCL) has announced recruitment 
 
 ---
 
-## Application Timeline
+<h2>Application Timeline</h2>
 
-### Important Dates
+<h3>Important Dates</h3>
 
 | Event | Date |
 |-------|------|
@@ -26,9 +26,9 @@ The National High Speed Rail Company Limited (NHSRCL) has announced recruitment 
 
 ---
 
-## How to Apply Online
+<h2>How to Apply Online</h2>
 
-### Step-by-Step Application Process:
+<h3>Step-by-Step Application Process:</h3>
 
 1. **Visit Official Website:** [https://nhsrcl.in/](https://nhsrcl.in/)
 
@@ -52,24 +52,24 @@ The National High Speed Rail Company Limited (NHSRCL) has announced recruitment 
 
 ---
 
-## Detailed Eligibility Criteria
+<h2>Detailed Eligibility Criteria</h2>
 
-### Technician Posts (Total: 237)
+<h3>Technician Posts (Total: 237)</h3>
 
-#### Educational Qualification:
+<h4>Educational Qualification:</h4>
 - **Matriculation/SSLC + ITI** in relevant trade
 - **OR Diploma** in relevant engineering discipline
 
-#### Experience:
+<h4>Experience:</h4>
 - Minimum **2 years** of post-qualification experience in Operations & Maintenance departments of:
   - Indian Railways
   - Metro Railways
   - RRTS systems
 
-#### Age Limit:
+<h4>Age Limit:</h4>
 - Maximum **35 years** (relaxable as per rules)
 
-#### Post-wise Details:
+<h4>Post-wise Details:</h4>
 
 | Vacancy No. | Post Name | Number of Posts |
 |-------------|-----------|-----------------|
@@ -89,18 +89,18 @@ The National High Speed Rail Company Limited (NHSRCL) has announced recruitment 
 | 48/2026 | Technician (Rolling Stock-Electrician) | 13 |
 | 49/2026 | Technician (Rolling Stock-RAC) | 3 |
 
-### Junior Engineer Posts (Total: 206)
+<h3>Junior Engineer Posts (Total: 206)</h3>
 
-#### Educational Qualification:
+<h4>Educational Qualification:</h4>
 - **Engineering Diploma** or **BE/B.Tech** in relevant discipline
 
-#### Experience:
+<h4>Experience:</h4>
 - Minimum **3 years** of post-qualification experience
 
-#### Age Limit:
+<h4>Age Limit:</h4>
 - Maximum **45 years** (relaxable as per rules)
 
-#### Post Names:
+<h4>Post Names:</h4>
 - Junior Engineer (Civil/Track)
 - Junior Engineer (Electrical)
 - Junior Engineer (Signalling & Telecom)
@@ -112,7 +112,7 @@ The National High Speed Rail Company Limited (NHSRCL) has announced recruitment 
 
 ---
 
-## Application Fee
+<h2>Application Fee</h2>
 
 | Category | Fee |
 |----------|-----|
@@ -121,21 +121,21 @@ The National High Speed Rail Company Limited (NHSRCL) has announced recruitment 
 
 ---
 
-## Salary Structure
+<h2>Salary Structure</h2>
 
-### Pay Scale
+<h3>Pay Scale</h3>
 - **Technician:** IDA Pay Scale Level-6 to Level-10
 - **Junior Engineer:** IDA Pay Scale NE-4
 
-### Estimated Monthly Salary
+<h3>Estimated Monthly Salary</h3>
 - **Technician:** ₹40,000 - ₹1,25,000 (including allowances)
 - **Junior Engineer:** ₹56,100 - ₹1,80,000 (including allowances)
 
 ---
 
-## Selection Process
+<h2>Selection Process</h2>
 
-### Process Overview
+<h3>Process Overview</h3>
 The selection process includes:
 
 1. **Computer Based Test (CBT)**
@@ -153,9 +153,9 @@ The selection process includes:
 
 ---
 
-## Required Documents
+<h2>Required Documents</h2>
 
-### For Application:
+<h3>For Application:</h3>
 - Educational Certificates (Mark Sheets & Degree/Diploma)
 - Experience Certificate(s) from previous employer(s)
 - Identity Proof (Aadhaar, PAN, Passport)
@@ -165,28 +165,28 @@ The selection process includes:
 - Passport Size Photograph
 - Signature
 
-### For Selection:
+<h3>For Selection:</h3>
 - All documents mentioned above
 - Employment Exchange Registration Card (if applicable)
 - Bank Passbook & Cancelled Cheque
 
 ---
 
-## Why Join NHSRCL?
+<h2>Why Join NHSRCL?</h2>
 
-### About NHSRCL
-National High Speed Rail Company Limited is India's premier high-speed rail developer, responsible for:
+<h3>About NHSRCL</h3>
+NHSRCL is India's premier high-speed rail developer. It manages:
 - **Chennai-Bengaluru High-Speed Rail Corridor**
-- **Future high-speed rail projects** across the country
+- **Future high-speed rail projects** across India
 
-### Career Benefits
+<h3>Career Benefits</h3>
 - **National Project:** Work on India's first high-speed rail line
 - **Modern Technology:** Exposure to cutting-edge rail technology
 - **Career Growth:** Opportunities in expanding high-speed rail network
 - **Competitive Salary:** IDA pay scale with allowances
 - **Job Security:** Government company with stable employment
 
-### Work Environment
+<h3>Work Environment</h3>
 - Modern office and field environments
 - Professional and skilled workforce
 - International collaboration opportunities
@@ -194,34 +194,34 @@ National High Speed Rail Company Limited is India's premier high-speed rail deve
 
 ---
 
-## Frequently Asked Questions
+<h2>Frequently Asked Questions</h2>
 
-### What is the total number of posts available?
+<h3>What is the total number of posts available?</h3>
 
-NHSRCL has announced **454 posts** in total, comprising **237 Technician** and **206 Junior Engineer** posts.
+NHSRCL announced **454 posts** total. These include **237 Technician** and **206 Junior Engineer** posts.
 
-### Is there any age relaxation for reserved categories?
+<h3>Is there any age relaxation for reserved categories?</h3>
 
 Yes, age relaxation is available as per government rules:
 - **SC/ST:** 5 years
 - **OBC:** 3 years
 - **Ex-Servicemen:** As per government policy
 
-### Do I need prior railways experience?
+<h3>Do I need prior railways experience?</h3>
 
-Yes, for Technician posts, you need **minimum 2 years** experience in Operations & Maintenance of Indian Railways, Metro Railways, or RRTS systems.
+Technician posts need **2 years** experience. This is in Operations & Maintenance of Indian Railways. Also valid: Metro Railways or RRTS systems.
 
-### What is the application fee?
+<h3>What is the application fee?</h3>
 
-Application fee is **₹400/-** for General/OBC/EWS candidates. **SC/ST/Women candidates are exempted** from paying the fee.
+Application fee is **₹400/-** for General/OBC/EWS candidates. SC/ST/Women candidates are exempted from fees.
 
-### How will I know if I'm shortlisted?
+<h3>How will I know if I'm shortlisted?</h3>
 
-Shortlisted candidates will be notified through email/SMS as per the official notification. All updates will be available on the official website.
+Shortlisted candidates will be notified via email/SMS. Check the official notification for details. Updates are on the official website.
 
 ---
 
-## Important Links
+<h2>Important Links</h2>
 
 | Link | Purpose |
 |------|---------|
@@ -231,10 +231,10 @@ Shortlisted candidates will be notified through email/SMS as per the official no
 
 ---
 
-> **Note:** The application process is **online only**. No offline applications will be accepted. Ensure you meet all eligibility criteria before applying.
+> **Note:** Applications are **online only**. No offline applications accepted. Check eligibility before applying.
 
 ---
 
 **Keywords:** NHSRCL Recruitment 2026, Technician Junior Engineer NHSRCL, High Speed Rail Jobs, Railway Technician Application, NHSRCL Career Opportunities, Apply Online NHSRCL, Railway Jobs India, High Speed Rail Recruitment
 
-**Meta Description:** Apply for NHSRCL Recruitment 2026 for 454 Technician & Junior Engineer posts. Check eligibility, application process, salary & selection criteria at nhsrcl.in
+**Meta Description:** Apply for nhsrcl recruitment 2026: 454 technician & je posts. Check eligibility, salary, and application process. nhsrcl recruitment jobs available.

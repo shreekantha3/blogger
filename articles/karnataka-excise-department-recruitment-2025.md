@@ -1,10 +1,10 @@
-# Karnataka Excise Department Recruitment 2025: Apply Online for Constable & Sub Inspector Posts
+<h1>Karnataka Excise Recruitment 2025: 1207 Posts Apply Online</h1>
 
 **Last Updated:** July 2026 | **Total Posts:** 1,207 | **Application Mode:** Online
 
 The Karnataka Excise Department has announced an exciting recruitment drive for 1,207 vacancies comprising Excise Constable and Excise Sub-Inspector positions. This is a golden opportunity for candidates seeking government jobs in Karnataka's premier excise administration.
 
-## Karnataka Excise Department Recruitment 2025 - Overview
+<h2>Karnataka Excise Department Recruitment 2025 - Overview</h2>
 
 | Category | Number of Posts |
 |----------|-----------------|
@@ -14,16 +14,16 @@ The Karnataka Excise Department has announced an exciting recruitment drive for 
 
 **Official Website:** [stateexcise.karnataka.gov.in](https://stateexcise.karnataka.gov.in)
 
-## Detailed Eligibility Criteria
+<h2>Detailed Eligibility Criteria</h2>
 
-### Educational Qualification
+<h3>Educational Qualification</h3>
 
 | Post | Minimum Qualification |
 |------|----------------------|
 | **Excise Constable** | 10th Pass |
 | **Excise Sub-Inspector** | 12th Pass or Degree |
 
-### Age Limits (as of Recruitment Date)
+<h3>Age Limits (as of Recruitment Date)</h3>
 
 - **Minimum Age:** 18 years
 - **Maximum Age:** 35 years
@@ -32,46 +32,46 @@ The Karnataka Excise Department has announced an exciting recruitment drive for 
   - **2A/2B/3A/3B:** 3 years additional relaxation
   - **Ex-Servicemen:** As per government rules
 
-### Physical Standards (For Constable Posts)
+<h3>Physical Standards (For Constable Posts)</h3>
 
 - **Height:** Minimum 165 cm for General Category
 - **Chest:** Minimum 85 cm (with expansion 90 cm)
 - **Weight:** As per medical standards
 
-## Salary Structure
+<h2>Salary Structure</h2>
 
-### Pay Scale Details
+<h3>Pay Scale Details</h3>
 
 | Post | Pay Scale | Estimated Monthly |
 |------|-----------|-------------------|
 | **Excise Constable** | Level-1 Pay Matrix | ₹21,400 - ₹58,250 |
 | **Excise Sub-Inspector** | Level-10 Pay Matrix | ₹56,100 - ₹1,80,000 |
 
-## Selection Process
+<h2>Selection Process</h2>
 
 The recruitment selection process follows a multi-stage approach:
 
-### Step 1: Competitive Examination
+<h3>Step 1: Competitive Examination</h3>
 - Written test conducted by Karnataka Public Service Commission (KPSC)
 - Objective type questions covering General Knowledge, Reasoning, and Professional Knowledge
 
-### Step 2: Physical Efficiency Test (PET)
+<h3>Step 2: Physical Efficiency Test (PET)</h3>
 - 1600m race
 - Long jump
 - High jump
 - Shuttle run
 
-### Step 3: Physical Standards Test (PST)
+<h3>Step 3: Physical Standards Test (PST)</h3>
 - Verification of physical measurements
 - Medical fitness examination
 
-### Step 4: Document Verification
+<h3>Step 4: Document Verification</h3>
 - Verification of all original documents
 - Certificate validation
 
-## How to Apply Online
+<h2>How to Apply Online</h2>
 
-### Step-by-Step Application Process:
+<h3>Step-by-Step Application Process:</h3>
 
 1. **Visit Official Website:** [stateexcise.karnataka.gov.in](https://stateexcise.karnataka.gov.in)
 
@@ -99,7 +99,7 @@ The recruitment selection process follows a multi-stage approach:
 
 10. **Print Confirmation:** Save/print acknowledgment for future reference
 
-## Important Dates
+<h2>Important Dates</h2>
 
 | Event | Date |
 |-------|------|
@@ -109,7 +109,7 @@ The recruitment selection process follows a multi-stage approach:
 | **Written Exam** | [Check official website] |
 | **Result Declaration** | [Check official website] |
 
-## Required Documents Checklist
+<h2>Required Documents Checklist</h2>
 
 - [ ] Educational Certificates (10th/12th/Degree)
 - [ ] Experience Certificate (if any)
@@ -122,29 +122,29 @@ The recruitment selection process follows a multi-stage approach:
 - [ ] Passport Size Photograph (white background)
 - [ ] Signature
 
-## Frequently Asked Questions
+<h2>Frequently Asked Questions</h2>
 
-### Is there any application fee for Karnataka Excise recruitment?
+<h3>Is there any application fee for Karnataka Excise recruitment?</h3>
 
 No, there is **no application fee** required for Excise Constable and Sub Inspector posts under this recruitment.
 
-### Can I apply for both Constable and Sub Inspector posts?
+<h3>Can I apply for both Constable and Sub Inspector posts?</h3>
 
 Yes, candidates can apply for both categories if they meet the eligibility criteria for each post.
 
-### What is the age relaxation for SC/ST candidates?
+<h3>What is the age relaxation for SC/ST candidates?</h3>
 
 SC/ST candidates get **5 years** additional relaxation in the upper age limit.
 
-### How long does the selection process take?
+<h3>How long does the selection process take?</h3>
 
 The complete selection process typically takes **3-6 months** depending on the number of applicants and exam schedule.
 
-### Is there any reservation for women candidates?
+<h3>Is there any reservation for women candidates?</h3>
 
 Women can apply for all posts as per the general category rules, with applicable age relaxation for certain categories.
 
-## Important Links
+<h2>Important Links</h2>
 
 | Link | Purpose |
 |------|---------|
@@ -152,7 +152,7 @@ Women can apply for all posts as per the general category rules, with applicable
 | [Career Portal](https://stateexcise.karnataka.gov.in/careers) | Application Portal |
 | [Download PDF](https://stateexcise.karnataka.gov.in/recruitment-notice) | Full Advertisement |
 
-## Why Join Karnataka Excise Department?
+<h2>Why Join Karnataka Excise Department?</h2>
 
 - **Job Security:** Permanent government employment
 - **Career Growth:** Clear promotion pathway
@@ -166,4 +166,4 @@ Women can apply for all posts as per the general category rules, with applicable
 
 **Keywords:** Karnataka Excise Department Recruitment, Karnataka Excise Recruitment 2025, Excise Constable Apply Online, Excise Sub Inspector Salary, Karnataka Excise Jobs, stateexcise.karnataka.gov.in, Excise Constable Age Limit, Excise Sub Inspector Eligibility
 
-**Meta Description:** Apply for Karnataka Excise Department Recruitment 2025 for 1207 posts (Excise Constable & Sub Inspector). Check eligibility, salary, selection process & apply online at stateexcise.karnataka.gov.in
+**Meta Description:** Apply for karnataka excise recruitment 2025: 1207 posts apply online. Check eligibility, salary, and application process. karnataka excise recruitment j...

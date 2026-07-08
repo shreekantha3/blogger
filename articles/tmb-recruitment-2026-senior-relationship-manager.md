@@ -1,10 +1,10 @@
-# TMB Recruitment 2026: Apply Online for Senior Relationship Manager Posts - Tamilnad Mercantile Bank
+<h1>TMB Senior Relationship Manager 2026: Apply Online Now</h1>
 
 **Last Updated:** July 2026 | **Total Posts:** Various | **Application Mode:** Online
 
 Tamilnad Mercantile Bank (TMB) has announced recruitment for **Senior Relationship Manager** positions in 2026. This is an excellent opportunity for banking professionals to join one of Tamil Nadu's leading private sector banks with a strong reputation for customer service and innovation.
 
-## TMB Senior Relationship Manager Recruitment 2026 - Overview
+<h2>TMB Senior Relationship Manager Recruitment 2026 - Overview</h2>
 
 | Details | Information |
 |---------|-------------|
@@ -15,9 +15,9 @@ Tamilnad Mercantile Bank (TMB) has announced recruitment for **Senior Relationsh
 
 ---
 
-## Application Timeline
+<h2>Application Timeline</h2>
 
-### Important Dates
+<h3>Important Dates</h3>
 
 | Event | Date |
 |-------|------|
@@ -26,9 +26,9 @@ Tamilnad Mercantile Bank (TMB) has announced recruitment for **Senior Relationsh
 
 ---
 
-## How to Apply Online
+<h2>How to Apply Online</h2>
 
-### Step-by-Step Application Process:
+<h3>Step-by-Step Application Process:</h3>
 
 1. **Visit Career Portal:** Go to [www.ib.tmbonline.bank.in/tmb_careers/](http://www.ib.tmbonline.bank.in/tmb_careers/)
 
@@ -48,25 +48,25 @@ Tamilnad Mercantile Bank (TMB) has announced recruitment for **Senior Relationsh
 
 ---
 
-## Eligibility Criteria
+<h2>Eligibility Criteria</h2>
 
-### Age Limit
+<h3>Age Limit</h3>
 - **Minimum Age:** 28 years
 - **Maximum Age:** 38 years (as of June 30, 2026)
 - **Age Relaxation:** Available for deserving candidates as per bank policy
 
-### Educational Qualification
+<h3>Educational Qualification</h3>
 - **Any Graduate/Post Graduate** from a recognized university
 - **No specific percentage requirement**
 
-### Experience Requirements
+<h3>Experience Requirements</h3>
 
-#### Mandatory Experience:
+<h4>Mandatory Experience:</h4>
 - **5 years** of work experience in sourcing/processing loans
 - **3 years** as Relationship Manager
 - Experience in **MSME loans** and high-value credit segments
 
-#### Preferred Qualifications:
+<h4>Preferred Qualifications:</h4>
 - Banking/financial sector experience
 - Sales and relationship management background
 - Credit analysis and risk assessment skills
@@ -74,23 +74,23 @@ Tamilnad Mercantile Bank (TMB) has announced recruitment for **Senior Relationsh
 
 ---
 
-## Salary Structure & Remuneration
+<h2>Salary Structure & Remuneration</h2>
 
-### Pay Scale
+<h3>Pay Scale</h3>
 - **Rank:** Senior Manager / Assistant Vice President (AVP)
 - **Salary:** As applicable to regular officers at SM/AVP level
 - **Variable Pay:** Performance-based incentives
 
-### Total Compensation Package
+<h3>Total Compensation Package</h3>
 - **Fixed Salary:** Competitive with industry standards
 - **Performance Bonuses:** Based on business generation
 - **Benefits:** Medical insurance, retirement plans, leave policies
 
 ---
 
-## Job Profile & Responsibilities
+<h2>Job Profile & Responsibilities</h2>
 
-### Key Responsibilities
+<h3>Key Responsibilities</h3>
 - Manage and develop high-value client relationships
 - Source new business opportunities in MSME segment
 - Process and sanction credit proposals
@@ -98,7 +98,7 @@ Tamilnad Mercantile Bank (TMB) has announced recruitment for **Senior Relationsh
 - Maintain portfolio quality and profitability
 - Achieve business targets and growth metrics
 
-### Required Skills
+<h3>Required Skills</h3>
 - Strong negotiation and persuasion skills
 - Excellent communication and interpersonal abilities
 - Credit analysis and risk management knowledge
@@ -107,9 +107,9 @@ Tamilnad Mercantile Bank (TMB) has announced recruitment for **Senior Relationsh
 
 ---
 
-## Required Documents
+<h2>Required Documents</h2>
 
-### For Application
+<h3>For Application</h3>
 - SSLC or Higher Secondary Mark Sheet (for age proof)
 - Degree Certificate (Graduation)
 - Experience certificates and relieving letters
@@ -117,7 +117,7 @@ Tamilnad Mercantile Bank (TMB) has announced recruitment for **Senior Relationsh
 - Digital photograph (390 x 520 pixels, max 120 KB)
 - Signature (240 x 240 pixels, max 60 KB)
 
-### For Selected Candidates
+<h3>For Selected Candidates</h3>
 - Birth Certificate
 - Educational certificates (all levels)
 - Experience certificates
@@ -127,15 +127,15 @@ Tamilnad Mercantile Bank (TMB) has announced recruitment for **Senior Relationsh
 
 ---
 
-## Selection Process
+<h2>Selection Process</h2>
 
-### Process Overview
+<h3>Process Overview</h3>
 The selection process is based on:
 1. **Online Application Screening**
 2. **Interview/Assessment** (if applicable)
 3. **Document Verification**
 
-### Evaluation Criteria
+<h3>Evaluation Criteria</h3>
 - Educational qualifications and experience
 - Banking/financial sector knowledge
 - Sales and relationship management skills
@@ -144,15 +144,15 @@ The selection process is based on:
 
 ---
 
-## Why Join TMB?
+<h2>Why Join TMB?</h2>
 
-### Career Opportunities
+<h3>Career Opportunities</h3>
 - **Established Bank:** Over 50 years of banking experience
 - **Growth Prospects:** Clear career progression path
 - **Learning Environment:** Continuous skill development programs
 - **Modern Culture:** Progressive and employee-friendly work environment
 
-### Benefits
+<h3>Benefits</h3>
 - **Competitive Salary:** At par with industry standards
 - **Performance Incentives:** Attractive variable compensation
 - **Comprehensive Benefits:** Medical, retirement, and leave policies
@@ -160,31 +160,31 @@ The selection process is based on:
 
 ---
 
-## Frequently Asked Questions
+<h2>Frequently Asked Questions</h2>
 
-### Is there any application fee for TMB recruitment?
+<h3>Is there any application fee for TMB recruitment?</h3>
 
 No, there is **no application fee** required for Senior Relationship Manager posts.
 
-### Can I apply if I'm from outside Tamil Nadu?
+<h3>Can I apply if I'm from outside Tamil Nadu?</h3>
 
 Yes, the position is **transferable** across India. You can apply from anywhere.
 
-### What is the difference between Relationship Manager and Senior Relationship Manager?
+<h3>What is the difference between Relationship Manager and Senior Relationship Manager?</h3>
 
 Senior Relationship Manager is a **higher rank** (equivalent to Senior Manager/AVP) with more responsibilities including team leadership, high-value credit decisions, and business development.
 
-### How is the selection communicated?
+<h3>How is the selection communicated?</h3>
 
 Shortlisted candidates will be contacted via email or phone for further rounds of selection.
 
-### What if I miss the application deadline?
+<h3>What if I miss the application deadline?</h3>
 
 The application portal closes on **July 18, 2026**. Late applications will not be considered.
 
 ---
 
-## Important Links
+<h2>Important Links</h2>
 
 | Link | Purpose |
 |------|---------|
@@ -200,4 +200,4 @@ The application portal closes on **July 18, 2026**. Late applications will not b
 
 **Keywords:** TMB Recruitment 2026, Senior Relationship Manager TMB, Tamilnad Mercantile Bank Jobs, Banking Jobs in India, TMB Career Opportunities, Apply Online TMB, Senior Manager Banking Jobs, MSME Loan Experience
 
-**Meta Description:** Apply for TMB Senior Relationship Manager recruitment 2026. Check eligibility, application process, salary & experience requirements at tmbonline.bank.in
+**Meta Description:** Apply for tmb senior relationship manager 2026: apply online now. Check eligibility, salary, and application process. tmb recruitment jobs available.

@@ -1,10 +1,10 @@
-# AIIMS Gorakhpur Recruitment 2026: Apply Online for 12 Junior Resident Posts - Walk-In Interview
+<h1>AIIMS Gorakhpur Junior Resident 2026: Walk-In Interview</h1>
 
 **Last Updated:** July 2026 | **Total Posts:** 12 | **Application Mode:** Walk-In Interview
 
 AIIMS Gorakhpur has announced a walk-in interview recruitment for **12 Junior Resident (Non-Academic) posts** under the Government of India residency scheme. This presents a valuable opportunity for qualified MBBS graduates to join a premier medical institution.
 
-## AIIMS Gorakhpur Junior Resident Recruitment 2026 - Overview
+<h2>AIIMS Gorakhpur Junior Resident Recruitment 2026 - Overview</h2>
 
 | Post Name | Number of Posts | Duration |
 |-----------|-----------------|----------|
@@ -14,27 +14,27 @@ AIIMS Gorakhpur has announced a walk-in interview recruitment for **12 Junior Re
 
 ---
 
-## Essential Eligibility Criteria
+<h2>Essential Eligibility Criteria</h2>
 
-### Educational Qualification
+<h3>Educational Qualification</h3>
 - MBBS degree from MCI recognized institute
 - Completion of compulsory rotatory internship
 - FMGE certificate (for foreign graduates)
 - Registration with Medical Council of India/State Medical Council
 
-### Age Limit
+<h3>Age Limit</h3>
 - Maximum age: **37 years**
 - Age relaxation applicable as per government rules for reserved categories
 
-### Medical Fitness
+<h3>Medical Fitness</h3>
 - Must fulfill medical fitness standards for government employment
 - No history of infectious diseases
 
 ---
 
-## Application Process
+<h2>Application Process</h2>
 
-### Walk-In Interview Details
+<h3>Walk-In Interview Details</h3>
 
 **Interview Date:** **08/06/2026** at 10:00 AM
 
@@ -42,7 +42,7 @@ AIIMS Gorakhpur has announced a walk-in interview recruitment for **12 Junior Re
 
 **Venue:** Medical College Building, AIIMS Gorakhpur
 
-### Documents Required for Walk-In
+<h3>Documents Required for Walk-In</h3>
 
 Candidates must bring the following documents in original and photocopy:
 
@@ -62,7 +62,7 @@ Candidates must bring the following documents in original and photocopy:
 
 ---
 
-## Application Fee
+<h2>Application Fee</h2>
 
 | Category | Fee |
 |----------|-----|
@@ -70,7 +70,7 @@ Candidates must bring the following documents in original and photocopy:
 | **SC/ST** | ₹250/- |
 | **PwBD** | **Nil (Free)** |
 
-### Payment Method
+<h3>Payment Method</h3>
 **Bank:** State Bank of India  
 **Branch:** Giridharganj, Gorakhpur-273008  
 **Account No:** 42368584553  
@@ -80,12 +80,12 @@ Candidates must bring the following documents in original and photocopy:
 
 ---
 
-## Selection Process
+<h2>Selection Process</h2>
 
-### Process Overview
+<h3>Process Overview</h3>
 The selection is based entirely on **walk-in interview** conducted by the selection committee of AIIMS Gorakhpur.
 
-### Evaluation Criteria
+<h3>Evaluation Criteria</h3>
 - Academic credentials and educational qualifications
 - Professional experience and internship completion
 - Medical council registration validity
@@ -95,7 +95,7 @@ The selection is based entirely on **walk-in interview** conducted by the select
 
 ---
 
-## Important Dates
+<h2>Important Dates</h2>
 
 | Event | Date |
 |-------|------|
@@ -106,16 +106,16 @@ The selection is based entirely on **walk-in interview** conducted by the select
 
 ---
 
-## Why Join AIIMS Gorakhpur?
+<h2>Why Join AIIMS Gorakhpur?</h2>
 
-### Prestigious Institution Benefits
+<h3>Prestigious Institution Benefits</h3>
 - **National Recognition:** AIIMS brand value across India
 - **Career Growth:** Opportunity for further specialization
 - **Competitive Salary:** Level-10 pay scale with NPA
 - **Professional Development:** Exposure to tertiary care
 - **Research Opportunities:** Access to medical research facilities
 
-### Job Security
+<h3>Job Security</h3>
 - Ad-hoc appointment with potential for regularization
 - Government medical institution benefits
 - Medical insurance coverage
@@ -123,31 +123,31 @@ The selection is based entirely on **walk-in interview** conducted by the select
 
 ---
 
-## Frequently Asked Questions
+<h2>Frequently Asked Questions</h2>
 
-### What is the duration of the Junior Resident post?
+<h3>What is the duration of the Junior Resident post?</h3>
 
 The appointment is for **6 months on ad-hoc basis**. The post may be regularized based on future requirements and government policies.
 
-### Do I need to have FMGE for this recruitment?
+<h3>Do I need to have FMGE for this recruitment?</h3>
 
 Yes, all foreign medical graduates must have **FMGE certificate** and valid registration with Medical Council of India.
 
-### Is there any age relaxation for PwBD candidates?
+<h3>Is there any age relaxation for PwBD candidates?</h3>
 
 Yes, PwBD candidates are eligible for **100% age relaxation** as per government rules.
 
-### Can I apply without paying the application fee?
+<h3>Can I apply without paying the application fee?</h3>
 
 PwBD candidates can apply **without paying any fee** as the application fee is waived off for persons with disabilities.
 
-### What happens after the walk-in interview?
+<h3>What happens after the walk-in interview?</h3>
 
 Selected candidates will receive appointment letters and joining instructions through official communication. All selected candidates must complete medical fitness verification.
 
 ---
 
-## Important Links
+<h2>Important Links</h2>
 
 | Link | Purpose |
 |------|---------|
@@ -163,4 +163,4 @@ Selected candidates will receive appointment letters and joining instructions th
 
 **Keywords:** AIIMS Gorakhpur Recruitment 2026, Junior Resident Walk In Interview, AIIMS Junior Resident Salary, Medical Council Registration, MBBS Jobs in Gorakhpur, AIIMS Gorakhpur Junior Resident, Walk In Interview 2026, Medical Recruitment
 
-**Meta Description:** Apply for AIIMS Gorakhpur Junior Resident walk-in interview 2026 for 12 posts. Check eligibility, documents required, interview date & salary at aiimsgorakhpur.edu.in
+**Meta Description:** Apply for aiims gorakhpur junior resident 2026: walk-in interview. Check eligibility, salary, and application process. aiims gorakhpur jobs available.
