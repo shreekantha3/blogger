@@ -5,15 +5,16 @@ ARCHITECTURAL DECISION: Extraction Pattern
 --------------------------------------------
 The SummaryGenerator extracts key information and creates summaries.
 Useful for post excerpts and social media sharing.
+
+Provider selection is handled by the centralized create_provider() factory.
 """
 
 from typing import Optional
 
 from config import get_logger
 from ai.models import SummaryRequest, SummaryResponse
-from ai.providers.base import BaseProvider, ProviderConfig
-from ai.providers.anthropic_provider import AnthropicProvider
-from ai.providers.openrouter_provider import OpenRouterProvider
+from ai.providers.base import BaseProvider
+from ai.provider_factory import create_provider
 
 logger = get_logger("ai", "summary_generator")
 
@@ -30,30 +31,9 @@ class SummaryGenerator:
         Initialize summary generator.
 
         Args:
-            provider: Optional provider to use
+            provider: Optional provider to use (uses default if None)
         """
-        self._provider = provider or self._create_default_provider()
-
-    def _create_default_provider(self) -> BaseProvider:
-        """Create the default provider based on settings."""
-        from config import get_settings
-
-        settings = get_settings()
-
-        config = ProviderConfig(
-            api_key=settings.openrouter_api_key or settings.anthropic_api_key or settings.openai_api_key or "",
-            model=settings.ai_default_model,
-            max_tokens=300,
-            temperature=0.5,
-        )
-
-        if settings.ai_default_provider == "openrouter":
-            return OpenRouterProvider(config)
-        elif settings.ai_default_provider == "openai":
-            from ai.providers.openai_provider import OpenAIProvider
-            return OpenAIProvider(config)
-
-        return AnthropicProvider(config)
+        self._provider = provider or create_provider()
 
     def generate(self, request: SummaryRequest) -> SummaryResponse:
         """

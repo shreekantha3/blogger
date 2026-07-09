@@ -97,6 +97,7 @@ class AnthropicProvider(BaseProvider):
         target_keywords: Optional[list[str]] = None,
         word_count: int = 1000,
         language: str = "en",
+        research_insights: Optional[str] = None,
     ) -> tuple[str, str]:
         """Generate a complete article."""
         keywords = target_keywords or []
@@ -118,13 +119,17 @@ class AnthropicProvider(BaseProvider):
             lang_name = language_map.get(language.lower(), language)
             language_instruction = f"\n- Write the entire article in {lang_name} ({language.upper()}) language."
 
+        research_instruction = ""
+        if research_insights:
+            research_instruction = f"\n\nUse these research insights to ensure accuracy:\n{research_insights[:1000]}"
+
         prompt = f"""You are a professional blog writer. Write a comprehensive article about "{topic}".
 
 Requirements:
 - Tone: {tone}
 - Target length: approximately {word_count} words{language_instruction}
 - Include an H1 title, H2 section headings, and paragraph content
-- Make it engaging and valuable to readers{keyword_instruction}
+- Make it engaging and valuable to readers{keyword_instruction}{research_instruction}
 - Use proper HTML tags (<h1>, <h2>, <p>)
 - No markdown, only HTML
 - Ensure content is written in the specified language

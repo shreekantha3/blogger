@@ -7,17 +7,18 @@ The AIArticleGenerator is a facade that:
 1. Provides a simplified interface for article generation
 2. Delegates to the appropriate provider
 3. Integrates with SEO analyzer for quality scoring
-4. Handles provider selection and configuration
+
+Provider selection is handled by the centralized create_provider() factory
+to avoid code duplication across AI modules.
 """
 
 import re
 from typing import Optional
 
-from config import get_settings, get_logger
+from config import get_logger
 from ai.models import AIArticleRequest, AIArticleResponse
-from ai.providers.base import BaseProvider, ProviderConfig
-from ai.providers.anthropic_provider import AnthropicProvider
-from ai.providers.openrouter_provider import OpenRouterProvider
+from ai.providers.base import BaseProvider
+from ai.provider_factory import create_provider
 
 logger = get_logger("ai", "generator")
 
@@ -37,27 +38,7 @@ class AIArticleGenerator:
         Args:
             provider: Optional provider to use (creates default if None)
         """
-        self._provider = provider or self._create_default_provider()
-
-    def _create_default_provider(self) -> BaseProvider:
-        """Create the default provider based on settings."""
-        settings = get_settings()
-
-        config = ProviderConfig(
-            api_key=settings.openrouter_api_key or settings.anthropic_api_key or settings.openai_api_key or "",
-            model=settings.ai_default_model,
-            max_tokens=settings.ai_max_tokens,
-            temperature=settings.ai_temperature,
-        )
-
-        if settings.ai_default_provider == "openrouter":
-            return OpenRouterProvider(config)
-        elif settings.ai_default_provider == "openai":
-            from ai.providers.openai_provider import OpenAIProvider
-            config.api_key = settings.openai_api_key or ""
-            return OpenAIProvider(config)
-
-        return AnthropicProvider(config)
+        self._provider = provider or create_provider()
 
     def generate(self, request: AIArticleRequest) -> AIArticleResponse:
         """
@@ -79,7 +60,13 @@ class AIArticleGenerator:
             tone=request.tone,
             word_count=request.word_count,
             language=request.language,
+            has_references=bool(request.reference_urls),
         )
+
+        # Research phase: if reference URLs provided, extract insights
+        research_insights = None
+        if request.reference_urls:
+            research_insights = self._research_reference_urls(request.reference_urls, request.topic)
 
         # Generate title and content with SEO optimization
         title, content = self._provider.generate_article(
@@ -88,6 +75,7 @@ class AIArticleGenerator:
             target_keywords=request.target_keywords,
             word_count=request.word_count,
             language=request.language,
+            research_insights=research_insights,
         )
 
         # Generate and optimize meta description
@@ -137,6 +125,30 @@ class AIArticleGenerator:
             seo_score=seo_score,
             language=request.language,
         )
+
+    def _research_reference_urls(self, urls: list[str], topic: str) -> Optional[str]:
+        """
+        Research topic using reference URLs.
+
+        Extracts key information from URLs to inform article generation.
+
+        Args:
+            urls: Reference URLs to research
+            topic: Topic for context
+
+        Returns:
+            Synthesis of research findings or None
+        """
+        from ai.research import research_topic, synthesize_research
+
+        try:
+            research = research_topic(topic, urls)
+            synthesis = synthesize_research(research, topic)
+            logger.info("Research complete", sources=len(research.sources))
+            return synthesis
+        except Exception as e:
+            logger.warning("Research failed, continuing without references", error=str(e))
+            return None
 
     def _optimize_for_seo(self, title: str, content: str, keywords: list[str], meta: str, language: str = "en") -> dict:
         """

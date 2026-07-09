@@ -138,6 +138,7 @@ class OpenRouterProvider(BaseProvider):
         target_keywords: Optional[list[str]] = None,
         word_count: int = 1000,
         language: str = "en",
+        research_insights: Optional[str] = None,
     ) -> tuple[str, str]:
         """Generate a complete article."""
         keywords = target_keywords or []
@@ -159,6 +160,11 @@ class OpenRouterProvider(BaseProvider):
             }
             lang_name = language_map.get(language.lower(), language)
             language_instruction = f"\n- Write the entire content in {lang_name} ({language.upper()}) language."
+
+        # Research insights to inform content
+        research_instruction = ""
+        if research_insights:
+            research_instruction = f"\n\nResearch findings to ensure accuracy:\n{research_insights[:800]}"
 
         # Split into two calls for better free model compatibility
         # First, generate the title (optimized for SEO: 50-70 chars)
@@ -182,7 +188,7 @@ TITLE:'''
         content_prompt = f'''Write a comprehensive blog article about {topic}.
 Tone: {tone}
 Length: {word_count} words minimum (target 2500+ words for competitive topics)
-{language_instruction}
+{language_instruction}{research_instruction}
 
 SEO REQUIREMENTS (MUST FOLLOW STRICTLY):
 - Start with EXACT: <h1>{title}</h1>

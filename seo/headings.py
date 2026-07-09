@@ -13,14 +13,25 @@ Google's guidelines:
 - H2 for section headers
 - H3 for subsections
 - No skipping levels (H1 -> H3 without H2)
+
+Uses BeautifulSoup for robust HTML parsing when available,
+falls back to regex for basic compatibility.
 """
 
 import re
 from collections import Counter
 from dataclasses import dataclass
+from typing import Optional
 
 from config import get_logger
 from seo.models import SEOScore
+
+# Try to import BeautifulSoup for better HTML parsing
+try:
+    from bs4 import BeautifulSoup
+    BS4_AVAILABLE = True
+except ImportError:
+    BS4_AVAILABLE = False
 
 logger = get_logger("seo", "headings")
 
@@ -39,18 +50,47 @@ class HeadingAnalyzer:
 
     Design decisions:
     - Extracts all headings (H1-H6)
+    - Uses BeautifulSoup when available for robust parsing
+    - Falls back to regex for basic compatibility
     - Identifies hierarchy issues
     - Provides suggestions for improvement
-    - Works with plain HTML (no BeautifulSoup dependency yet)
     """
 
     def extract_headings(self, html: str) -> list[Heading]:
         """
         Extract all headings from HTML.
 
-        Uses regex for simplicity. For complex HTML, consider
-        switching to BeautifulSoup in Phase 3+.
+        Uses BeautifulSoup when available for robust parsing,
+        falls back to regex for basic cases.
+
+        Args:
+            html: HTML content to extract headings from
+
+        Returns:
+            List of Heading objects with level and text
         """
+        headings: list[Heading] = []
+
+        if BS4_AVAILABLE:
+            return self._extract_headings_bs4(html)
+
+        return self._extract_headings_regex(html)
+
+    def _extract_headings_bs4(self, html: str) -> list[Heading]:
+        """Extract headings using BeautifulSoup."""
+        headings = []
+        soup = BeautifulSoup(html, 'html.parser')
+
+        for level in range(1, 7):
+            for tag in soup.find_all(f'h{level}'):
+                text = tag.get_text(strip=True)
+                if text:
+                    headings.append(Heading(level=level, text=text))
+
+        return headings
+
+    def _extract_headings_regex(self, html: str) -> list[Heading]:
+        """Extract headings using regex (fallback)."""
         headings: list[Heading] = []
 
         # Match opening and closing tags for all heading levels

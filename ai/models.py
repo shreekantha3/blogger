@@ -28,6 +28,7 @@ class AIArticleRequest(BaseModel):
         include_faq: Whether to include FAQ section
         include_headings: Whether to include structured headings
         language: Target language for content (en, kn, hi, etc.)
+        reference_urls: Optional URLs to use as research sources
     """
 
     topic: str = Field(..., min_length=1, description="Main topic for the article")
@@ -53,6 +54,10 @@ class AIArticleRequest(BaseModel):
     language: Optional[str] = Field(
         default="en",
         description="Target language code (en=English, kn=Kannada, hi=Hindi, etc.)"
+    )
+    reference_urls: Optional[List[str]] = Field(
+        default_factory=list,
+        description="URLs to use as research sources for fact-based content"
     )
 
     @field_validator("tone")

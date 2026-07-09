@@ -335,6 +335,15 @@ class MockProvider:
     model = "test"
     def generate_text(self, prompt, **kwargs):
         return "A well-crafted meta description for SEO optimization purposes that is within limits"
+    def generate_article(self, topic, tone="professional", target_keywords=None,
+                       word_count=1000, language="en", research_insights=None, **kwargs):
+        return f"Title: {topic}", f"<h1>Title: {topic}</h1><p>Generated content.</p>"
+    def generate_seo_title(self, topic, target_keywords=None, max_length=60, language="en", **kwargs):
+        return f"Test Title: {topic}"
+    def optimize_meta_description(self, content, title, target_keyword=None, length=155, language="en", **kwargs):
+        return f"Meta description for {title}"
+    def generate_faq(self, content, title=None, num_questions=5, language="en", **kwargs):
+        return [("Question?", "Answer.")]
 
 
 
@@ -344,19 +353,19 @@ class TestMetaTags:
     def test_title_tag_length(self) -> None:
         """Title should be 50-60 characters."""
         from ai.seo_title import SEOTitleGenerator
-        
+
         class MockProvider:
             model = "test"
             def generate_text(self, prompt, **kwargs):
                 return "This is a test title that is exactly sixty chars long"
             def generate_article(self, **kwargs):
                 return "Title", "<h1>Title</h1>"
-            def generate_seo_title(self, topic, target_keywords=None, max_length=60):
+            def generate_seo_title(self, topic, target_keywords=None, max_length=60, language="en"):
                 return "This is a test title that is exactly sixty chars long"
 
         generator = SEOTitleGenerator(provider=MockProvider())
         response = generator.generate(SEOTitleRequest(topic="Test"))
-        
+
         assert len(response.title) <= 60
 
     def test_meta_description_length(self) -> None:

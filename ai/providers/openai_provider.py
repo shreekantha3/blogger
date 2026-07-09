@@ -92,18 +92,40 @@ class OpenAIProvider(BaseProvider):
         tone: str,
         target_keywords: Optional[list[str]] = None,
         word_count: int = 1000,
+        language: str = "en",
+        research_insights: Optional[str] = None,
     ) -> tuple[str, str]:
         """Generate a complete article."""
         keywords = target_keywords or []
         keyword_instruction = f" Include these keywords naturally: {', '.join(keywords)}." if keywords else ""
 
+        research_instruction = ""
+        if research_insights:
+            research_instruction = f"\n\nResearch findings to ensure accuracy:\n{research_insights[:800]}"
+
+        language_instruction = ""
+        if language and language.lower() != "en":
+            language_map = {
+                "kn": "Kannada",
+                "hi": "Hindi",
+                "es": "Spanish",
+                "fr": "French",
+                "de": "German",
+                "zh": "Chinese",
+                "ja": "Japanese",
+                "ta": "Tamil",
+                "te": "Telugu",
+            }
+            lang_name = language_map.get(language.lower(), language)
+            language_instruction = f"\n- Write the entire article in {lang_name} ({language.upper()}) language."
+
         prompt = f"""You are a professional blog writer. Write a comprehensive article about "{topic}".
 
 Requirements:
 - Tone: {tone}
-- Target length: approximately {word_count} words
+- Target length: approximately {word_count} words{language_instruction}
 - Include an H1 title, H2 section headings, and paragraph content
-- Make it engaging and valuable to readers{keyword_instruction}
+- Make it engaging and valuable to readers{keyword_instruction}{research_instruction}
 - Use proper HTML tags (<h1>, <h2>, <p>)
 - No markdown, only HTML
 
@@ -122,6 +144,7 @@ Return ONLY the HTML content starting with <h1>.
             "Article generated",
             title=title[:50],
             word_count=len(content.split()),
+            language=language,
         )
 
         return title, content

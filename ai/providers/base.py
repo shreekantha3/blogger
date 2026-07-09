@@ -101,6 +101,7 @@ class BaseProvider(ABC):
         target_keywords: Optional[list[str]] = None,
         word_count: int = 1000,
         language: str = "en",
+        research_insights: Optional[str] = None,
     ) -> tuple[str, str]:
         """
         Generate a complete article.
@@ -111,6 +112,7 @@ class BaseProvider(ABC):
             target_keywords: Keywords to include
             word_count: Target word count
             language: Target language code
+            research_insights: Optional research findings to inform content
 
         Returns:
             Tuple of (title, content)
