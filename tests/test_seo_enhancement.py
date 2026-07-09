@@ -335,6 +335,15 @@ class MockProvider:
     model = "test"
     def generate_text(self, prompt, **kwargs):
         return "A well-crafted meta description for SEO optimization purposes that is within limits"
+    def generate_article(self, topic, tone="professional", target_keywords=None,
+                       word_count=1000, language="en", research_insights=None, **kwargs):
+        return f"Title: {topic}", f"<h1>Title: {topic}</h1><p>Generated content.</p>"
+    def generate_seo_title(self, topic, target_keywords=None, max_length=60, language="en", **kwargs):
+        return f"Test Title: {topic}"
+    def optimize_meta_description(self, content, title, target_keyword=None, length=155, language="en", **kwargs):
+        return f"Meta description for {title}"
+    def generate_faq(self, content, title=None, num_questions=5, language="en", **kwargs):
+        return [("Question?", "Answer.")]
 
 
 
