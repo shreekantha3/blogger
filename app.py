@@ -560,6 +560,170 @@ if app:
             print(f"✗ Error: {e}")
 
 
+    @app.command("image-optimize")
+    def image_optimize(
+        input: Annotated[Path, typer.Option(help="Input image path")] = None,
+        output: Annotated[Path, typer.Option(help="Output image path")] = None,
+        quality: Annotated[int, typer.Option(help="JPEG/WebP quality (1-100)")] = 85,
+    ) -> None:
+        """Optimize an image for web publishing."""
+        settings = get_settings()
+        setup_logging(
+            level=settings.log_level,
+            log_format=settings.log_format,
+            log_file_path=settings.log_file_path,
+        )
+
+        if not input or not input.exists():
+            print("✗ --input is required with valid image path")
+            return
+
+        try:
+            from media.image_processor import ImageProcessor, ImageOptimizationConfig
+            config = ImageOptimizationConfig(quality=quality)
+            processor = ImageProcessor(config)
+            result = processor.optimize_image(input, output)
+
+            output_path = output or input.parent / f"{input.stem}_optimized{input.suffix}"
+            print(f"✓ Optimized image")
+            print(f"  Original: {input.stat().st_size} bytes")
+            print(f"  Optimized: {len(result)} bytes")
+            print(f"  Saved to: {output_path}")
+
+        except ImportError:
+            print("✗ Pillow not installed. Install with: pip install pillow")
+        except Exception as e:
+            print(f"✗ Error: {e}")
+
+
+    @app.command("thumbnail")
+    def generate_thumbnail(
+        title: Annotated[str, typer.Option(help="Thumbnail title text")] = None,
+        output: Annotated[Path, typer.Option(help="Output path for thumbnail")] = None,
+        type: Annotated[str, typer.Option(help="Thumbnail type: og, twitter, square")] = "og",
+        background: Annotated[Path, typer.Option(help="Background image path")] = None,
+    ) -> None:
+        """Generate social media thumbnail for blog post."""
+        settings = get_settings()
+        setup_logging(
+            level=settings.log_level,
+            log_format=settings.log_format,
+            log_file_path=settings.log_file_path,
+        )
+
+        if not title:
+            print("✗ --title is required for thumbnail text")
+            return
+
+        if not output:
+            print("✗ --output is required for thumbnail path")
+            return
+
+        try:
+            from media.thumbnail_generator import ThumbnailGenerator
+            generator = ThumbnailGenerator()
+
+            output.parent.mkdir(parents=True, exist_ok=True)
+
+            if type == "og":
+                generator.generate_og_thumbnail(title, output, background)
+            elif type == "twitter":
+                generator.generate_twitter_thumbnail(title, output)
+            elif type == "square":
+                generator.generate_square_thumbnail(title, output)
+            else:
+                print(f"✗ Invalid type: {type}. Use 'og', 'twitter', or 'square'")
+                return
+
+            print(f"✓ Generated {type} thumbnail")
+            print(f"  Size: {output.stat().st_size} bytes")
+
+        except ImportError:
+            print("✗ Pillow not installed. Install with: pip install pillow")
+        except Exception as e:
+            print(f"✗ Error: {e}")
+
+
+    @app.command("images-suggest")
+    def images_suggest(
+        topic: Annotated[str, typer.Option(help="Article topic")] = None,
+        count: Annotated[int, typer.Option(help="Number of images")] = 4,
+        format: Annotated[bool, typer.Option(help="Output as HTML")] = False,
+    ) -> None:
+        """Suggest images with alt text for blog post."""
+        settings = get_settings()
+        setup_logging(
+            level=settings.log_level,
+            log_format=settings.log_format,
+            log_file_path=settings.log_file_path,
+        )
+
+        if not topic:
+            print("✗ --topic is required")
+            return
+
+        try:
+            from media.image_selector import ImageSelector
+            selector = ImageSelector()
+            suggestions = selector.suggest_images(topic=topic, count=count)
+
+            print(f"✓ Generated {len(suggestions)} image suggestions")
+            for i, suggestion in enumerate(suggestions, 1):
+                print(f"  {i}. {suggestion.url}")
+                print(f"     Alt: {suggestion.alt_text}")
+
+                if format:
+                    print(f"     HTML: {suggestion.to_html()}")
+
+        except Exception as e:
+            print(f"✗ Error: {e}")
+
+
+    @app.command("eeat-score")
+    def eeat_score(
+        title: Annotated[str, typer.Option(help="Post title")] = None,
+        content: Annotated[str, typer.Option(help="Post content")] = "",
+    ) -> None:
+        """Score content for EEAT (Experience, Expertise, Authoritativeness, Trustworthiness)."""
+        settings = get_settings()
+        setup_logging(
+            level=settings.log_level,
+            log_format=settings.log_format,
+            log_file_path=settings.log_file_path,
+        )
+
+        if not title or not content:
+            print("✗ --title and --content are required")
+            return
+
+        try:
+            from seo.quality_scorer import QualityScorer
+            scorer = QualityScorer()
+            score = scorer.score_content(title, content)
+            report = scorer.generate_eeat_report(content, title)
+
+            grade = report["grade"]
+            overall = report["overall_score"]
+
+            print(f"✓ EEAT Score: {overall}/100 (Grade: {grade})")
+            print(f"  Experience: {score.experience}/100")
+            print(f"  Expertise: {score.expertise}/100")
+            print(f"  Authoritativeness: {score.authoritativeness}/100")
+            print(f"  Trustworthiness: {score.trustworthiness}/100")
+
+            if report["issues"]:
+                print(f"\n  Issues:")
+                for issue in report["issues"]:
+                    print(f"    - {issue}")
+
+            if report["suggestions"]:
+                print(f"\n  Suggestions:")
+                for suggestion in report["suggestions"]:
+                    print(f"    - {suggestion}")
+
+        except Exception as e:
+            print(f"✗ Error: {e}")
+
 
     @app.command("update")
     def update_post(

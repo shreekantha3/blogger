@@ -24,9 +24,11 @@ mypy>=1.11.0
 ruff>=0.6.0
 types-python-dotenv>=1.0.0
 
+# Phase 5: Media Engine
+pillow>=10.0.0  # Image processing - compression, WebP conversion, thumbnails
+
 # Future phases - placeholder dependencies
 # langgraph>=0.2.0  # AI workflows
 # beautifulsoup4>=4.12.0  # SEO parsing
 # nltk>=3.9.0  # Readability analysis
-# pillow>=10.0.0  # Image processing
 # openai>=1.51.0  # AI content generation
