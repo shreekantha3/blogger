@@ -35,6 +35,7 @@ from ai.models import (
     KeywordOptimizationRequest,
     KeywordOptimizationResponse,
 )
+from ai.provider_factory import create_provider
 from ai.generator import AIArticleGenerator
 from ai.seo_title import SEOTitleGenerator
 from ai.meta_optimizer import MetaDescriptionOptimizer
@@ -56,6 +57,8 @@ __all__ = [
     "SummaryResponse",
     "KeywordOptimizationRequest",
     "KeywordOptimizationResponse",
+    # Factory
+    "create_provider",
     # Generators
     "AIArticleGenerator",
     "SEOTitleGenerator",
