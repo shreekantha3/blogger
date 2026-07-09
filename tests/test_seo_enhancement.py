@@ -387,6 +387,68 @@ class TestKeywordDensity:
         assert 0 <= score.overall <= 100
         assert score.trustworthiness > score.experience
 
+    def test_unsplash_image_fetching(self) -> None:
+        """Should fetch Unsplash images or fallback to placeholders."""
+        from media.image_selector import ImageSelector
+
+        selector = ImageSelector()
+        images = selector.fetch_unsplash_images("python", count=2)
+
+        assert len(images) == 2
+        for img in images:
+            assert img.url
+            assert img.alt_text
+
+    def test_unsplash_placeholder_fallback(self) -> None:
+        """Should use placeholder images when API unavailable."""
+        from media.image_selector import ImageSelector
+
+        selector = ImageSelector()
+        images = selector._fetch_placeholder_images("python", 3)
+
+        assert len(images) == 3
+        assert all("source.unsplash.com" in img.url for img in images)
+
+    def test_fact_claim_extraction(self) -> None:
+        """Should extract claims from content."""
+        from ai.fact_checker import FactChecker
+
+        checker = FactChecker()
+
+        content = "<p>80% of developers use Python. In 2025, it became #1.</p>"
+        claims = checker.extract_claims(content)
+
+        assert len(claims) > 0
+
+    def test_fact_check_with_sources(self) -> None:
+        """Should verify claims against sources."""
+        from ai.fact_checker import FactChecker
+
+        checker = FactChecker()
+
+        results = checker.verify_claims(
+            ["Python is popular"],
+            ["https://example.com/research"],
+        )
+
+        assert len(results) == 1
+        assert results[0].sources_found == 1
+
+    def test_fact_check_full_report(self) -> None:
+        """Should generate full fact check report."""
+        from ai.fact_checker import FactChecker
+
+        checker = FactChecker()
+
+        report = checker.check_content(
+            title="Python Stats",
+            content="<p>Python is used by 80% of developers.</p>",
+            reference_urls=["https://survey.com"],
+        )
+
+        assert "claims_checked" in report
+        assert "overall_confidence" in report
+
 
 
 

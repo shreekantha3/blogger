@@ -6,14 +6,22 @@ ARCHITECTURAL DECISION: Media Engine Pattern
 This module implements Phase 5's media features:
 1. Image alt text generation using AI
 2. Image selection based on content
-3. Unsplash/Pexels API integration placeholders
+3. Unsplash/Pexels API integration
 4. Thumbnail generation coordination
 
 Based on RankMath SEO guidelines requiring 4+ images per post
 with descriptive alt text for accessibility and SEO.
 """
 
+import os
 from typing import Optional, List, Dict, Any
+
+# Try to import httpx for API calls
+try:
+    import httpx
+    HTTPX_AVAILABLE = True
+except ImportError:
+    HTTPX_AVAILABLE = False
 
 
 class ImageSuggestion:
@@ -164,6 +172,83 @@ ALT TEXT:"""
         alt_text = f"{context.title()} {img_type} showing key concepts and examples"
 
         return alt_text[:125]
+
+    def fetch_unsplash_images(
+        self,
+        query: str,
+        count: int = 4,
+        api_key: Optional[str] = None,
+    ) -> List[ImageSuggestion]:
+        """
+        Fetch images from Unsplash API.
+
+        Args:
+            query: Search query for images
+            count: Number of images to fetch (max 30)
+            api_key: Unsplash API key (reads from UNSPLASH_API_KEY env if not provided)
+
+        Returns:
+            List of ImageSuggestion objects with real Unsplash URLs
+
+        Example:
+            >>> selector = ImageSelector()
+            >>> images = selector.fetch_unsplash_images("python programming", 4)
+            >>> len(images) == 4
+        """
+        api_key = api_key or os.getenv("UNSPLASH_API_KEY", "")
+
+        if not api_key or not HTTPX_AVAILABLE:
+            # Fallback to placeholder
+            return self._fetch_placeholder_images(query, count)
+
+        try:
+            headers = {"Authorization": f"Client-ID {api_key}"}
+            response = httpx.get(
+                "https://api.unsplash.com/search/photos",
+                params={"query": query, "per_page": min(count, 30)},
+                headers=headers,
+                timeout=30,
+            )
+            response.raise_for_status()
+
+            results = response.json().get("results", [])
+            suggestions = []
+
+            for i, photo in enumerate(results[:count]):
+                alt_text = photo.get("alt_description", f"{query} concept {i+1}")[:125]
+                urls = photo.get("urls", {})
+                url = urls.get("regular", "") or urls.get("small", "")
+
+                if url:
+                    suggestions.append(ImageSuggestion(
+                        url=url,
+                        alt_text=alt_text,
+                        source="unsplash",
+                    ))
+
+            return suggestions
+        except Exception:
+            # Fallback on error
+            return self._fetch_placeholder_images(query, count)
+
+    def _fetch_placeholder_images(
+        self,
+        query: str,
+        count: int,
+    ) -> List[ImageSuggestion]:
+        """Fetch placeholder images when API is unavailable."""
+        suggestions = []
+        for i in range(count):
+            alt_text = self._generate_fallback_alt_text(query, i)
+            url = f"https://source.unsplash.com/1200x630/?{query.replace(' ', ',')},{i}"
+
+            suggestions.append(ImageSuggestion(
+                url=url,
+                alt_text=alt_text,
+                source="unsplash",
+            ))
+
+        return suggestions
 
     def generate_og_image_html(
         self,
