@@ -10,6 +10,7 @@ basic readability checks:
 2. Average word length (< 5 chars ideal)
 3. Paragraph length (2-4 sentences ideal)
 4. Passive voice detection (simplified)
+5. HTML parsing with BeautifulSoup when available
 
 These correlate with Flesch scores and catch most readability issues.
 
@@ -18,9 +19,18 @@ calculations when nltk/textstat is installed.
 """
 
 import re
+from typing import Optional
+
 from config import get_logger
 from seo.models import SEOScore
 from utils.helpers import extract_text_from_html
+
+# Try to import BeautifulSoup for better HTML parsing
+try:
+    from bs4 import BeautifulSoup
+    BS4_AVAILABLE = True
+except ImportError:
+    BS4_AVAILABLE = False
 
 logger = get_logger("seo", "readability")
 
@@ -88,8 +98,8 @@ class ReadabilityAnalyzer:
                 "Consider simpler vocabulary for broader audience"
             )
 
-        # Check paragraph structure (simplified)
-        paragraphs = re.split(r"\n\n|\r\n\r\n|<p>", html)
+        # Check paragraph structure
+        paragraphs = self._extract_paragraphs(html)
         avg_para_sentences = self._avg_paragraph_sentences(
             paragraphs, sentences
         )
@@ -133,6 +143,16 @@ class ReadabilityAnalyzer:
 
         total_chars = sum(len(w) for w in words)
         return total_chars / len(words)
+
+    def _extract_paragraphs(self, html: str) -> list[str]:
+        """Extract paragraphs from HTML."""
+        if BS4_AVAILABLE:
+            soup = BeautifulSoup(html, 'html.parser')
+            paragraphs = [p.get_text(strip=True) for p in soup.find_all('p')]
+            return [p for p in paragraphs if p]
+
+        # Fallback: regex-based extraction
+        return re.split(r"\n\n|\r\n\r\n|<p>", html)
 
     def _avg_paragraph_sentences(
         self, paragraphs: list[str], sentences: list[str]
