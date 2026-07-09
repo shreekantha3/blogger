@@ -76,3 +76,12 @@ def setup_test_logging():
     from config import setup_logging
 
     setup_logging(level="DEBUG", log_format="plain")
+
+
+@pytest.fixture(autouse=True)
+def mock_settings_env(monkeypatch):
+    """Mock settings environment variables for tests."""
+    monkeypatch.setenv("blogger_blog_id", "test-blog-id-123")
+    monkeypatch.setenv("openrouter_api_key", "test-key")
+    monkeypatch.setenv("ai_default_provider", "openrouter")
+    monkeypatch.setenv("ai_default_model", "test-model")

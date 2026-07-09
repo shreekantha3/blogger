@@ -41,6 +41,7 @@ from ai.meta_optimizer import MetaDescriptionOptimizer
 from ai.faq_generator import FAQGenerator
 from ai.summary_generator import SummaryGenerator
 from ai.keyword_optimizer import KeywordOptimizer
+from ai.schema_generator import SchemaGenerator, HowToStep
 
 __all__ = [
     # Models
@@ -63,4 +64,6 @@ __all__ = [
     "FAQGenerator",
     "SummaryGenerator",
     "KeywordOptimizer",
+    "SchemaGenerator",
+    "HowToStep",
 ]

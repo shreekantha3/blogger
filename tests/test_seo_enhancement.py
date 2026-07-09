@@ -233,6 +233,105 @@ class TestKeywordDensity:
         # Will be implemented in Phase 5
         pass
 
+    def test_howto_schema_generation(self) -> None:
+        """Should generate HowTo schema for tutorial content."""
+        from ai.schema_generator import SchemaGenerator, HowToStep
+
+        generator = SchemaGenerator()
+
+        steps = [
+            HowToStep(name="Step 1", text="First step description"),
+            HowToStep(name="Step 2", text="Second step description"),
+        ]
+
+        schema = generator.generate_howto_schema(
+            title="How to Install Python",
+            steps=steps,
+            total_time="PT15M",
+        )
+
+        assert schema["@type"] == "HowTo"
+        assert schema["name"] == "How to Install Python"
+        assert len(schema["step"]) == 2
+        assert schema["step"][0]["@type"] == "HowToStep"
+        assert schema["step"][0]["name"] == "Step 1"
+        assert schema["totalTime"] == "PT15M"
+
+    def test_howto_schema_without_steps(self) -> None:
+        """Should generate basic HowTo schema without steps."""
+        from ai.schema_generator import SchemaGenerator
+
+        generator = SchemaGenerator()
+
+        schema = generator.generate_howto_schema(title="How to Install Python")
+
+        assert schema["@type"] == "HowTo"
+        assert schema["name"] == "How to Install Python"
+        assert "step" not in schema
+
+    def test_image_suggestions(self) -> None:
+        """Should suggest images with alt text."""
+        from media.image_selector import ImageSelector
+
+        selector = ImageSelector()
+
+        suggestions = selector.suggest_images(
+            topic="Python programming",
+            headings=["Introduction", "Variables"],
+            count=4,
+        )
+
+        assert len(suggestions) == 4
+        for suggestion in suggestions:
+            assert suggestion.url
+            assert suggestion.alt_text
+            assert len(suggestion.alt_text) <= 125
+
+    def test_image_alt_text_generation(self) -> None:
+        """Should generate alt text with character limit."""
+        from media.image_selector import ImageSelector
+
+        selector = ImageSelector()
+        alt_text = selector.generate_alt_text(
+            "Python code showing a for loop",
+            content="<h1>Python Tips</h1>",
+        )
+
+        assert alt_text
+        assert len(alt_text) <= 125
+
+    def test_image_html_generation(self) -> None:
+        """Should generate proper HTML img tags."""
+        from media.image_selector import ImageSelector, ImageSuggestion
+
+        selector = ImageSelector()
+        html = selector.generate_og_image_html(
+            image_url="https://example.com/image.jpg",
+            alt_text="Python code example",
+        )
+
+        assert 'src="https://example.com/image.jpg"' in html
+        assert 'alt="Python code example"' in html
+        assert 'width="1200"' in html
+
+    def test_eeat_quality_scoring(self) -> None:
+        """Should score content quality based on EEAT."""
+        from seo.quality_scorer import QualityScorer
+
+        scorer = QualityScorer()
+
+        content = """
+        <h1>Python Programming Guide</h1>
+        <p>In my experience, Python is easy to learn.
+        According to recent research, it's the most popular language.
+        Source: Stack Overflow Survey 2025.</p>
+        """
+
+        score = scorer.score_content("Python Guide", content, sources=["https://example.com"])
+
+        assert 0 <= score.overall <= 100
+        assert score.trustworthiness > score.experience
+
 
 
 
@@ -344,19 +443,19 @@ class TestMetaTags:
     def test_title_tag_length(self) -> None:
         """Title should be 50-60 characters."""
         from ai.seo_title import SEOTitleGenerator
-        
+
         class MockProvider:
             model = "test"
             def generate_text(self, prompt, **kwargs):
                 return "This is a test title that is exactly sixty chars long"
             def generate_article(self, **kwargs):
                 return "Title", "<h1>Title</h1>"
-            def generate_seo_title(self, topic, target_keywords=None, max_length=60):
+            def generate_seo_title(self, topic, target_keywords=None, max_length=60, language="en"):
                 return "This is a test title that is exactly sixty chars long"
 
         generator = SEOTitleGenerator(provider=MockProvider())
         response = generator.generate(SEOTitleRequest(topic="Test"))
-        
+
         assert len(response.title) <= 60
 
     def test_meta_description_length(self) -> None:
