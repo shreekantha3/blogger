@@ -19,6 +19,7 @@ Components:
 - faq_generator.py: FAQ generation from content
 - summary_generator.py: Content summarization
 - keyword_optimizer.py: Keyword optimization and suggestions
+- fact_checker.py: Fact checking against reference sources
 """
 
 from ai.models import (
@@ -41,6 +42,8 @@ from ai.meta_optimizer import MetaDescriptionOptimizer
 from ai.faq_generator import FAQGenerator
 from ai.summary_generator import SummaryGenerator
 from ai.keyword_optimizer import KeywordOptimizer
+from ai.schema_generator import SchemaGenerator, HowToStep
+from ai.fact_checker import FactChecker
 
 __all__ = [
     # Models
@@ -63,4 +66,7 @@ __all__ = [
     "FAQGenerator",
     "SummaryGenerator",
     "KeywordOptimizer",
+    "SchemaGenerator",
+    "HowToStep",
+    "FactChecker",
 ]

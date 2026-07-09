@@ -21,6 +21,7 @@ from seo.meta import MetaDescriptionGenerator
 from seo.headings import HeadingAnalyzer
 from seo.keywords import KeywordAnalyzer
 from seo.readability import ReadabilityAnalyzer
+from seo.quality_scorer import QualityScorer, QualityScore
 
 __all__ = [
     "SEOAnalyzer",
@@ -28,4 +29,6 @@ __all__ = [
     "HeadingAnalyzer",
     "KeywordAnalyzer",
     "ReadabilityAnalyzer",
+    "QualityScorer",
+    "QualityScore",
 ]

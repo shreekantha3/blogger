@@ -6,7 +6,8 @@ ARCHITECTURAL DECISION: Schema Generation Module
 This module generates JSON-LD structured data for:
 1. Article/BlogPosting schema - for rich results in Google Search
 2. BreadcrumbList schema - for breadcrumb navigation
-3. Combined output for all markup types
+3. HowTo schema - for tutorial/how-to content with steps
+4. Combined output for all markup types
 
 Based on RankMath SEO recommendations and Google's guidelines.
 
@@ -29,11 +30,40 @@ from datetime import datetime
 from typing import Optional, List, Dict, Any
 
 
+class HowToStep:
+    """Represents a single step in a HowTo guide."""
+
+    def __init__(
+        self,
+        name: str,
+        text: str,
+        url: Optional[str] = None,
+        image: Optional[str] = None,
+    ) -> None:
+        self.name = name
+        self.text = text
+        self.url = url
+        self.image = image
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert to schema.org HowToStep format."""
+        step: Dict[str, Any] = {
+            "@type": "HowToStep",
+            "name": self.name,
+            "text": self.text,
+        }
+        if self.url:
+            step["url"] = self.url
+        if self.image:
+            step["image"] = self.image
+        return step
+
+
 class SchemaGenerator:
     """
     Generates JSON-LD schema markup for SEO optimization.
 
-    Supports Article/BlogPosting and BreadcrumbList schemas.
+    Supports Article/BlogPosting, BreadcrumbList, and HowTo schemas.
     """
 
     def generate_article_schema(
@@ -172,6 +202,68 @@ class SchemaGenerator:
             "@type": "BreadcrumbList",
             "itemListElement": items
         }
+
+    def generate_howto_schema(
+        self,
+        title: str,
+        steps: Optional[List[HowToStep]] = None,
+        total_time: Optional[str] = None,
+        tool: Optional[str] = None,
+        image_url: Optional[str] = None,
+        description: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """
+        Generate HowTo schema for tutorial content.
+
+        HowTo schema helps content appear in rich results with step-by-step instructions.
+
+        Args:
+            title: The title of the HowTo guide
+            steps: List of HowToStep objects representing each step
+            total_time: ISO 8601 duration (e.g., "PT30M" for 30 minutes)
+            tool: Required tool or material for the HowTo
+            image_url: Featured image URL
+            description: Meta description
+
+        Returns:
+            Dictionary containing the HowTo schema
+
+        Example:
+            >>> steps = [
+            ...     HowToStep(name="Step 1", text="First step description"),
+            ...     HowToStep(name="Step 2", text="Second step description"),
+            ... ]
+            >>> schema = generator.generate_howto_schema(
+            ...     title="How to Install Python",
+            ...     steps=steps,
+            ...     total_time="PT15M",
+            ... )
+        """
+        schema: Dict[str, Any] = {
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": title,
+        }
+
+        if description:
+            schema["description"] = description[:160]
+        elif steps:
+            # Use first step as description if none provided
+            schema["description"] = steps[0].text[:160]
+
+        if image_url:
+            schema["image"] = image_url
+
+        if total_time:
+            schema["totalTime"] = total_time
+
+        if tool:
+            schema["tool"] = tool
+
+        if steps:
+            schema["step"] = [step.to_dict() for step in steps]
+
+        return schema
 
     def combine_schemas(self, *schemas: Dict[str, Any]) -> str:
         """
