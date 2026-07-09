@@ -9,7 +9,13 @@ Built in phases following clean architecture principles:
 - **Phase 2**: Publishing Engine (retry, queue, publisher) ✅
 - **Phase 3**: SEO Engine (meta, headings, keywords, readability) ✅
 - **Phase 4**: AI Engine (article generation, SEO titles, meta optimization, FAQ, summary, keywords) ✅ Enhanced
-- **Phase 5**: Media Engine (image upload, Unsplash, thumbnails) 🔄 Planned
+- **Phase 5**: Media Engine (image optimization, thumbnails, storage) ✅ Completed
+  - `media/image_processor.py` - Image compression, WebP conversion
+  - `media/thumbnail_generator.py` - 1200x630 social thumbnails
+  - `media/storage.py` - Storage backends (Local, S3, Cloudinary)
+  - `media/image_selector.py` - Alt text generation, Unsplash integration
+  - `seo/quality_scorer.py` - EEAT content quality scoring
+  - `ai/fact_checker.py` - Factual claim verification
 
 ## Key Patterns
 
@@ -68,9 +74,17 @@ python app.py ai-summary --content "<p>Long content...</p>" --style brief
 
 # AI Keyword Optimization
 python app.py ai-keywords --topic "Python" --content "<p>Content...</p>"
+
+# Phase 5: Media Engine
+python app.py image-optimize --input photo.jpg --output optimized.jpg --quality 85
+python app.py thumbnail --title "My Article" --output thumb.jpg --type og
+python app.py images-suggest --topic "Python" --count 4
+python app.py eeat-score --title "My Post" --content "<p>...</p>"
 ```
 
 **Note:** For AI commands, set `OPENROUTER_API_KEY` in `.env` (recommended) or `ANTHROPIC_API_KEY`.
+
+**Note:** For image processing, install Pillow with: `pip install pillow`
 
 ## AI Provider Options
 
@@ -126,7 +140,17 @@ Every public function must contain examples.
 pytest tests/ -v
 ```
 
-All 32 tests pass.
+All 97 tests pass (20 new media tests added in Phase 5).
+
+## Recent Improvements (2026-07-09)
+
+### Phase 5: Media Engine
+- **Image Processing**: Added `ImageProcessor` for compression and WebP conversion
+- **Thumbnail Generation**: Added `ThumbnailGenerator` for 1200x630 social thumbnails
+- **Storage Integration**: Added `LocalStorage`, `S3Storage`, `CloudinaryStorage` backends
+- **Image Selection**: Added `ImageSelector` for alt text generation and Unsplash integration
+- **EEAT Quality Scoring**: Added `QualityScorer` for content quality evaluation
+- **Fact Checking**: Added `FactChecker` for factual claim verification
 
 ## Recent Improvements (2026-07-04)
 
