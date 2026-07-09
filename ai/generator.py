@@ -60,7 +60,13 @@ class AIArticleGenerator:
             tone=request.tone,
             word_count=request.word_count,
             language=request.language,
+            has_references=bool(request.reference_urls),
         )
+
+        # Research phase: if reference URLs provided, extract insights
+        research_insights = None
+        if request.reference_urls:
+            research_insights = self._research_reference_urls(request.reference_urls, request.topic)
 
         # Generate title and content with SEO optimization
         title, content = self._provider.generate_article(
@@ -69,6 +75,7 @@ class AIArticleGenerator:
             target_keywords=request.target_keywords,
             word_count=request.word_count,
             language=request.language,
+            research_insights=research_insights,
         )
 
         # Generate and optimize meta description
@@ -118,6 +125,30 @@ class AIArticleGenerator:
             seo_score=seo_score,
             language=request.language,
         )
+
+    def _research_reference_urls(self, urls: list[str], topic: str) -> Optional[str]:
+        """
+        Research topic using reference URLs.
+
+        Extracts key information from URLs to inform article generation.
+
+        Args:
+            urls: Reference URLs to research
+            topic: Topic for context
+
+        Returns:
+            Synthesis of research findings or None
+        """
+        from ai.research import research_topic, synthesize_research
+
+        try:
+            research = research_topic(topic, urls)
+            synthesis = synthesize_research(research, topic)
+            logger.info("Research complete", sources=len(research.sources))
+            return synthesis
+        except Exception as e:
+            logger.warning("Research failed, continuing without references", error=str(e))
+            return None
 
     def _optimize_for_seo(self, title: str, content: str, keywords: list[str], meta: str, language: str = "en") -> dict:
         """
