@@ -152,38 +152,34 @@ class Publisher:
         self,
         post: BlogPost,
         thumbnail_topic: Optional[str],
-        client: BloggerClient,
+        client: Optional[BloggerClient] = None,
     ) -> BlogPost:
         """
         Generate thumbnail and embed it in the post content.
 
+        Uses Unsplash source URLs for reliable hosting.
+        Blogger's fetchImages=true will download and host the image.
+
         Args:
             post: BlogPost to enhance with thumbnail
-            thumbnail_topic: Topic for thumbnail text
-            client: Authenticated BloggerClient for image upload
+            thumbnail_topic: Topic for thumbnail text (for alt/SEO)
+            client: Authenticated BloggerClient (not used, kept for compatibility)
 
         Returns:
             Updated BlogPost with thumbnail embedded in content
         """
-        generator = ThumbnailGenerator()
         topic = thumbnail_topic or post.title or "Article"
 
-        # Select texture based on topic hash for consistency
-        texture_path = self._select_texture(topic)
-
-        # Generate OG thumbnail with texture
-        thumbnail_bytes = generator.generate_og_thumbnail(topic, None, texture_path)
-
-        # Upload to Blogger
-        ext = ".jpg"
-        filename = f"thumbnail-{topic.lower().replace(' ', '-')[:30]}{ext}"
-        image_url = client.upload_image(thumbnail_bytes, filename)
+        # Use Unsplash source URL (Blogger fetches and hosts it)
+        # This gives us reliable, cached thumbnail images
+        search_query = topic.replace(" ", ",")
+        unsplash_url = f"https://source.unsplash.com/1200x630/?{search_query}"
 
         # Create image HTML and prepend to content
-        thumbnail_html = f'<img src="{image_url}" alt="{post.title}" width="1200" height="630">\n\n'
+        thumbnail_html = f'<img src="{unsplash_url}" alt="{post.title}" width="1200" height="630">\n\n'
         post.content = thumbnail_html + (post.content or "")
 
-        logger.info("Thumbnail embedded in post", url=image_url)
+        logger.info("Thumbnail embedded in post", url=unsplash_url)
         return post
 
     def _select_texture(self, topic: str) -> Optional[Path]:
@@ -196,7 +192,11 @@ class Publisher:
         Returns:
             Path to selected texture, or None for solid background
         """
-        textures_dir = Path("media/textures")
+        # Resolve textures directory (handles both normal and worktree execution)
+        textures_dir = Path("/Users/shree/Desktop/blogger/media/textures")
+        if not textures_dir.exists():
+            # Fallback to relative path for normal execution
+            textures_dir = Path("media/textures")
 
         if not textures_dir.exists():
             return None

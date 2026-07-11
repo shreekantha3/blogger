@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Publish all recruitment articles with auto-generated thumbnails."""
+"""Publish all recruitment articles with Unsplash thumbnails.
+
+Note: Uses Unsplash source URLs which Blogger fetches automatically.
+For custom texture thumbnails, use --background flag with the thumbnail command.
+"""
 
 import json
 from pathlib import Path
@@ -7,7 +11,7 @@ from core.publishing import Publisher
 from core.models import BlogPost
 
 # Load all articles and publish with thumbnails
-articles_dir = Path("articles")
+articles_dir = Path("/Users/shree/Desktop/blogger/articles")
 articles = [
     "aiims-gorakhpur-recruitment-2026-junior-resident.html",
     "cotton-corporation-of-india-recruitment-2026.html",
