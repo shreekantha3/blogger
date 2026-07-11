@@ -790,6 +790,228 @@ if app:
         else:
             print(f"✗ Failed to update: {result.error}")
 
+    @app.command("list-posts")
+    def list_posts(
+        status: Annotated[str, typer.Option(help="Filter by status: draft, published, scheduled")] = None,
+        limit: Annotated[int, typer.Option(help="Maximum posts to retrieve")] = 20,
+    ) -> None:
+        """List existing posts from the configured blog."""
+        settings = get_settings()
+        setup_logging(
+            level=settings.log_level,
+            log_format=settings.log_format,
+            log_file_path=settings.log_file_path,
+        )
+
+        client = BloggerClient()
+        posts = client.list_posts(status=status, max_results=limit)
+
+        if not posts:
+            print("No posts found")
+            return
+
+        print(f"Found {len(posts)} post(s):")
+        for post in posts:
+            status_str = post.status.value if post.status else "unknown"
+            # Truncate title for clean display
+            title_display = post.raw_response.get("title", "Untitled")
+            if len(title_display) > 50:
+                title_display = title_display[:47] + "..."
+            print(f"  {post.post_id}: \"{title_display}\" ({status_str})")
+            if post.url:
+                print(f"    {post.url}")
+
+    @app.command("seo-audit")
+    def seo_audit(
+        max_results: Annotated[int, typer.Option(help="Maximum posts to analyze")] = 50,
+        sort_by: Annotated[str, typer.Option(help="Sort order: worst, best, date")] = "worst",
+    ) -> None:
+        """Audit all published posts and show SEO scores sorted by performance."""
+        settings = get_settings()
+        setup_logging(
+            level=settings.log_level,
+            log_format=settings.log_format,
+            log_file_path=settings.log_file_path,
+        )
+
+        from seo import SEOAnalyzer
+
+        client = BloggerClient()
+        analyzer = SEOAnalyzer()
+
+        # Get published posts only
+        posts = client.list_posts(status="published", max_results=max_results)
+
+        if not posts:
+            print("No published posts found to audit")
+            return
+
+        print(f"Analyzing {len(posts)} post(s)...")
+
+        # Analyze each post
+        audit_results = []
+        for i, post in enumerate(posts, 1):
+            if i % 5 == 0:
+                print(f"  Progress: {i}/{len(posts)}")
+
+            try:
+                title = post.raw_response.get("title", "")
+                content = post.raw_response.get("content", "")
+                report = analyzer.analyze(title, content)
+
+                audit_results.append({
+                    "post_id": post.post_id,
+                    "title": title,
+                    "url": post.url,
+                    "score": report.overall_score,
+                    "issues": report.all_issues,
+                    "suggestions": report.all_suggestions,
+                })
+            except Exception as e:
+                print(f"  Warning: Failed to analyze post {post.post_id}: {e}")
+
+        # Sort by score
+        if sort_by == "worst":
+            audit_results.sort(key=lambda x: x["score"])
+        elif sort_by == "best":
+            audit_results.sort(key=lambda x: x["score"], reverse=True)
+
+        print(f"\n{'='*60}")
+        print("SEO AUDIT RESULTS")
+        print(f"{'='*60}\n")
+
+        for i, result in enumerate(audit_results[:20], 1):  # Show top 20
+            score_display = f"{result['score']:3d}/100"
+            title = result["title"][:45] + "..." if len(result["title"]) > 45 else result["title"]
+            print(f"{i}. [{score_display}] {title}")
+            if result["url"]:
+                print(f"   {result['url']}")
+            if result["issues"]:
+                print(f"   Issues: {len(result['issues'])}")
+            print()
+
+        # Summary
+        if audit_results:
+            avg_score = sum(r["score"] for r in audit_results) / len(audit_results)
+            print(f"Average SEO Score: {avg_score:.1f}/100")
+            print(f"Posts audited: {len(audit_results)}")
+
+    @app.command("post-optimize")
+    def post_optimize(
+        post_id: Annotated[str, typer.Option(help="Blogger post ID to optimize")] = None,
+        auto_fix: Annotated[bool, typer.Option(help="Automatically apply AI suggestions and update")] = False,
+        dry_run: Annotated[bool, typer.Option(help="Preview changes without updating")] = True,
+    ) -> None:
+        """
+        Fetch existing post, analyze SEO, generate improvements, and optionally update.
+
+        Use --auto-fix to apply AI-generated improvements automatically.
+        Use --dry-run to preview changes (default is preview mode).
+        """
+        settings = get_settings()
+        setup_logging(
+            level=settings.log_level,
+            log_format=settings.log_format,
+            log_file_path=settings.log_file_path,
+        )
+
+        if not post_id:
+            print("✗ --post-id is required")
+            return
+
+        client = BloggerClient()
+
+        # Fetch existing post
+        try:
+            result = client.get_post(post_id)
+            if not result.success:
+                print(f"✗ Failed to fetch post: {result.error}")
+                return
+        except Exception as e:
+            print(f"✗ Failed to fetch post: {e}")
+            return
+
+        raw = result.raw_response
+        current_title = raw.get("title", "")
+        current_content = raw.get("content", "")
+        current_labels = raw.get("labels", [])
+
+        print(f"Analyzing post: {current_title[:50]}...")
+
+        # Run SEO analysis
+        from seo import SEOAnalyzer
+        analyzer = SEOAnalyzer()
+        report = analyzer.analyze(current_title, current_content)
+
+        print(f"\nCurrent SEO Score: {report.overall_score}/100")
+        print(f"  Title: {report.title_score.value}/100")
+        print(f"  Meta: {report.meta_score.value}/100")
+        print(f"  Headings: {report.heading_score.value}/100")
+        print(f"  Keywords: {report.keyword_score.value}/100")
+        print(f"  Readability: {report.readability_score.value}/100")
+
+        # Generate AI improvements
+        if current_content:
+            from ai.seo_title import SEOTitleGenerator
+            from ai.meta_optimizer import MetaDescriptionOptimizer
+            from ai.keyword_optimizer import KeywordOptimizer
+
+            # Generate better title
+            try:
+                title_gen = SEOTitleGenerator()
+                from ai.models import SEOTitleRequest
+                # Extract topics from content for title generation
+                content_preview = current_content[:200]
+                title_request = SEOTitleRequest(
+                    topic=current_title,
+                    target_keywords=current_labels[:3],
+                    language="en",
+                )
+                title_response = title_gen.generate(title_request)
+                improved_title = title_response.title
+                print(f"\n✓ Improved title suggestion ({title_response.seo_score}/100):")
+                print(f"  {improved_title}")
+            except Exception as e:
+                print(f"\n  Warning: Could not generate title: {e}")
+                improved_title = current_title
+
+            # Generate better meta description
+            try:
+                meta_opt = MetaDescriptionOptimizer()
+                from ai.models import MetaOptimizationRequest
+                meta_request = MetaOptimizationRequest(
+                    title=current_title,
+                    content=current_content,
+                )
+                meta_response = meta_opt.optimize(meta_request)
+                print(f"\n✓ Improved meta ({meta_response.optimized_score}/100):")
+                print(f"  {meta_response.meta_description}")
+            except Exception as e:
+                print(f"  Warning: Could not generate meta: {e}")
+                meta_response = None
+
+        # If auto-fix, update the post
+        if auto_fix and not dry_run:
+            from core.models import BlogPost
+            from core.publishing import Publisher
+
+            post = BlogPost(
+                title=improved_title if 'improved_title' in dir() else current_title,
+                content=current_content,
+                labels=current_labels,
+            )
+
+            publisher = Publisher()
+            update_result = publisher.update_post(post_id, post)
+
+            if update_result.success:
+                print(f"\n✓ Post updated successfully")
+                print(f"  URL: {update_result.url}")
+            else:
+                print(f"\n✗ Failed to update: {update_result.error}")
+        else:
+            print("\nℹ Use --auto-fix to apply changes (without --dry-run)")
+
     @app.command("delete")
     def delete_post(
         post_id: Annotated[str, typer.Option(help="Blogger post ID to delete")],
