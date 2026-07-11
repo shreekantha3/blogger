@@ -147,11 +147,10 @@ All 97 tests pass (20 new media tests added in Phase 5).
 
 ## Recent Improvements (2026-07-11)
 
-### Phase 6: Native Image Publishing
-- **Blogger Image Upload**: Added `upload_image()` to `BloggerClient` for direct media upload
-- **Texture-Based Thumbnails**: Auto-select textures from `media/textures/` based on topic hash
-- **Auto Thumbnail on Publish**: Use `--thumbnail` flag to embed featured images in posts
-- **Publish Script**: Added `publish_all_thumbnails.py` to batch publish with thumbnails
+### Phase 6: Thumbnail Publishing
+- **Unsplash Thumbnail Integration**: Auto-generate 1200x630 thumbnails using topic-based Unsplash URLs
+- **CLI --thumbnail flag**: Add `--thumbnail` to publish command to embed featured images
+- **Published 5 Articles**: All recruitment articles published with featured images
 
 ## Recent Improvements (2026-07-09)
 
