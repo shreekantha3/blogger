@@ -1,10 +1,43 @@
 # Development Progress Tracker
 
-Updated: 2026-07-09
+Updated: 2026-07-11
 
 ## Phase 5: Media Engine & SEO Enhancement
 
 ### Status: ✅ COMPLETED
+
+## Phase 6: Multi-Account & Existing Post Management
+
+### Status: ✅ COMPLETED
+
+### Completed Items
+
+#### Existing Post Management
+- [x] `list_posts()` method in BloggerClient for fetching all posts
+- [x] `list-posts` CLI command - display posts with ID, title, status
+- [x] `seo-audit` CLI command - batch SEO analysis sorted by performance
+- [x] `post-optimize` CLI command - review and AI-optimize existing posts
+
+#### Multi-Account Support
+- [x] AccountProfile dataclass in config/settings.py
+- [x] AccountManager class in core/accounts.py
+- [x] config/accounts.yaml template for account configuration
+- [x] `accounts` CLI command - list all configured accounts
+- [x] `account-add` CLI command - OAuth flow for new accounts
+- [x] `publish-to` CLI command - publish to specific account
+
+### CLI Commands Added
+```bash
+# Existing Post Management
+python app.py list-posts --status published --limit 50
+python app.py seo-audit --max-results 100
+python app.py post-optimize --post-id 123456789 --auto-fix
+
+# Multi-Account Support
+python app.py accounts
+python app.py account-add --name "work" --blog-id "123..."
+python app.py publish-to --account "work" --title "..." --content "..."
+```
 
 ### Completed Items
 
