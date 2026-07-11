@@ -16,6 +16,9 @@ Built in phases following clean architecture principles:
   - `media/image_selector.py` - Alt text generation, Unsplash integration
   - `seo/quality_scorer.py` - EEAT content quality scoring
   - `ai/fact_checker.py` - Factual claim verification
+- **Phase 6**: Multi-Account & Post Management (existing post review, optimization) ✅
+  - `core/blogger_client.py` - Added `list_posts()` method
+  - `app.py` - Added `list-posts`, `seo-audit`, `post-optimize` commands
 
 ## Key Patterns
 
@@ -39,6 +42,9 @@ Built in phases following clean architecture principles:
 # Authentication
 python app.py auth
 
+# List accessible blogs (useful for multi-account setup)
+python app.py list-blogs
+
 # Publish single post
 python app.py publish --title "My Title" --content "<h1>Content</h1>" --labels "python,automation"
 
@@ -56,6 +62,16 @@ python app.py bulk-publish --file data/sample_posts.json
 
 # SEO check
 python app.py seo-check --title "Test" --content "<h1>...</h1><p>...</p>"
+
+# List existing posts (NEW - Phase 6)
+python app.py list-posts --status published --limit 50
+
+# SEO audit all published posts (NEW - Phase 6)
+python app.py seo-audit --max-results 100
+
+# Optimize existing post (NEW - Phase 6)
+python app.py post-optimize --post-id "123456789" --dry-run
+python app.py post-optimize --post-id "123456789" --auto-fix
 
 # AI Content Generation (Phase 4)
 python app.py ai-generate --topic "Python Tips" --tone professional --keywords "python,coding" --words 800
@@ -142,7 +158,13 @@ pytest tests/ -v
 
 All 97 tests pass (20 new media tests added in Phase 5).
 
-## Recent Improvements (2026-07-09)
+## Recent Improvements (2026-07-11)
+
+### Phase 6: Multi-Account & Post Management (In Progress)
+- **Existing Post Listing**: Added `list_posts()` method to BloggerClient with status filtering and pagination
+- **List Posts CLI**: Added `list-posts` command to display existing posts with IDs, titles, and URLs
+- **SEO Audit CLI**: Added `seo-audit` command for batch SEO analysis of published posts
+- **Post Optimize CLI**: Added `post-optimize` command to review and AI-optimize existing posts
 
 ### Phase 5: Media Engine
 - **Image Processing**: Added `ImageProcessor` for compression and WebP conversion
@@ -151,6 +173,34 @@ All 97 tests pass (20 new media tests added in Phase 5).
 - **Image Selection**: Added `ImageSelector` for alt text generation and Unsplash integration
 - **EEAT Quality Scoring**: Added `QualityScorer` for content quality evaluation
 - **Fact Checking**: Added `FactChecker` for factual claim verification
+
+## Multi-Account Support (Phase 6)
+
+The platform supports multiple Blogger accounts through:
+- `config/accounts.yaml` - Account profile configuration
+- `core/accounts.py` - AccountManager for handling multiple credentials
+- Per-account credential storage (`credentials_{name}.json`)
+
+CLI commands:
+```bash
+# List all configured accounts
+python app.py accounts
+
+# Add a new account via OAuth flow
+python app.py account-add --name "work" --blog-id "123456789"
+
+# Publish to a specific account
+python app.py publish-to --account "work" --title "..." --content "..." --labels "..."
+```
+
+Account profiles in `config/accounts.yaml`:
+```yaml
+accounts:
+  - name: work
+    blog_id: "1234567890123456789"
+    credentials_path: "credentials_work.json"
+    labels: ["work", "professional"]
+```
 
 ## Recent Improvements (2026-07-04)
 

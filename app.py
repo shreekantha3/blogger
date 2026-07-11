@@ -28,6 +28,7 @@ from typing_extensions import Annotated
 # For now, we'll use a simple CLI. In Phase 7, this becomes a web dashboard.
 # Install with: pip install typer[all]
 import json
+import yaml
 
 try:
     import typer
@@ -895,6 +896,142 @@ if app:
             avg_score = sum(r["score"] for r in audit_results) / len(audit_results)
             print(f"Average SEO Score: {avg_score:.1f}/100")
             print(f"Posts audited: {len(audit_results)}")
+
+    @app.command("accounts")
+    def accounts() -> None:
+        """List all configured Blogger accounts."""
+        settings = get_settings()
+        setup_logging(
+            level=settings.log_level,
+            log_format=settings.log_format,
+            log_file_path=settings.log_file_path,
+        )
+
+        from core.accounts import AccountManager
+
+        manager = AccountManager()
+        accs = manager.list_accounts()
+
+        print(f"Configured Blogger accounts:")
+        for acc in accs:
+            valid = "✓" if manager.validate_account(acc.name) else "✗"
+            print(f"  {valid} {acc.name}")
+            print(f"    Blog ID: {acc.blog_id}")
+            print(f"    Credentials: {acc.credentials_path}")
+            if acc.labels:
+                print(f"    Default labels: {', '.join(acc.labels)}")
+
+    @app.command("account-add")
+    def account_add(
+        name: Annotated[str, typer.Option(help="Account identifier")] = None,
+        blog_id: Annotated[str, typer.Option(help="Blogger blog ID")] = None,
+    ) -> None:
+        """
+        Add a new Blogger account via OAuth flow.
+
+        This will run the OAuth flow and save credentials to a new file.
+        """
+        if not name:
+            print("✗ --name is required for account identifier")
+            return
+
+        settings = get_settings()
+        setup_logging(
+            level=settings.log_level,
+            log_format=settings.log_format,
+            log_file_path=settings.log_file_path,
+        )
+
+        from core.accounts import AccountManager
+
+        manager = AccountManager()
+
+        # Run OAuth flow for this account
+        credentials_path = f"credentials_{name}.json"
+        print(f"Starting OAuth flow for account '{name}'...")
+        print(f"Credentials will be saved to: {credentials_path}")
+
+        authenticator = Authenticator(credentials_path=Path(credentials_path))
+
+        try:
+            credentials = authenticator.load_credentials()
+            print("✓ OAuth successful")
+
+            # Create client and list blogs to verify
+            client = BloggerClient(credentials=credentials, blog_id=blog_id)
+            blogs = client.list_blogs()
+
+            if blogs and not blog_id:
+                print(f"\nAvailable blogs:")
+                for i, blog in enumerate(blogs, 1):
+                    print(f"  {i}. {blog.name} ({blog.id})")
+                print(f"\nRun again with --blog-id <ID> to select a blog")
+            elif blogs and blog_id:
+                print(f"\n✓ Account '{name}' configured for blog: {blog_id}")
+                print(f"  Add to config/accounts.yaml manually or edit after running")
+
+                # Suggest YAML entry
+                print(f"\nSuggested accounts.yaml entry:")
+                print(f"  - name: {name}")
+                print(f"    blog_id: \"{blog_id}\"")
+                print(f"    credentials_path: \"{credentials_path}\"")
+
+        except Exception as e:
+            print(f"✗ OAuth failed: {e}")
+            # Clean up failed credentials file
+            try:
+                Path(credentials_path).unlink()
+            except Exception:
+                pass
+
+    @app.command("publish-to")
+    def publish_to(
+        account: Annotated[str, typer.Option(help="Account name to publish to")] = "default",
+        title: Annotated[str, typer.Option(help="Post title")] = None,
+        content: Annotated[str, typer.Option(help="HTML content")] = "<p>Auto-generated content</p>",
+        labels: Annotated[str, typer.Option(help="Comma-separated labels")] = "",
+    ) -> None:
+        """Publish a post to a specific Blogger account."""
+        settings = get_settings()
+        setup_logging(
+            level=settings.log_level,
+            log_format=settings.log_format,
+            log_file_path=settings.log_file_path,
+        )
+
+        if not title:
+            print("✗ --title is required")
+            return
+
+        from core.accounts import AccountManager
+
+        manager = AccountManager()
+
+        try:
+            client = manager.get_client(account)
+        except Exception as e:
+            print(f"✗ Failed to get client for account '{account}': {e}")
+            print("  Run 'python app.py accounts' to see available accounts")
+            return
+
+        labels_list = [l.strip() for l in labels.split(",") if l.strip()]
+
+        post = BlogPost(
+            title=title,
+            content=content,
+            labels=labels_list,
+        )
+
+        try:
+            result = client.publish_post(post)
+            if result.success:
+                print(f"✓ Published post {result.post_id}")
+                print(f"  URL: {result.url}")
+                print(f"  Account: {account}")
+            else:
+                print(f"✗ Failed: {result.error}")
+        except Exception as e:
+            print(f"✗ Failed: {e}")
 
     @app.command("post-optimize")
     def post_optimize(

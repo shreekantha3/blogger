@@ -1,0 +1,21 @@
+# Blogger Account Profiles
+# Each account can have its own blog_id and credentials file
+
+# Default account uses credentials.storage and blogger_blog_id from .env
+# Additional accounts can be added below:
+
+# accounts:
+#   - name: work
+#     blog_id: "1234567890123456789"
+#     credentials_path: "credentials_work.json"
+#     labels: ["work", "professional"]
+#
+#   - name: personal
+#     blog_id: "9876543210987654321"
+#     credentials_path: "credentials_personal.json"
+#     labels: ["personal", "hobby"]
+#
+#   - name: technical
+#     blog_id: "1111111111111111111"
+#     credentials_path: "credentials_technical.json"
+#     labels: ["tech", "programming"]
