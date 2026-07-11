@@ -1,203 +1,256 @@
-<h1>TMB Senior Relationship Manager 2026: Apply Online Now</h1>
+<h1>TMB Recruitment 2026: Senior Relationship Manager Apply Online</h1>
 
-**Last Updated:** July 2026 | **Total Posts:** Various | **Application Mode:** Online
+<p><strong>Last Updated:</strong> July 2026 | <strong>Total Posts:</strong> Various | <strong>Application Mode:</strong> Online | <strong>Organization:</strong> Tamilnad Mercantile Bank (TMB)</p>
 
-Tamilnad Mercantile Bank (TMB) has announced recruitment for **Senior Relationship Manager** positions in 2026. This is an excellent opportunity for banking professionals to join one of Tamil Nadu's leading private sector banks with a strong reputation for customer service and innovation.
+<p>Tamilnad Mercantile Bank (TMB) has announced recruitment for <strong>Senior Relationship Manager</strong> positions in 2026. This is an excellent opportunity for banking professionals to join one of Tamil Nadu's leading private sector banks with a strong reputation for customer service and innovation.</p>
 
-<h2>TMB Senior Relationship Manager Recruitment 2026 - Overview</h2>
+<h2>TMB Senior Relationship Manager Recruitment 2026 - Complete Details</h2>
 
-| Details | Information |
-|---------|-------------|
-| **Position** | Senior Relationship Manager (Senior Manager/AVP Level) |
-| **Posting Location** | Anywhere in India (Transferable) |
-| **Application Mode** | Online |
-| **Application Fee** | Nil |
+<table>
+  <thead>
+    <tr>
+      <th>Position</th>
+      <th>Level</th>
+      <th>Posting Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Senior Relationship Manager</strong></td>
+      <td>Senior Manager / AVP Level</td>
+      <td>Anywhere in India (Transferable)</td>
+    </tr>
+  </tbody>
+</table>
 
----
+<p><strong>Official Website:</strong> <a href="https://www.tmb.in" target="_blank" rel="noopener noreferrer">www.tmb.in</a><br>
+<strong>Career Portal:</strong> <a href="http://www.ib.tmbonline.bank.in/tmb_careers/" target="_blank" rel="noopener noreferrer">ib.tmbonline.bank.in/tmb_careers/</a></p>
 
-<h2>Application Timeline</h2>
+<h2>Application Timeline 2026</h2>
 
-<h3>Important Dates</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Online Application Start Date</strong></td>
+      <td>July 3, 2026</td>
+    </tr>
+    <tr>
+      <td><strong>Online Application Closing Date</strong></td>
+      <td>July 18, 2026</td>
+    </tr>
+  </tbody>
+</table>
 
-| Event | Date |
-|-------|------|
-| **Online Application Start Date** | July 3, 2026 |
-| **Online Application Closing Date** | July 18, 2026 |
+<h2>How to Apply Online - Step by Step</h2>
 
----
+<h3>Complete Application Process</h3>
 
-<h2>How to Apply Online</h2>
-
-<h3>Step-by-Step Application Process:</h3>
-
-1. **Visit Career Portal:** Go to [www.ib.tmbonline.bank.in/tmb_careers/](http://www.ib.tmbonline.bank.in/tmb_careers/)
-
-2. **Click "Apply Online":** Select the Senior Relationship Manager post
-
-3. **Register Yourself:** Create an account with valid email and mobile number
-
-4. **Receive Activation Link:** Check your email for activation link
-
-5. **Login & Complete Application:** Use Registration Number and Password sent to mobile
-
-6. **Fill Application Form:** Complete all sections with accurate details
-
-7. **Upload Documents:** Scan and upload required documents
-
-8. **Submit Application:** Review all details and submit before July 18, 2026
-
----
+<ol>
+  <li><strong>Visit Career Portal:</strong> <a href="http://www.ib.tmbonline.bank.in/tmb_careers/" target="_blank" rel="noopener noreferrer">www.ib.tmbonline.bank.in/tmb_careers/</a></li>
+  <li><strong>Click "Apply Online":</strong> Select the Senior Relationship Manager post from the list</li>
+  <li><strong>Register Yourself:</strong> Create an account with valid email and mobile number</li>
+  <li><strong>Receive Activation Link:</strong> Check your email for activation link sent by system</li>
+  <li><strong>Login & Complete Application:</strong> Use Registration Number and Password sent to mobile</li>
+  <li><strong>Fill Application Form:</strong> Complete all sections with accurate details</li>
+  <li><strong>Upload Documents:</strong> Scan and upload required documents (max 250 KB)</li>
+  <li><strong>Upload Photograph:</strong> Digital photo (390 x 520 pixels, max 120 KB)</li>
+  <li><strong>Upload Signature:</strong> Digital signature (240 x 240 pixels, max 60 KB)</li>
+  <li><strong>Submit Application:</strong> Review all details and submit before July 18, 2026</li>
+</ol>
 
 <h2>Eligibility Criteria</h2>
 
 <h3>Age Limit</h3>
-- **Minimum Age:** 28 years
-- **Maximum Age:** 38 years (as of June 30, 2026)
-- **Age Relaxation:** Available for deserving candidates as per bank policy
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Age Requirement</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Minimum Age</strong></td>
+      <td>28 years (as of June 30, 2026)</td>
+    </tr>
+    <tr>
+      <td><strong>Maximum Age</strong></td>
+      <td>38 years (as of June 30, 2026)</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3>Educational Qualification</h3>
-- **Any Graduate/Post Graduate** from a recognized university
-- **No specific percentage requirement**
+<ul>
+  <li><strong>Any Graduate/Post Graduate</strong> from a recognized university</li>
+  <li><strong>No specific percentage requirement</strong> - All graduates are eligible</li>
+</ul>
 
 <h3>Experience Requirements</h3>
 
 <h4>Mandatory Experience:</h4>
-- **5 years** of work experience in sourcing/processing loans
-- **3 years** as Relationship Manager
-- Experience in **MSME loans** and high-value credit segments
+<ul>
+  <li><strong>5 years</strong> of total work experience in sourcing/processing loans</li>
+  <li><strong>3 years</strong> of experience as Relationship Manager in any bank</li>
+  <li>Experience in <strong>MSME loans</strong> and high-value credit segments</li>
+</ul>
 
 <h4>Preferred Qualifications:</h4>
-- Banking/financial sector experience
-- Sales and relationship management background
-- Credit analysis and risk assessment skills
-- Customer relationship management expertise
-
----
+<ul>
+  <li>Banking/financial sector experience</li>
+  <li>Sales and relationship management background</li>
+  <li>Credit analysis and risk assessment skills</li>
+  <li>Customer relationship management expertise</li>
+</ul>
 
 <h2>Salary Structure & Remuneration</h2>
 
-<h3>Pay Scale</h3>
-- **Rank:** Senior Manager / Assistant Vice President (AVP)
-- **Salary:** As applicable to regular officers at SM/AVP level
-- **Variable Pay:** Performance-based incentives
+<h3>Pay Scale Details</h3>
+<ul>
+  <li><strong>Rank:</strong> Senior Manager / Assistant Vice President (AVP)</li>
+  <li><strong>Salary:</strong> As applicable to regular officers at SM/AVP level</li>
+  <li><strong>Variable Pay:</strong> Performance-based incentives</li>
+</ul>
 
 <h3>Total Compensation Package</h3>
-- **Fixed Salary:** Competitive with industry standards
-- **Performance Bonuses:** Based on business generation
-- **Benefits:** Medical insurance, retirement plans, leave policies
-
----
+<ul>
+  <li><strong>Fixed Salary:</strong> Competitive with industry standards</li>
+  <li><strong>Performance Bonuses:</strong> Based on business generation</li>
+  <li><strong>Benefits:</strong> Medical insurance, retirement plans, leave policies</li>
+  <li><strong>Work-Life Balance:</strong> Supportive management approach</li>
+</ul>
 
 <h2>Job Profile & Responsibilities</h2>
 
 <h3>Key Responsibilities</h3>
-- Manage and develop high-value client relationships
-- Source new business opportunities in MSME segment
-- Process and sanction credit proposals
-- Analyze credit risk and assess loan applications
-- Maintain portfolio quality and profitability
-- Achieve business targets and growth metrics
+<ul>
+  <li>Manage and develop high-value client relationships</li>
+  <li>Source new business opportunities in MSME segment</li>
+  <li>Process and sanction credit proposals</li>
+  <li>Analyze credit risk and assess loan applications</li>
+  <li>Maintain portfolio quality and profitability</li>
+  <li>Achieve business targets and growth metrics</li>
+</ul>
 
 <h3>Required Skills</h3>
-- Strong negotiation and persuasion skills
-- Excellent communication and interpersonal abilities
-- Credit analysis and risk management knowledge
-- Sales orientation and target-driven mindset
-- Knowledge of banking regulations and products
-
----
-
-<h2>Required Documents</h2>
-
-<h3>For Application</h3>
-- SSLC or Higher Secondary Mark Sheet (for age proof)
-- Degree Certificate (Graduation)
-- Experience certificates and relieving letters
-- Last month's salary slip
-- Digital photograph (390 x 520 pixels, max 120 KB)
-- Signature (240 x 240 pixels, max 60 KB)
-
-<h3>For Selected Candidates</h3>
-- Birth Certificate
-- Educational certificates (all levels)
-- Experience certificates
-- Bank statements
-- PAN Card
-- Aadhaar Card
-
----
+<ul>
+  <li>Strong negotiation and persuasion skills</li>
+  <li>Excellent communication and interpersonal abilities</li>
+  <li>Credit analysis and risk management knowledge</li>
+  <li>Sales orientation and target-driven mindset</li>
+  <li>Knowledge of banking regulations and products</li>
+</ul>
 
 <h2>Selection Process</h2>
 
-<h3>Process Overview</h3>
-The selection process is based on:
-1. **Online Application Screening**
-2. **Interview/Assessment** (if applicable)
-3. **Document Verification**
+<ol>
+  <li><strong>Online Application Screening</strong> - Review of applications received</li>
+  <li><strong>Interview/Assessment</strong> - Direct or video conferencing</li>
+  <li><strong>Document Verification</strong> - Certificate and experience verification</li>
+</ol>
 
 <h3>Evaluation Criteria</h3>
-- Educational qualifications and experience
-- Banking/financial sector knowledge
-- Sales and relationship management skills
-- Communication and interpersonal abilities
-- Risk assessment and credit evaluation skills
+<ul>
+  <li>Educational qualifications and relevant experience</li>
+  <li>Banking/financial sector knowledge</li>
+  <li>Sales and relationship management skills</li>
+  <li>Communication and interpersonal abilities</li>
+  <li>Risk assessment and credit evaluation skills</li>
+</ul>
 
----
+<h2>Documents Required for Application</h2>
 
-<h2>Why Join TMB?</h2>
+<h3>For Application Process</h3>
+<ul>
+  <li>SSLC or Higher Secondary Mark Sheet (for age proof)</li>
+  <li>Degree Certificate (Graduation)</li>
+  <li>Experience certificates and relieving letters</li>
+  <li>Last month's salary slip</li>
+  <li>Digital photograph (390 x 520 pixels, max 120 KB)</li>
+  <li>Signature (240 x 240 pixels, max 60 KB)</li>
+</ul>
+
+<h3>For Selected Candidates</h3>
+<ul>
+  <li>Birth Certificate</li>
+  <li>Educational certificates (all levels)</li>
+  <li>Experience certificates</li>
+  <li>Bank statements</li>
+  <li>PAN Card</li>
+  <li>Aadhaar Card</li>
+</ul>
+
+<h2>Why Join Tamilnad Mercantile Bank (TMB)?</h2>
 
 <h3>Career Opportunities</h3>
-- **Established Bank:** Over 50 years of banking experience
-- **Growth Prospects:** Clear career progression path
-- **Learning Environment:** Continuous skill development programs
-- **Modern Culture:** Progressive and employee-friendly work environment
+<ul>
+  <li><strong>Established Bank:</strong> Over 50 years of banking experience</li>
+  <li><strong>Growth Prospects:</strong> Clear career progression path</li>
+  <li><strong>Learning Environment:</strong> Continuous skill development programs</li>
+  <li><strong>Modern Culture:</strong> Progressive and employee-friendly work environment</li>
+</ul>
 
-<h3>Benefits</h3>
-- **Competitive Salary:** At par with industry standards
-- **Performance Incentives:** Attractive variable compensation
-- **Comprehensive Benefits:** Medical, retirement, and leave policies
-- **Work-Life Balance:** Supportive management approach
-
----
+<h3>Benefits Package</h3>
+<ul>
+  <li><strong>Competitive Salary:</strong> At par with industry standards</li>
+  <li><strong>Performance Incentives:</strong> Attractive variable compensation</li>
+  <li><strong>Full Benefits:</strong> Medical, retirement, and leave policies</li>
+  <li><strong>Work-Life Balance:</strong> Supportive management approach</li>
+</ul>
 
 <h2>Frequently Asked Questions</h2>
 
-<h3>Is there any application fee for TMB recruitment?</h3>
+<h3>Q1. Is there any application fee for TMB recruitment?</h3>
+<p>A. No, there is <strong>no application fee</strong> required for Senior Relationship Manager posts at TMB.</p>
 
-No, there is **no application fee** required for Senior Relationship Manager posts.
+<h3>Q2. Can I apply if I'm from outside Tamil Nadu?</h3>
+<p>A. Yes, the position is <strong>transferable across India</strong>. Candidates from any state can apply.</p>
 
-<h3>Can I apply if I'm from outside Tamil Nadu?</h3>
+<h3>Q3. What is the difference between Relationship Manager and Senior Relationship Manager?</h3>
+<p>A. Senior Relationship Manager is a <strong>higher rank</strong> (equivalent to Senior Manager/AVP) with additional responsibilities including team leadership, high-value credit decisions, and business development.</p>
 
-Yes, the position is **transferable** across India. You can apply from anywhere.
+<h3>Q4. How is the selection communicated?</h3>
+<p>A. Shortlisted candidates will be contacted via email or phone for further rounds of selection. Details will be shared on the official career portal.</p>
 
-<h3>What is the difference between Relationship Manager and Senior Relationship Manager?</h3>
+<h3>Q5. What if I miss the application deadline?</h3>
+<p>A. The application portal closes on <strong>July 18, 2026</strong>. Late applications will not be accepted under any circumstances.</p>
 
-Senior Relationship Manager is a **higher rank** (equivalent to Senior Manager/AVP) with more responsibilities including team leadership, high-value credit decisions, and business development.
-
-<h3>How is the selection communicated?</h3>
-
-Shortlisted candidates will be contacted via email or phone for further rounds of selection.
-
-<h3>What if I miss the application deadline?</h3>
-
-The application portal closes on **July 18, 2026**. Late applications will not be considered.
-
----
+<h3>Q6. What documents need to be uploaded?</h3>
+<p>A. All documents must be uploaded in scanned format with maximum size limits. Photograph (390 x 520 pixels, 120 KB) and signature (240 x 240 pixels, 60 KB) have specific requirements.</p>
 
 <h2>Important Links</h2>
 
-| Link | Purpose |
-|------|---------|
-| [Career Portal](http://www.ib.tmbonline.bank.in/tmb_careers/) | Apply Online |
-| [Official Website](https://www.tmb.in/) | Bank Information |
-| [Download Advertisement](https://www.tmb.in/careers) | Full Notification |
+<table>
+  <thead>
+    <tr>
+      <th>Link</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="http://www.ib.tmbonline.bank.in/tmb_careers/" target="_blank" rel="noopener noreferrer">Career Portal</a></td>
+      <td>Apply Online</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.tmb.in" target="_blank" rel="noopener noreferrer">Official Website</a></td>
+      <td>Bank Information</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.tmb.in/careers" target="_blank" rel="noopener noreferrer">Download Advertisement</a></td>
+      <td>Full Notification</td>
+    </tr>
+  </tbody>
+</table>
 
----
+<hr>
 
-> **Important:** Applications are only accepted **online**. No offline applications will be entertained. Ensure all documents are scanned clearly before uploading.
-
----
-
-**Keywords:** TMB Recruitment 2026, Senior Relationship Manager TMB, Tamilnad Mercantile Bank Jobs, Banking Jobs in India, TMB Career Opportunities, Apply Online TMB, Senior Manager Banking Jobs, MSME Loan Experience
-
-**Meta Description:** Apply for tmb senior relationship manager 2026: apply online now. Check eligibility, salary, and application process. tmb recruitment jobs available.
+<p><strong>Focus Keyword:</strong> TMB Recruitment 2026<br>
+<strong>Keywords:</strong> TMB Recruitment 2026, Senior Relationship Manager TMB, Tamilnad Mercantile Bank Jobs, Banking Jobs in India, TMB Career Opportunities, Apply Online TMB, Senior Manager Banking Jobs, MSME Loan Experience<br>
+<strong>Meta Description:</strong> Apply for TMB Recruitment 2026 Senior Relationship Manager. Online application from July 3-18 at ib.tmbonline.bank.in. Check age limit (28-38 years), experience requirements, salary, and selection process.</p>
