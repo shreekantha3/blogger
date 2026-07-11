@@ -160,11 +160,15 @@ All 97 tests pass (20 new media tests added in Phase 5).
 
 ## Recent Improvements (2026-07-11)
 
-### Phase 6: Multi-Account & Post Management (In Progress)
+#### Recent Improvements (2026-07-11)
+
+### Phase 6: Multi-Account & Post Management ✅
 - **Existing Post Listing**: Added `list_posts()` method to BloggerClient with status filtering and pagination
 - **List Posts CLI**: Added `list-posts` command to display existing posts with IDs, titles, and URLs
 - **SEO Audit CLI**: Added `seo-audit` command for batch SEO analysis of published posts
 - **Post Optimize CLI**: Added `post-optimize` command to review and AI-optimize existing posts
+- **Account Management**: Added `accounts`, `account-add`, `publish-to` commands for multi-account support
+- **AccountProfile Model**: Added dataclass for account configuration with blog_id and credentials_path
 
 ### Phase 5: Media Engine
 - **Image Processing**: Added `ImageProcessor` for compression and WebP conversion
