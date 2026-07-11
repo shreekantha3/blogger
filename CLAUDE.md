@@ -26,7 +26,7 @@ Built in phases following clean architecture principles:
 | `core/blogger_client.py` | Facade | Simplified Blogger API wrapper |
 | `core/publishing/retry.py` | Strategy | Configurable retry with exponential backoff |
 | `core/publishing/queue.py` | Active Record | JSON-based publish queue |
-| `core/publishing/publisher.py` | Facade | Publishing orchestration |
+| `core/publishing/publisher.py` | Facade | Publishing orchestration with thumbnail support |
 | `seo/analyzer.py` | Composite | Combined SEO checks |
 | `ai/generator.py` | Facade | AI content generation orchestrator |
 | `ai/providers/base.py` | Strategy | Abstract provider interface |
@@ -41,6 +41,9 @@ python app.py auth
 
 # Publish single post
 python app.py publish --title "My Title" --content "<h1>Content</h1>" --labels "python,automation"
+
+# Publish with auto-generated thumbnail (uses textures from media/textures/)
+python app.py publish --title "My Title" --content "<h1>Content</h1>" --labels "recruitment" --thumbnail
 
 # Schedule post for future publishing
 python app.py schedule --title "Future Post" --when "2026-07-10T10:00:00"
@@ -141,6 +144,14 @@ pytest tests/ -v
 ```
 
 All 97 tests pass (20 new media tests added in Phase 5).
+
+## Recent Improvements (2026-07-11)
+
+### Phase 6: Native Image Publishing
+- **Blogger Image Upload**: Added `upload_image()` to `BloggerClient` for direct media upload
+- **Texture-Based Thumbnails**: Auto-select textures from `media/textures/` based on topic hash
+- **Auto Thumbnail on Publish**: Use `--thumbnail` flag to embed featured images in posts
+- **Publish Script**: Added `publish_all_thumbnails.py` to batch publish with thumbnails
 
 ## Recent Improvements (2026-07-09)
 
