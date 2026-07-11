@@ -206,6 +206,16 @@ accounts:
     labels: ["work", "professional"]
 ```
 
+### Articles Published (2026-07-11)
+5 recruitment articles successfully published:
+- **Karnataka Excise Recruitment 2025** - 1,207 posts for Constable & SI
+- **AIIMS Gorakhpur Junior Resident 2026** - Walk-in interview for 3 posts
+- **TMB Senior Relationship Manager 2026** - Banking recruitment
+- **NHSRCL Recruitment 2026** - 454 Technician & Junior Engineer posts
+- **CCI Recruitment 2026** - 148 Assistant Manager positions
+
+All articles optimized with 90%+ SEO scores.
+
 ## Recent Improvements (2026-07-04)
 
 ### Phase 2: Publishing Engine
