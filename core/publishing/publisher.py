@@ -157,7 +157,7 @@ class Publisher:
         """
         Generate thumbnail and embed it in the post content.
 
-        Uses Unsplash source URLs for reliable hosting.
+        Uses Picsum Photos for reliable random thumbnails.
         Blogger's fetchImages=true will download and host the image.
 
         Args:
@@ -170,16 +170,16 @@ class Publisher:
         """
         topic = thumbnail_topic or post.title or "Article"
 
-        # Use Unsplash source URL (Blogger fetches and hosts it)
-        # This gives us reliable, cached thumbnail images
-        search_query = topic.replace(" ", ",")
-        unsplash_url = f"https://source.unsplash.com/1200x630/?{search_query}"
+        # Use Picsum Photos (reliable random image service)
+        # Use seed parameter for deterministic images per topic
+        seed = abs(hash(topic)) % 1000
+        picsum_url = f"https://picsum.photos/seed/{seed}/1200/630"
 
         # Create image HTML and prepend to content
-        thumbnail_html = f'<img src="{unsplash_url}" alt="{post.title}" width="1200" height="630">\n\n'
+        thumbnail_html = f'<img src="{picsum_url}" alt="{post.title}" width="1200" height="630">\n\n'
         post.content = thumbnail_html + (post.content or "")
 
-        logger.info("Thumbnail embedded in post", url=unsplash_url)
+        logger.info("Thumbnail embedded in post", url=picsum_url)
         return post
 
     def _select_texture(self, topic: str) -> Optional[Path]:
