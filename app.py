@@ -174,6 +174,7 @@ if app:
         title: Annotated[str, typer.Option(help="Post title")],
         content: Annotated[str, typer.Option(help="HTML content")] = "<p>Auto-generated content</p>",
         labels: Annotated[str, typer.Option(help="Comma-separated labels")] = "",
+        thumbnail: Annotated[bool, typer.Option(help="Auto-generate thumbnail with texture")] = False,
     ) -> None:
         """Publish a post to Blogger."""
         settings = get_settings()
@@ -192,7 +193,7 @@ if app:
         )
 
         publisher = Publisher()
-        result = publisher.publish(post)
+        result = publisher.publish(post, thumbnail=thumbnail)
 
         if result.success:
             print(f"✓ Published post {result.post_id}")

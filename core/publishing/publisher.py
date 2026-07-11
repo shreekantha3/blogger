@@ -19,6 +19,7 @@ KEY PRINCIPLES:
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Optional, List
 
 from config import get_settings, get_logger
@@ -27,6 +28,7 @@ from core.blogger_client import BloggerClient
 from core.models import BlogPost, PostResult, PostStatus
 from core.publishing.retry import RetryStrategy, RetryConfig
 from core.publishing.queue import PublishQueue, QueuedPost
+from media.thumbnail_generator import ThumbnailGenerator
 
 logger = get_logger("core", "publishing")
 
@@ -93,6 +95,8 @@ class Publisher:
         self,
         post: BlogPost,
         schedule_time: Optional[datetime] = None,
+        thumbnail: bool = False,
+        thumbnail_topic: Optional[str] = None,
     ) -> PublishResult:
         """
         Publish a single post immediately or schedule for later.
@@ -100,6 +104,8 @@ class Publisher:
         Args:
             post: BlogPost to publish
             schedule_time: Optional future time for scheduled publishing
+            thumbnail: Whether to generate and upload a thumbnail
+            thumbnail_topic: Topic for thumbnail text (defaults to post title)
 
         Returns:
             PublishResult with post details
@@ -122,6 +128,10 @@ class Publisher:
         client = self._ensure_client()
 
         try:
+            # Generate thumbnail if requested
+            if thumbnail:
+                post = self._publish_with_thumbnail(post, thumbnail_topic, client)
+
             result = self._retry_strategy.execute(
                 lambda: client.publish_post(post),
             )
@@ -137,6 +147,69 @@ class Publisher:
                 success=False,
                 error=str(e),
             )
+
+    def _publish_with_thumbnail(
+        self,
+        post: BlogPost,
+        thumbnail_topic: Optional[str],
+        client: BloggerClient,
+    ) -> BlogPost:
+        """
+        Generate thumbnail and embed it in the post content.
+
+        Args:
+            post: BlogPost to enhance with thumbnail
+            thumbnail_topic: Topic for thumbnail text
+            client: Authenticated BloggerClient for image upload
+
+        Returns:
+            Updated BlogPost with thumbnail embedded in content
+        """
+        generator = ThumbnailGenerator()
+        topic = thumbnail_topic or post.title or "Article"
+
+        # Select texture based on topic hash for consistency
+        texture_path = self._select_texture(topic)
+
+        # Generate OG thumbnail with texture
+        thumbnail_bytes = generator.generate_og_thumbnail(topic, None, texture_path)
+
+        # Upload to Blogger
+        ext = ".jpg"
+        filename = f"thumbnail-{topic.lower().replace(' ', '-')[:30]}{ext}"
+        image_url = client.upload_image(thumbnail_bytes, filename)
+
+        # Create image HTML and prepend to content
+        thumbnail_html = f'<img src="{image_url}" alt="{post.title}" width="1200" height="630">\n\n'
+        post.content = thumbnail_html + (post.content or "")
+
+        logger.info("Thumbnail embedded in post", url=image_url)
+        return post
+
+    def _select_texture(self, topic: str) -> Optional[Path]:
+        """
+        Select a texture from the textures folder based on topic hash.
+
+        Args:
+            topic: Article topic for hash-based selection
+
+        Returns:
+            Path to selected texture, or None for solid background
+        """
+        textures_dir = Path("media/textures")
+
+        if not textures_dir.exists():
+            return None
+
+        # Get all JPG files in textures folder
+        textures = sorted(textures_dir.glob("*.jpg"))
+
+        if not textures:
+            return None
+
+        # Hash-based selection for consistent texture per topic
+        texture_index = hash(topic) % len(textures)
+        return textures[texture_index]
 
     def save_draft(self, post: BlogPost) -> PublishResult:
         """

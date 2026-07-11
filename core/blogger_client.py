@@ -26,8 +26,10 @@ Design pattern: Repository pattern (from Domain-Driven Design)
 from typing import List, Optional
 
 from googleapiclient import discovery
+from googleapiclient.http import MediaIoBaseUpload
 from google.auth.credentials import Credentials
 from googleapiclient.errors import HttpError
+import io
 
 from config import get_settings, get_logger
 from core.auth import Authenticator
@@ -384,6 +386,56 @@ class BloggerClient:
 
         logger.debug("Building post body", post_id=post.title, status=status.value)
         return body
+
+    def upload_image(
+        self,
+        image_bytes: bytes,
+        filename: str,
+        post_id: Optional[str] = None,
+    ) -> str:
+        """
+        Upload an image to Blogger and return its URL.
+
+        Args:
+            image_bytes: Raw image data
+            filename: Name for the uploaded file
+            post_id: Optional post ID to associate image with
+
+        Returns:
+            Public URL to the uploaded image
+
+        Raises:
+            APIError: If upload fails
+
+        Example:
+            >>> url = client.upload_image(thumbnail_bytes, "thumbnail.jpg")
+        """
+        service = self._get_service()
+
+        try:
+            # Create media upload object from bytes
+            media = MediaIoBaseUpload(
+                io.BytesIO(image_bytes),
+                mimetype="image/jpeg",
+                resumable=True,
+            )
+
+            # Upload to Blogger
+            response = (
+                service.posts()
+                .images()
+                .upload(blogId=self._blog_id, media_body=media)
+                .execute()
+            )
+
+            image_url = response.get("url", "")
+            logger.info("Image uploaded to Blogger", url=image_url)
+            return image_url
+
+        except HttpError as e:
+            error_msg = f"Failed to upload image: {e}"
+            logger.error(error_msg)
+            raise APIError(error_msg, status_code=e.resp.status) from e
 
     def _parse_error_body(self, error: HttpError) -> dict:
         """Parse HTTP error response body for logging."""
