@@ -1,11 +1,32 @@
 """Application settings with validation and type safety."""
 
+from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
 from typing import List, Optional
 
 from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+@dataclass
+class AccountProfile:
+    """
+    Profile for a Blogger account.
+
+    Used for multi-account management - each profile stores
+    its own blog_id and credentials path.
+    """
+
+    name: str
+    blog_id: str
+    credentials_path: str = "credentials.storage"
+    labels: List[str] = None
+
+    def __post_init__(self) -> None:
+        """Initialize mutable defaults."""
+        if self.labels is None:
+            self.labels = []
 
 
 class Settings(BaseSettings):

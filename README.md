@@ -52,18 +52,29 @@ blogger-automation/
 - [x] Meta description optimization
 - [x] Content structure fixing for SEO compliance
 
-### Phase 5: Media Engine (Planned)
-- [ ] Image generation (AI)
-- [ ] Image optimization
-- [ ] Thumbnail creation
-- [ ] Blogger image upload
+### Phase 5: Media Engine ✓
+- [x] Image optimization (ImageProcessor)
+- [x] WebP format conversion
+- [x] Thumbnail creation (1200x630, Twitter, Square)
+- [x] Storage backends (Local, S3, Cloudinary)
+- [x] Image alt text generation
+- [x] EEAT quality scoring
 
-### Phase 6: Analytics (Planned)
+### Phase 6: Multi-Account & Post Management ✓
+- [x] `list_posts()` - Fetch all existing posts
+- [x] `list-posts` CLI - Display posts with IDs and titles
+- [x] `seo-audit` CLI - Batch SEO analysis of published posts
+- [x] `post-optimize` CLI - Review and AI-optimize existing posts
+- [x] AccountProfile - Multi-account configuration model
+- [x] AccountManager - Multiple account support
+- [x] `accounts`, `account-add`, `publish-to` CLI commands
+
+### Phase 7: Analytics (Planned)
 - [ ] Google Search Console integration
 - [ ] Publishing analytics
 - [ ] SEO reporting
 
-### Phase 7: Web Dashboard (Planned)
+### Phase 8: Web Dashboard (Planned)
 - [ ] FastAPI backend
 - [ ] React/TypeScript frontend
 - [ ] Real-time publishing status
@@ -111,6 +122,16 @@ python app.py list-blogs
 
 # Publish a post
 python app.py publish --title "My Post" --labels "python,automation"
+
+# Phase 6: Existing Post Management
+python app.py list-posts --status published --limit 50    # List existing posts
+python app.py seo-audit --max-results 100                  # SEO audit all posts
+python app.py post-optimize --post-id 123456789 --auto-fix  # Optimize existing post
+
+# Phase 6: Multi-Account Support
+python app.py accounts                                   # List all accounts
+python app.py account-add --name "work"                  # Add new account
+python app.py publish-to --account "work" --title "..."   # Publish to specific account
 ```
 
 ### Programmatic Usage

@@ -282,6 +282,75 @@ class BloggerClient:
                 response_body=self._parse_error_body(e),
             ) from e
 
+    def list_posts(
+        self,
+        status: Optional[str] = None,
+        max_results: int = 100,
+        fetch_images: bool = False,
+    ) -> List[PostResult]:
+        """
+        List all posts from the blog with optional status filtering.
+
+        Args:
+            status: Filter by status - 'draft', 'published', 'scheduled', or None for all
+            max_results: Maximum number of posts to retrieve (1-200, API limit)
+            fetch_images: Whether to fetch images for each post (slower)
+
+        Returns:
+            List of PostResult objects for matching posts
+
+        Raises:
+            APIError: If the API call fails
+
+        Examples:
+            >>> client = BloggerClient()
+            >>> all_posts = client.list_posts()
+            >>> drafts = client.list_posts(status="draft")
+            >>> recent = client.list_posts(max_results=50)
+        """
+        service = self._get_service()
+
+        try:
+            posts: List[PostResult] = []
+            request = service.posts().list(
+                blogId=self._blog_id,
+                maxResults=min(max_results, 200),
+                fetchImages=fetch_images,
+            )
+
+            while request is not None:
+                response = request.execute()
+                items = response.get("items", [])
+
+                for item in items:
+                    # Filter by status if specified
+                    if status is None or item.get("status") == status:
+                        posts.append(PostResult.from_api_response(item))
+                        if len(posts) >= max_results:
+                            break
+
+                if len(posts) >= max_results:
+                    break
+
+                request = service.posts().list_next(request, response)
+
+            logger.info(
+                "Listed posts",
+                count=len(posts),
+                status_filter=status,
+                max_results=max_results,
+            )
+            return posts
+
+        except HttpError as e:
+            error_msg = f"Failed to list posts: {e}"
+            logger.error(error_msg, status_code=e.resp.status)
+            raise APIError(
+                error_msg,
+                status_code=e.resp.status,
+                response_body=self._parse_error_body(e),
+            ) from e
+
     def delete_post(self, post_id: str) -> bool:
         """
         Delete a blog post.

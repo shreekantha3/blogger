@@ -20,7 +20,22 @@ Files already covered in main.
 
 **Action needed:** Wait for locked sessions to complete or manually merge.
 
+## Phase 6 Completion (worktree-multi-account-seo-enhancement)
+
+### Features Implemented
+- [x] `list_posts()` method - Fetch all posts with status filtering
+- [x] `list-posts` CLI command - Display existing posts
+- [x] `seo-audit` CLI command - Batch SEO analysis
+- [x] `post-optimize` CLI command - Review and optimize existing posts
+- [x] AccountProfile dataclass - Account configuration model
+- [x] AccountManager class - Multi-account credential management
+- [x] `accounts`, `account-add`, `publish-to` CLI commands - Account management
+
+### Ready for Merge
+All Phase 6 features are complete and tested. Ready to be merged into main.
+
 ## Current State on main
 - Phase 5 Media Engine: Complete
-- 20 media tests: Passing
+- Phase 6 Multi-Account & Post Management: Complete (in worktree)
+- 20 media tests: Passing (8 pre-existing failures in publish queue tests)
 - 5 articles published: Live on gyanasangam.com
