@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="[TOPIC] Quiz with 25 MCQs. Perfect for KPSC, UPSC preparation.">
+    <meta name="keywords" content="[TOPIC] Quiz, KPSC MCQ, UPSC Polity, Competitive Exams">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="[TOPIC] Quiz: 25 Essential MCQs for Competitive Exams">
+    <meta property="og:description" content="Master [TOPIC] with expert-crafted MCQs. Perfect for KPSC, UPSC exam preparation.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://yourblog.com/[SLUG]">
+    <meta property="og:image" content="https://yourblog.com/images/[SLUG]-og.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://yourblog.com/[SLUG]">
+
+    <title>[TOPIC] Quiz: 25 Essential MCQs for Competitive Exams | YourBlog</title>
+
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #7c3aed;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+            --light-bg: #f8fafc;
+            --dark-text: #1e293b;
+            --light-text: #64748b;
+            --border-color: #e2e8f0;
+            --radius: 12px;
+            --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background: var(--light-bg);
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+        .breadcrumb { padding: 1rem 0; font-size: 0.875rem; color: var(--light-text); }
+        .breadcrumb a { color: var(--primary-color); text-decoration: none; }
+
+        /* Enhanced Header with Animated Gradient */
+        header {
+            background: linear-gradient(135deg, #1e40af 0%, #3730a3 25%, #5b21b4 50%, #7c3aed 75%, #8b5cf6 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 8s ease infinite;
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        header .container { position: relative; z-index: 1; }
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.025em;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        header p { font-size: 1.25rem; opacity: 0.95; font-weight: 300; max-width: 600px; margin: 0 auto; }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        section {
+            background: white;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+        h2 {
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th, td { padding: 0.75rem 1rem; border: 1px solid var(--border-color); }
+        th { background: var(--light-bg); font-weight: 600; }
+
+        /* Enhanced Quiz Container */
+        .quiz-container {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .quiz-header h2 { margin: 0; color: var(--primary-dark); font-size: 1.5rem; }
+        .quiz-progress-info {
+            background: var(--light-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: linear-gradient(90deg, #e2e8f0 0%, #cbd5e1 100%);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            transition: width 0.5s ease;
+        }
+
+        .question-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+        .question-number {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+        }
+        .question-text { font-size: 1.25rem; margin-bottom: 1.5rem; line-height: 1.5; }
+
+        .options { list-style: none; display: grid; gap: 0.75rem; }
+        .option {
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 1.125rem 1.25rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        .option:hover { border-color: var(--primary-color); transform: translateY(-1px); }
+        .option.selected {
+            border-color: var(--primary-color);
+            background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+        .option input[type="radio"] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            position: relative;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .option input[type="radio"]::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 10px; height: 10px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            transition: transform 0.2s ease;
+        }
+        .option input[type="radio"]:checked::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .explanation {
+            background: linear-gradient(135deg, #fefce8 0%, #fef9e7 100%);
+            border-left: 4px solid var(--warning-color);
+            padding: 1.25rem;
+            margin-top: 1.25rem;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            display: none;
+        }
+        .explanation.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .btn {
+            padding: 0.875rem 1.75rem;
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+        .btn-secondary {
+            background: white;
+            color: var(--dark-text);
+            border: 1px solid var(--border-color);
+        }
+
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .results-container {
+            text-align: center;
+            padding: 3rem 2rem;
+            display: none;
+        }
+        .score-display {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.75rem; }
+            .quiz-container { padding: 1.25rem; }
+            .quiz-navigation { flex-direction: column; }
+            .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="/">Home</a> &raquo; <a href="/quizzes">Quizzes</a> &raquo; <span>[TOPIC] Quiz</span>
+        </nav>
+
+        <header>
+            <div class="container">
+                <h1>[TOPIC] Quiz: Master 25 Essential MCQs</h1>
+                <p>Crucial for KPSC, UPSC and competitive exam preparation</p>
+            </div>
+        </header>
+
+        <!-- CONTENT SECTIONS -->
+        <section id="introduction">
+            <h2>Understanding [TOPIC]: Your Exam Success Guide</h2>
+            <!-- Your introduction content here -->
+        </section>
+
+        <section id="key-facts">
+            <h2>Key Facts: [TOPIC]</h2>
+            <!-- Tables or fact cards -->
+        </section>
+
+        <section id="study-notes">
+            <h2>Study Notes: [TOPIC] Essentials</h2>
+            <!-- Educational content -->
+        </section>
+
+        <section id="previous-years">
+            <h2>Previous Year Relevance</h2>
+            <!-- Exam questions table -->
+        </section>
+
+        <!-- ENHANCED QUIZ INTERFACE -->
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <h2>[TOPIC] Quiz</h2>
+                <div class="quiz-progress-info">
+                    <strong>Question <span id="current-question">1</span>/25</strong>
+                </div>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress" style="width: 4%"></div>
+            </div>
+
+            <div id="quiz-content">
+                <!-- Questions loaded dynamically -->
+            </div>
+
+            <div class="quiz-navigation">
+                <button class="btn btn-secondary" id="prev-btn" onclick="previousQuestion()" disabled>← Previous</button>
+                <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()">Next →</button>
+                <button class="btn btn-primary" id="submit-btn" onclick="submitQuiz()" style="display: none;">Submit Quiz</button>
+            </div>
+        </div>
+
+        <div class="results-container" id="results">
+            <h2>Quiz Completed!</h2>
+            <div class="score-display"><span id="score-text">Your Score: 0/25</span></div>
+            <p id="score-message"></p>
+            <button class="btn btn-primary" onclick="restartQuiz()">Restart Quiz</button>
+        </div>
+
+        <section id="review-answers" style="display:none;">
+            <h2>Review Your Answers</h2>
+            <div id="review-content"></div>
+        </section>
+    </div>
+
+    <script>
+        // QUIZ DATA - EDIT THIS SECTION FOR NEW QUIZZES
+        const quizData = [
+            /* Add your questions here in format: */
+            /*
+            {
+                question: "Your question here?",
+                options: ["Option A", "Option B", "Option C", "Option D"],
+                answer: 0, // Correct option index (0-based)
+                explanation: "Detailed explanation here..."
+            }
+            */
+        ];
+
+        // QUIZ STATE MANAGEMENT
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let quizCompleted = false;
+
+        function initQuiz() {
+            currentQuestion = 0;
+            userAnswers = new Array(quizData.length).fill(null);
+            quizCompleted = false;
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('review-answers').style.display = 'none';
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const q = quizData[currentQuestion];
+            let html = `<div class="question-card">
+                <div class="question-number">Question ${currentQuestion + 1}</div>
+                <div class="question-text">${q.question}</div>
+                <ul class="options">`;
+            q.options.forEach((opt, idx) => {
+                const sel = userAnswers[currentQuestion] === idx ? 'selected' : '';
+                html += `<li class="option ${sel}" onclick="selectOption(${idx})">
+                    <input type="radio" ${sel ? 'checked' : ''} readonly> ${opt}
+                </li>`;
+            });
+            html += `</ul><div class="explanation" id="explanation-${currentQuestion}">
+                <strong>Explanation:</strong> ${q.explanation}
+            </div></div>`;
+            document.getElementById('quiz-content').innerHTML = html;
+            document.getElementById('progress').style.width = `${((currentQuestion + 1) / quizData.length) * 100}%`;
+            document.getElementById('current-question').textContent = currentQuestion + 1;
+            document.getElementById('prev-btn').disabled = currentQuestion === 0;
+            if (currentQuestion === quizData.length - 1) {
+                document.getElementById('next-btn').style.display = 'none';
+                document.getElementById('submit-btn').style.display = 'inline-block';
+            }
+        }
+
+        function selectOption(idx) {
+            if (quizCompleted) return;
+            userAnswers[currentQuestion] = idx;
+            loadQuestion();
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) { currentQuestion--; loadQuestion(); }
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < quizData.length - 1) { currentQuestion++; loadQuestion(); }
+        }
+
+        function submitQuiz() {
+            quizCompleted = true;
+            let score = 0;
+            quizData.forEach((q, i) => { if (userAnswers[i] === q.answer) score++; });
+            document.querySelector('.quiz-container').style.display = 'none';
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('score-text').textContent = `Your Score: ${score}/${quizData.length}`;
+            document.getElementById('score-message').textContent = score >= 20 ? 'Excellent! 🏆' : score >= 15 ? 'Good job! 👍' : 'Keep studying! 📚';
+            document.getElementById('review-answers').style.display = 'block';
+            let r = '';
+            quizData.forEach((q, i) => {
+                r += `<div class="question-card">
+                    <div class="question-number">Question ${i + 1}</div>
+                    <div class="question-text">${q.question}</div>
+                    <p><strong>Your Answer:</strong> <span style="color:${userAnswers[i] === q.answer ? 'var(--success-color)' : 'var(--danger-color)'};">${q.options[userAnswers[i]]}</span></p>
+                    <p><strong>Correct:</strong> ${q.options[q.answer]}</p>
+                    <div class="explanation active"><strong>Explanation:</strong> ${q.explanation}</div>
+                </div>`;
+            });
+            document.getElementById('review-content').innerHTML = r;
+        }
+
+        function restartQuiz() {
+            initQuiz();
+            document.querySelector('.quiz-container').style.display = 'block';
+        }
+
+        document.addEventListener('DOMContentLoaded', initQuiz);
+    </script>
+</body>
+</html>
