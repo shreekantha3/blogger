@@ -1051,6 +1051,39 @@ if app:
             print(f"    Intent: {kw.intent}")
             print()
 
+    @app.command("internal-links")
+    def internal_links(
+        topic: Annotated[str, typer.Option(help="Topic to find links for")] = None,
+        top_k: Annotated[int, typer.Option(help="Max links to return")] = 5,
+    ) -> None:
+        """Analyze internal link graph and suggest links."""
+        from ai.internal_link_graph import InternalLinkGraph
+        from ai.internal_linking import InternalLinkSuggester
+
+        # For now, use the existing suggester
+        suggester = InternalLinkSuggester()
+
+        # Mock existing posts - in production would fetch from Blogger
+        mock_posts = [
+            {"id": "1", "title": "KSP Recruitment 2026", "content": "police exam", "url": "/ksp-2026", "keywords": ["police", "recruitment"]},
+            {"id": "2", "title": "CCI Recruitment 2026", "content": "insurance exam", "url": "/cci-2026", "keywords": ["insurance", "recruitment"]},
+        ]
+
+        print("Internal Link Analysis")
+        print("=" * 50)
+
+        if topic:
+            links = suggester.find_related_posts(
+                current_content=f"<p>Content about {topic}</p>",
+                target_keywords=[topic],
+                existing_posts=mock_posts,
+            )
+            print(f"Suggested links for '{topic}':")
+            for link in links[:top_k]:
+                print(f"  - {link.anchor_text} → {link.url} (score: {link.relevance_score:.2f})")
+
+        print(f"\nRecommendation: {suggester.get_link_density_recommendation(1000)}")
+
 
 if __name__ == "__main__":
     if app is None:

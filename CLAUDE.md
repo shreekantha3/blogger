@@ -17,6 +17,17 @@ Built in phases following clean architecture principles:
   - `seo/quality_scorer.py` - EEAT content quality scoring
   - `ai/fact_checker.py` - Factual claim verification
 
+- **Phase 6**: Analytics + Strategy Layer ✅ In Progress
+  - `analytics/gsc_client.py` - Google Search Console API integration
+  - `analytics/ga4_client.py` - GA4 Measurement Protocol client
+  - `analytics/content_audit.py` - Decaying/stale post detection
+  - `seo/serp_analyzer.py` - SERP feature extraction, competitor analysis
+  - `ai/content_brief.py` - Content brief generation before AI writing
+  - `ai/schema_howto.py` - HowTo, JobPosting, VideoObject schemas
+  - `media/ai_image_generator.py` - DALL-E 3 integration for custom visuals
+  - `seo/keyword_research.py` - Keyword opportunity discovery
+  - `ai/internal_link_graph.py` - PageRank-based link analysis
+
 ## Key Patterns
 
 | Module | Pattern | Purpose |
@@ -80,6 +91,26 @@ python app.py image-optimize --input photo.jpg --output optimized.jpg --quality 
 python app.py thumbnail --title "My Article" --output thumb.jpg --type og
 python app.py images-suggest --topic "Python" --count 4
 python app.py eeat-score --title "My Post" --content "<p>...</p>"
+
+# Phase 6: Analytics + Strategy
+# Analytics
+python app.py analytics-top-queries --days 90
+python app.py analytics-audit --detect-decaying
+
+# SERP Analysis
+python app.py serp-analyze --keyword "ksp recruitment" --location "IN"
+python app.py content-brief --topic "Police Exam" --keyword "ksp constable"
+
+# Schema Generation
+python app.py schema-job --title "KSP Recruitment 2026" --date "2026-07-15"
+python app.py schema-howto --title "How to Apply" --steps '[{"text": "Step 1"}, {"text": "Step 2"}]'
+
+# AI Images
+python app.py ai-image --type feature --title "My Article" --topic "Recruitment"
+
+# Keyword Research
+python app.py keywords-research --seed "recruitment" --easy-wins
+python app.py internal-links --topic "ksp"
 ```
 
 **Note:** For AI commands, set `OPENROUTER_API_KEY` in `.env` (recommended) or `ANTHROPIC_API_KEY`.
