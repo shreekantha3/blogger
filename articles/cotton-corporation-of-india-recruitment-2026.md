@@ -1,3 +1,24 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "JobPosting",
+  "title": "CCI Recruitment 2026: 148 Assistant Manager & Junior Assistant Posts Apply Online",
+  "datePosted": "2026-07-22",
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "Cotton Corporation of India"
+  },
+  "jobLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "India"
+    }
+  },
+  "description": "Government job recruitment with online application. Check eligibility and apply."
+}
+</script>
+
 <h1>CCI Recruitment 2026: 148 Assistant Manager & Junior Assistant Posts Apply Online</h1>
 
 <p><strong>Last Updated:</strong> July 2026 | <strong>Total Posts:</strong> 148 | <strong>Application Mode:</strong> Online | <strong>Organization:</strong> Cotton Corporation of India Limited</p>
