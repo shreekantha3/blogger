@@ -1023,6 +1023,34 @@ if app:
         except Exception as e:
             print(f"✗ Error: {e}")
 
+    @app.command("keywords-research")
+    def keywords_research(
+        seed: Annotated[str, typer.Option(help="Seed keyword to research")] = None,
+        easy_wins: Annotated[bool, typer.Option(help="Show only easy wins")] = False,
+        limit: Annotated[int, typer.Option(help="Max keywords to return")] = 50,
+    ) -> None:
+        """Research keyword opportunities."""
+        if not seed:
+            print("✗ --seed is required")
+            return
+
+        from seo.keyword_research import KeywordResearcher, find_easy_wins
+        researcher = KeywordResearcher()
+        opportunities = researcher.find_opportunities(seed, limit=limit)
+
+        if easy_wins:
+            opportunities = find_easy_wins(opportunities)
+
+        print(f"Found {len(opportunities)} keyword opportunities for '{seed}':")
+        print()
+
+        for kw in opportunities[:20]:
+            score = researcher._opportunity_score(kw)
+            print(f"  {kw.keyword}")
+            print(f"    Volume: {kw.search_volume:,} | Difficulty: {kw.difficulty:.0f} | Score: {score:.0f}")
+            print(f"    Intent: {kw.intent}")
+            print()
+
 
 if __name__ == "__main__":
     if app is None:
