@@ -17,7 +17,7 @@ Built in phases following clean architecture principles:
   - `seo/quality_scorer.py` - EEAT content quality scoring
   - `ai/fact_checker.py` - Factual claim verification
 
-- **Phase 6**: Analytics + Strategy Layer ✅ In Progress
+- **Phase 6**: Analytics + Strategy Layer ✅ Completed (requires API configuration)
   - `analytics/gsc_client.py` - Google Search Console API integration
   - `analytics/ga4_client.py` - GA4 Measurement Protocol client
   - `analytics/content_audit.py` - Decaying/stale post detection
@@ -171,7 +171,27 @@ Every public function must contain examples.
 pytest tests/ -v
 ```
 
-All 97 tests pass (20 new media tests added in Phase 5).
+All 97 tests pass (13 new analytics tests added in Phase 6).
+
+## Phase 6 Configuration Required
+
+To enable analytics features, add to `.env`:
+
+```bash
+# Google Search Console API (optional)
+GSC_SITE_URL="https://yourblog.blogspot.com"
+
+# GA4 Property (optional)  
+GA4_PROPERTY_ID="YOUR-PROPERTY-ID"
+
+# OpenAI (for image generation, optional)
+OPENAI_API_KEY="your-key"
+
+# SerpAPI (for real SERP data, optional)
+SERPAPI_KEY="your-key"
+```
+
+Framework code is ready - requires API credentials to function.
 
 ## Recent Improvements (2026-07-09)
 
