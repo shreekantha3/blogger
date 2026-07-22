@@ -1092,6 +1092,19 @@ if app:
         from workflows.content_refresh_pipeline import run_refresh_audit
         run_refresh_audit(threshold=threshold)
 
+    @app.command("brief-create")
+    def brief_create(
+        topic: Annotated[str, typer.Option(help="Article topic")] = None,
+        keyword: Annotated[str, typer.Option(help="Target keyword")] = None,
+    ) -> None:
+        """Create content brief for human approval."""
+        if not topic or not keyword:
+            print("✗ Both --topic and --keyword are required")
+            return
+
+        from workflows.content_approval import create_content_brief
+        create_content_brief(topic, keyword)
+
 
 if __name__ == "__main__":
     if app is None:
