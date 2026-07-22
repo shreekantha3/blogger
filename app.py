@@ -820,6 +820,150 @@ if app:
 
 
 
+@app.command("analytics-top-queries")
+    def analytics_top_queries(
+        days: Annotated[int, typer.Option(help="Number of days")] = 90,
+        limit: Annotated[int, typer.Option(help="Max queries to return")] = 100,
+    ) -> None:
+        """Get top performing search queries."""
+        settings = get_settings()
+        setup_logging(
+            level=settings.log_level,
+            log_format=settings.log_format,
+            log_file_path=settings.log_file_path,
+        )
+
+        from analytics.gsc_client import GSCClient
+        client = GSCClient()
+        queries = client.get_top_queries(days=days, row_limit=limit)
+
+        print(f"Top {len(queries)} queries (last {days} days):")
+        for q in queries[:20]:
+            print(f"  {q.query}: {q.clicks} clicks, {q.ctr:.1%} CTR, #{q.position:.0f}")
+
+    @app.command("analytics-audit")
+    def analytics_audit(
+        detect_decaying: Annotated[bool, typer.Option(help="Find decaying posts")] = True,
+        decaying_threshold: Annotated[float, typer.Option(help="Traffic drop % threshold")] = 20.0,
+    ) -> None:
+        """Run content audit to find stale/decaying posts."""
+        settings = get_settings()
+        setup_logging(
+            level=settings.log_level,
+            log_format=settings.log_format,
+            log_file_path=settings.log_file_path,
+        )
+
+        from analytics.content_audit import run_audit
+        report = run_audit(traffic_drop_threshold=decaying_threshold)
+
+        print(f"# Content Audit Report - {report.generated_at.strftime('%Y-%m-%d')}")
+        print(f"\nTotal issues found: {report.total_issues}")
+
+        if report.priority_updates:
+            print(f"\n## Priority Updates ({len(report.priority_updates)})")
+            for post in report.priority_updates[:5]:
+                print(f"  - {post.title}: {post.traffic_drop_pct:.1f}% drop")
+
+        if report.refresh_candidates:
+            print(f"\n## Refresh Candidates ({len(report.refresh_candidates)})")
+            for post in report.refresh_candidates[:5]:
+                print(f"  - {post.title}: {post.days_since_update} days since update")
+
+    @app.command("schema-job")
+    def schema_job(
+        title: Annotated[str, typer.Option(help="Job title")] = None,
+        date: Annotated[str, typer.Option(help="Date posted (YYYY-MM-DD)")] = None,
+    ) -> None:
+        """Generate JobPosting schema for recruitment articles."""
+        if not title:
+            print("✗ --title is required")
+            return
+
+        from ai.schema_howto import JobPostingSchemaGenerator
+        generator = JobPostingSchemaGenerator()
+
+        # Generate with minimal required data
+        schema = generator.generate_jobposting(
+            title=title,
+            date_posted=date or datetime.now().strftime("%Y-%m-%d"),
+        )
+
+        print("```json")
+        print(json.dumps(schema, indent=2))
+        print("```")
+
+    @app.command("schema-howto")
+    def schema_howto(
+        title: Annotated[str, typer.Option(help="How-to title")] = None,
+        steps: Annotated[str, typer.Option(help="JSON array of steps")] = '[]',
+    ) -> None:
+        """Generate HowTo schema for tutorial articles."""
+        if not title:
+            print("✗ --title is required")
+            return
+
+        from ai.schema_howto import HowToSchemaGenerator
+        generator = HowToSchemaGenerator()
+
+        try:
+            steps_list = json.loads(steps)
+        except json.JSONDecodeError:
+            print("✗ Invalid JSON for steps")
+            return
+
+        schema = generator.generate_howto(title=title, steps=steps_list)
+
+        print("```json")
+        print(json.dumps(schema, indent=2))
+        print("```")
+
+    @app.command("content-brief")
+    def content_brief(
+        topic: Annotated[str, typer.Option(help="Article topic")] = None,
+        keyword: Annotated[str, typer.Option(help="Target keyword")] = None,
+    ) -> None:
+        """Generate content brief with SERP insights."""
+        if not topic or not keyword:
+            print("✗ Both --topic and --keyword are required")
+            return
+
+        import asyncio
+        from ai.content_brief import ContentBriefGenerator, ContentBriefRequest
+        generator = ContentBriefGenerator()
+        request = ContentBriefRequest(
+            topic=topic,
+            target_keyword=keyword or topic,
+        )
+        brief = asyncio.run(generator.generate(request))
+
+        print(brief.formatted_brief)
+
+    @app.command("serp-analyze")
+    def serp_analyze(
+        keyword: Annotated[str, typer.Option(help="Target keyword")] = None,
+        location: Annotated[str, typer.Option(help="Location code (IN, US, etc.)")] = "IN",
+    ) -> None:
+        """Analyze SERP for content strategy insights."""
+        if not keyword:
+            print("✗ --keyword is required")
+            return
+
+        import asyncio
+        from seo.serp_analyzer import SERPAnalyzer
+        analyzer = SERPAnalyzer()
+        brief = asyncio.run(analyzer.analyze(keyword, location=location))
+
+        print(f"Search Intent: {brief.search_intent}")
+        print(f"Recommended Word Count: {brief.recommended_word_count}")
+        print(f"\nTop PAA Questions:")
+        for q in brief.paa_questions[:5]:
+            print(f"  - {q}")
+        print(f"\nContent Gaps to Exploit:")
+        for gap in brief.content_gaps:
+            print(f"  - {gap}")
+
+
 if __name__ == "__main__":
     if app is None:
         # Fallback for when typer is not installed
