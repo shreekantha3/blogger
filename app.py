@@ -963,6 +963,66 @@ if app:
         for gap in brief.content_gaps:
             print(f"  - {gap}")
 
+    @app.command("ai-image")
+    def ai_image(
+        type: Annotated[str, typer.Option(help="Image type: feature, diagram, chart")] = "feature",
+        title: Annotated[str, typer.Option(help="Title/topic for image")] = None,
+        topic: Annotated[str, typer.Option(help="Article topic")] = None,
+        chart_type: Annotated[str, typer.Option(help="Chart type: bar, line, pie")] = "bar",
+        data: Annotated[str, typer.Option(help="JSON data for charts/diagrams")] = "{}",
+    ) -> None:
+        """Generate AI-powered images for blog posts."""
+        if not title:
+            print("✗ --title is required")
+            return
+
+        import asyncio
+        from media.ai_image_generator import AIImageGenerator
+
+        generator = AIImageGenerator()
+
+        try:
+            if type == "feature":
+                result = asyncio.run(
+                    generator.generate_feature_image(
+                        title=title,
+                        topic=topic or title,
+                    )
+                )
+            elif type == "diagram":
+                data_dict = json.loads(data) if data else {}
+                result = asyncio.run(
+                    generator.generate_diagram(
+                        concept=title,
+                        data=data_dict,
+                    )
+                )
+            elif type == "chart":
+                data_dict = json.loads(data) if data else {}
+                result = asyncio.run(
+                    generator.generate_chart(
+                        chart_type=chart_type,
+                        data=data_dict,
+                        title=title,
+                    )
+                )
+            else:
+                print(f"✗ Invalid type: {type}. Use 'feature', 'diagram', or 'chart'")
+                return
+
+            if result.error:
+                print(f"✗ Generation failed: {result.error}")
+            elif result.url:
+                print(f"✓ Generated image")
+                print(f"  URL: {result.url}")
+                if result.revised_prompt:
+                    print(f"  Revised prompt: {result.revised_prompt[:80]}...")
+
+        except json.JSONDecodeError:
+            print("✗ Invalid JSON for --data")
+        except Exception as e:
+            print(f"✗ Error: {e}")
+
 
 if __name__ == "__main__":
     if app is None:
