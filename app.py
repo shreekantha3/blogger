@@ -1084,6 +1084,14 @@ if app:
 
         print(f"\nRecommendation: {suggester.get_link_density_recommendation(1000)}")
 
+    @app.command("refresh-audit")
+    def refresh_audit(
+        threshold: Annotated[float, typer.Option(help="Traffic drop % threshold")] = 20.0,
+    ) -> None:
+        """Run content refresh audit to find declining posts."""
+        from workflows.content_refresh_pipeline import run_refresh_audit
+        run_refresh_audit(threshold=threshold)
+
 
 if __name__ == "__main__":
     if app is None:
