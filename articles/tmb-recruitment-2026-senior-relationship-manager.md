@@ -1,3 +1,24 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "JobPosting",
+  "title": "TMB Recruitment 2026: Senior Relationship Manager Apply Online",
+  "datePosted": "2026-07-22",
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "Tamilnad Mercantile Bank"
+  },
+  "jobLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "India"
+    }
+  },
+  "description": "Government job recruitment with online application. Check eligibility and apply."
+}
+</script>
+
 <h1>TMB Recruitment 2026: Senior Relationship Manager Apply Online</h1>
 
 <p><strong>Last Updated:</strong> July 2026 | <strong>Total Posts:</strong> Various | <strong>Application Mode:</strong> Online | <strong>Organization:</strong> Tamilnad Mercantile Bank (TMB)</p>

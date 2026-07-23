@@ -1,3 +1,29 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "JobPosting",
+  "title": "Karnataka Excise Department Recruitment 2025: Excise Constable & SI Posts",
+  "datePosted": "2026-07-22",
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "Karnataka Excise Department"
+  },
+  "jobLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Karnataka, India"
+    }
+  },
+  "baseSalary": {
+    "@type": "MonetaryAmount",
+    "currency": "INR",
+    "value": "21,400 - 180,000"
+  },
+  "description": "1,207 vacancies for Excise Constable and Excise Sub-Inspector positions. Apply online at stateexcise.karnataka.gov.in."
+}
+</script>
+
 <h1>Karnataka Excise Department Recruitment 2025: 1,207 Constable & SI Posts Apply Online</h1>
 
 <p><strong>Last Updated:</strong> July 2026 | <strong>Total Posts:</strong> 1,207 | <strong>Application Mode:</strong> Online | <strong>Organization:</strong> Karnataka Excise Department</p>

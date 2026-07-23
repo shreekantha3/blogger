@@ -1,3 +1,24 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "JobPosting",
+  "title": "NHSRCL Recruitment 2026: 454 Technician & Junior Engineer Posts Apply Online",
+  "datePosted": "2026-07-22",
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "NHSRCL"
+  },
+  "jobLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "India"
+    }
+  },
+  "description": "Government job recruitment with online application. Check eligibility and apply."
+}
+</script>
+
 <h1>NHSRCL Recruitment 2026: 454 Technician & Junior Engineer Posts Apply Online</h1>
 
 <p><strong>Last Updated:</strong> July 2026 | <strong>Total Posts:</strong> 454 | <strong>Application Mode:</strong> Online | <strong>Organization:</strong> National High Speed Rail Corporation Limited</p>

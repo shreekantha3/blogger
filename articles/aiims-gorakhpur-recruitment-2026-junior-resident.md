@@ -1,3 +1,24 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "JobPosting",
+  "title": "AIIMS Gorakhpur Junior Resident 2026: Walk-In Interview for 12 Posts",
+  "datePosted": "2026-07-22",
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "AIIMS Gorakhpur"
+  },
+  "jobLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "India"
+    }
+  },
+  "description": "Government job recruitment with online application. Check eligibility and apply."
+}
+</script>
+
 <h1>AIIMS Gorakhpur Junior Resident 2026: Walk-In Interview for 12 Posts</h1>
 
 <p><strong>Last Updated:</strong> July 2026 | <strong>Total Posts:</strong> 12 | <strong>Application Mode:</strong> Walk-In Interview | <strong>Organization:</strong> AIIMS Gorakhpur</p>

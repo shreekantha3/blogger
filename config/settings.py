@@ -33,6 +33,10 @@ class Settings(BaseSettings):
         default="https://www.googleapis.com/auth/blogger",
         description="OAuth scopes for Blogger API (comma-separated)"
     )
+    gsc_api_scopes: str = Field(
+        default="https://www.googleapis.com/auth/webmasters.readonly",
+        description="OAuth scopes for Search Console API (comma-separated)"
+    )
 
     # Blogger configuration
     blogger_blog_id: str = Field(

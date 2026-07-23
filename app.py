@@ -820,6 +820,292 @@ if app:
 
 
 
+@app.command("analytics-top-queries")
+    def analytics_top_queries(
+        days: Annotated[int, typer.Option(help="Number of days")] = 90,
+        limit: Annotated[int, typer.Option(help="Max queries to return")] = 100,
+    ) -> None:
+        """Get top performing search queries."""
+        settings = get_settings()
+        setup_logging(
+            level=settings.log_level,
+            log_format=settings.log_format,
+            log_file_path=settings.log_file_path,
+        )
+
+        from analytics.gsc_client import GSCClient
+        client = GSCClient()
+        queries = client.get_top_queries(days=days, row_limit=limit)
+
+        print(f"Top {len(queries)} queries (last {days} days):")
+        for q in queries[:20]:
+            print(f"  {q.query}: {q.clicks} clicks, {q.ctr:.1%} CTR, #{q.position:.0f}")
+
+    @app.command("analytics-audit")
+    def analytics_audit(
+        detect_decaying: Annotated[bool, typer.Option(help="Find decaying posts")] = True,
+        decaying_threshold: Annotated[float, typer.Option(help="Traffic drop % threshold")] = 20.0,
+    ) -> None:
+        """Run content audit to find stale/decaying posts."""
+        settings = get_settings()
+        setup_logging(
+            level=settings.log_level,
+            log_format=settings.log_format,
+            log_file_path=settings.log_file_path,
+        )
+
+        from analytics.content_audit import run_audit
+        report = run_audit(traffic_drop_threshold=decaying_threshold)
+
+        print(f"# Content Audit Report - {report.generated_at.strftime('%Y-%m-%d')}")
+        print(f"\nTotal issues found: {report.total_issues}")
+
+        if report.priority_updates:
+            print(f"\n## Priority Updates ({len(report.priority_updates)})")
+            for post in report.priority_updates[:5]:
+                print(f"  - {post.title}: {post.traffic_drop_pct:.1f}% drop")
+
+        if report.refresh_candidates:
+            print(f"\n## Refresh Candidates ({len(report.refresh_candidates)})")
+            for post in report.refresh_candidates[:5]:
+                print(f"  - {post.title}: {post.days_since_update} days since update")
+
+    @app.command("schema-job")
+    def schema_job(
+        title: Annotated[str, typer.Option(help="Job title")] = None,
+        date: Annotated[str, typer.Option(help="Date posted (YYYY-MM-DD)")] = None,
+    ) -> None:
+        """Generate JobPosting schema for recruitment articles."""
+        if not title:
+            print("✗ --title is required")
+            return
+
+        from ai.schema_howto import JobPostingSchemaGenerator
+        generator = JobPostingSchemaGenerator()
+
+        # Generate with minimal required data
+        schema = generator.generate_jobposting(
+            title=title,
+            date_posted=date or datetime.now().strftime("%Y-%m-%d"),
+        )
+
+        print("```json")
+        print(json.dumps(schema, indent=2))
+        print("```")
+
+    @app.command("schema-howto")
+    def schema_howto(
+        title: Annotated[str, typer.Option(help="How-to title")] = None,
+        steps: Annotated[str, typer.Option(help="JSON array of steps")] = '[]',
+    ) -> None:
+        """Generate HowTo schema for tutorial articles."""
+        if not title:
+            print("✗ --title is required")
+            return
+
+        from ai.schema_howto import HowToSchemaGenerator
+        generator = HowToSchemaGenerator()
+
+        try:
+            steps_list = json.loads(steps)
+        except json.JSONDecodeError:
+            print("✗ Invalid JSON for steps")
+            return
+
+        schema = generator.generate_howto(title=title, steps=steps_list)
+
+        print("```json")
+        print(json.dumps(schema, indent=2))
+        print("```")
+
+    @app.command("content-brief")
+    def content_brief(
+        topic: Annotated[str, typer.Option(help="Article topic")] = None,
+        keyword: Annotated[str, typer.Option(help="Target keyword")] = None,
+    ) -> None:
+        """Generate content brief with SERP insights."""
+        if not topic or not keyword:
+            print("✗ Both --topic and --keyword are required")
+            return
+
+        import asyncio
+        from ai.content_brief import ContentBriefGenerator, ContentBriefRequest
+        generator = ContentBriefGenerator()
+        request = ContentBriefRequest(
+            topic=topic,
+            target_keyword=keyword or topic,
+        )
+        brief = asyncio.run(generator.generate(request))
+
+        print(brief.formatted_brief)
+
+    @app.command("serp-analyze")
+    def serp_analyze(
+        keyword: Annotated[str, typer.Option(help="Target keyword")] = None,
+        location: Annotated[str, typer.Option(help="Location code (IN, US, etc.)")] = "IN",
+    ) -> None:
+        """Analyze SERP for content strategy insights."""
+        if not keyword:
+            print("✗ --keyword is required")
+            return
+
+        import asyncio
+        from seo.serp_analyzer import SERPAnalyzer
+        analyzer = SERPAnalyzer()
+        brief = asyncio.run(analyzer.analyze(keyword, location=location))
+
+        print(f"Search Intent: {brief.search_intent}")
+        print(f"Recommended Word Count: {brief.recommended_word_count}")
+        print(f"\nTop PAA Questions:")
+        for q in brief.paa_questions[:5]:
+            print(f"  - {q}")
+        print(f"\nContent Gaps to Exploit:")
+        for gap in brief.content_gaps:
+            print(f"  - {gap}")
+
+    @app.command("ai-image")
+    def ai_image(
+        type: Annotated[str, typer.Option(help="Image type: feature, diagram, chart")] = "feature",
+        title: Annotated[str, typer.Option(help="Title/topic for image")] = None,
+        topic: Annotated[str, typer.Option(help="Article topic")] = None,
+        chart_type: Annotated[str, typer.Option(help="Chart type: bar, line, pie")] = "bar",
+        data: Annotated[str, typer.Option(help="JSON data for charts/diagrams")] = "{}",
+    ) -> None:
+        """Generate AI-powered images for blog posts."""
+        if not title:
+            print("✗ --title is required")
+            return
+
+        import asyncio
+        from media.ai_image_generator import AIImageGenerator
+
+        generator = AIImageGenerator()
+
+        try:
+            if type == "feature":
+                result = asyncio.run(
+                    generator.generate_feature_image(
+                        title=title,
+                        topic=topic or title,
+                    )
+                )
+            elif type == "diagram":
+                data_dict = json.loads(data) if data else {}
+                result = asyncio.run(
+                    generator.generate_diagram(
+                        concept=title,
+                        data=data_dict,
+                    )
+                )
+            elif type == "chart":
+                data_dict = json.loads(data) if data else {}
+                result = asyncio.run(
+                    generator.generate_chart(
+                        chart_type=chart_type,
+                        data=data_dict,
+                        title=title,
+                    )
+                )
+            else:
+                print(f"✗ Invalid type: {type}. Use 'feature', 'diagram', or 'chart'")
+                return
+
+            if result.error:
+                print(f"✗ Generation failed: {result.error}")
+            elif result.url:
+                print(f"✓ Generated image")
+                print(f"  URL: {result.url}")
+                if result.revised_prompt:
+                    print(f"  Revised prompt: {result.revised_prompt[:80]}...")
+
+        except json.JSONDecodeError:
+            print("✗ Invalid JSON for --data")
+        except Exception as e:
+            print(f"✗ Error: {e}")
+
+    @app.command("keywords-research")
+    def keywords_research(
+        seed: Annotated[str, typer.Option(help="Seed keyword to research")] = None,
+        easy_wins: Annotated[bool, typer.Option(help="Show only easy wins")] = False,
+        limit: Annotated[int, typer.Option(help="Max keywords to return")] = 50,
+    ) -> None:
+        """Research keyword opportunities."""
+        if not seed:
+            print("✗ --seed is required")
+            return
+
+        from seo.keyword_research import KeywordResearcher, find_easy_wins
+        researcher = KeywordResearcher()
+        opportunities = researcher.find_opportunities(seed, limit=limit)
+
+        if easy_wins:
+            opportunities = find_easy_wins(opportunities)
+
+        print(f"Found {len(opportunities)} keyword opportunities for '{seed}':")
+        print()
+
+        for kw in opportunities[:20]:
+            score = researcher._opportunity_score(kw)
+            print(f"  {kw.keyword}")
+            print(f"    Volume: {kw.search_volume:,} | Difficulty: {kw.difficulty:.0f} | Score: {score:.0f}")
+            print(f"    Intent: {kw.intent}")
+            print()
+
+    @app.command("internal-links")
+    def internal_links(
+        topic: Annotated[str, typer.Option(help="Topic to find links for")] = None,
+        top_k: Annotated[int, typer.Option(help="Max links to return")] = 5,
+    ) -> None:
+        """Analyze internal link graph and suggest links."""
+        from ai.internal_link_graph import InternalLinkGraph
+        from ai.internal_linking import InternalLinkSuggester
+
+        # For now, use the existing suggester
+        suggester = InternalLinkSuggester()
+
+        # Mock existing posts - in production would fetch from Blogger
+        mock_posts = [
+            {"id": "1", "title": "KSP Recruitment 2026", "content": "police exam", "url": "/ksp-2026", "keywords": ["police", "recruitment"]},
+            {"id": "2", "title": "CCI Recruitment 2026", "content": "insurance exam", "url": "/cci-2026", "keywords": ["insurance", "recruitment"]},
+        ]
+
+        print("Internal Link Analysis")
+        print("=" * 50)
+
+        if topic:
+            links = suggester.find_related_posts(
+                current_content=f"<p>Content about {topic}</p>",
+                target_keywords=[topic],
+                existing_posts=mock_posts,
+            )
+            print(f"Suggested links for '{topic}':")
+            for link in links[:top_k]:
+                print(f"  - {link.anchor_text} → {link.url} (score: {link.relevance_score:.2f})")
+
+        print(f"\nRecommendation: {suggester.get_link_density_recommendation(1000)}")
+
+    @app.command("refresh-audit")
+    def refresh_audit(
+        threshold: Annotated[float, typer.Option(help="Traffic drop % threshold")] = 20.0,
+    ) -> None:
+        """Run content refresh audit to find declining posts."""
+        from workflows.content_refresh_pipeline import run_refresh_audit
+        run_refresh_audit(threshold=threshold)
+
+    @app.command("brief-create")
+    def brief_create(
+        topic: Annotated[str, typer.Option(help="Article topic")] = None,
+        keyword: Annotated[str, typer.Option(help="Target keyword")] = None,
+    ) -> None:
+        """Create content brief for human approval."""
+        if not topic or not keyword:
+            print("✗ Both --topic and --keyword are required")
+            return
+
+        from workflows.content_approval import create_content_brief
+        create_content_brief(topic, keyword)
+
+
 if __name__ == "__main__":
     if app is None:
         # Fallback for when typer is not installed
