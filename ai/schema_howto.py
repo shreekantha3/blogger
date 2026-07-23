@@ -181,7 +181,11 @@ class JobPostingSchemaGenerator:
 
         # Add validity dates
         if valid_through:
-            schema["validThrough"] = f"{valid_through}T23:59"
+            # Handle both full datetime and date-only formats
+            if "T" in valid_through:
+                schema["validThrough"] = valid_through
+            else:
+                schema["validThrough"] = f"{valid_through}T23:59"
 
         # Add organization
         if hiring_organization:
